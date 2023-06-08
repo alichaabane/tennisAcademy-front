@@ -19,8 +19,8 @@ export class SigninComponent implements OnInit {
   ) {}
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
-      username: ['admin', Validators.required],
-      password: ['admin', Validators.required],
+      username: ['', Validators.required],
+      password: ['', Validators.required],
     });
   }
   get f() {
@@ -37,13 +37,16 @@ export class SigninComponent implements OnInit {
         .login(this.f.username.value, this.f.password.value)
         .subscribe(
           (res) => {
-            if (res) {
+            if (res == null){
+              this.error = 'Invalid Login';
+
+
+            } else {
               const token = this.authService.currentUserValue.accessToken;
               if (token) {
                 this.router.navigate(['/dashboard/main']);
               }
-            } else {
-              this.error = 'Invalid Login';
+
             }
           },
           (error) => {

@@ -14,7 +14,7 @@
           </div>
           <div class="profile-usertitle">
             <div class="sidebar-userpic-name">{{prenomProfile}} {{nomProfile}} </div>
-            <div class="profile-usertitle-job " *ngFor="let role of roleProfile">{{role.name}} </div>
+            <!--div class="profile-usertitle-job " *ngFor="let role of roleProfile">{{role.name}} </div-->
           </div>
           <div class="sidebar-userpic-btn">
             <a mat-icon-button disabled routerLink="extra-pages/profile" matTooltip="Profile"
@@ -49,10 +49,10 @@
                 <mat-icon aria-hidden="false" [inline]="true">accessibility_new</mat-icon>Signup
               </a>
             </li>
-          </ul>          
+          </ul>
         </li> -->
 
-          
+
         <li [class.active]="level1Menu === sidebarItem.moduleName && sidebarItem.submenu.length != 0"
           *ngFor="let sidebarItem of sidebarItems" [routerLinkActive]="sidebarItem.submenu.length != 0 ? '' : 'active'">
           <div class="header" *ngIf="sidebarItem.groupTitle === true">{{sidebarItem.title}}</div>

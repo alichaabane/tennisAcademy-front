@@ -16,7 +16,7 @@ export class AuthService {
   public currentUser: Observable<User>;
 
   constructor(private http: HttpClient,private router: Router,) {
-    
+
     this.currentUserSubject = new BehaviorSubject<User>(
       JSON.parse(localStorage.getItem('currentUser'))
     );
@@ -34,7 +34,7 @@ export class AuthService {
   getUtilisateur(idUtilisateur: number): Observable<Utilisateur> {
     return this.http.get<Utilisateur>(this.Url+"/"+idUtilisateur);
   }
-  
+
   login(username: string, password: string) {
     return this.http
       .post<any>(`${environment.apiUrl}auth/signin`, {

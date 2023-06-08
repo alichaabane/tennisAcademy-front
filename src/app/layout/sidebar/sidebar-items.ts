@@ -24,7 +24,7 @@ export const ROUTES: RouteInfo[] = [
     badgeClass: '',
     submenu: [],
   },
-  {
+   {
     path: '',
     title: 'Utilisateurs',
     moduleName: 'utilisateurs',
@@ -134,8 +134,7 @@ export const ROUTES: RouteInfo[] = [
         badge: '',
         badgeClass: '',
         submenu: [],
-      },
-     
+      }
     ],
   },
   {
@@ -259,7 +258,6 @@ export const ROUTES: RouteInfo[] = [
         badgeClass: '',
         submenu: [],
       },
- 
     ],
   },
 

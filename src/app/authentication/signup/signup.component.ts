@@ -18,7 +18,7 @@ export class SignupComponent implements OnInit {
   error = '';
 
   constructor(private formBuilder: FormBuilder,
-    private snackBar: MatSnackBar, private authService: AuthService,private router: Router) {}
+              private snackBar: MatSnackBar, private authService: AuthService, private router: Router) {}
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
       prenom: ['', Validators.required],
@@ -94,7 +94,7 @@ export class SignupComponent implements OnInit {
             errors+'...!!!',
             'bottom',
             'center'
-          );         
+          );
            this.submitted = false;
         }
       );

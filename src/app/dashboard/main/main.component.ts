@@ -242,19 +242,15 @@ export class MainComponent implements OnInit{
 
 
   // area chart end
-  constructor(private authService: AuthService,
-    private router: Router,
-    private terrainService:TerrainService,
-    private utilisateurService:UtilisateurService
-    ) {
+  // tslint:disable-next-line:max-line-length
+  constructor(private authService: AuthService, private router: Router, private terrainService: TerrainService, private utilisateurService: UtilisateurService) {
 
   }
- 
   ngOnInit(): void {
     if (this.authService.currentUserValue) {
-      this.authentifiee=true;
-      this.usernameProfile=this.authService.currentUserValue.username;
-      this.rolesProfile=this.authService.currentUserValue.roles;
+      this.authentifiee = true;
+      this.usernameProfile = this.authService.currentUserValue.username;
+      this.rolesProfile = this.authService.currentUserValue.roles;
       this.rolesProfile.forEach(element => {
         if(element==="ROLE_ADMIN")
           this.admin=true;

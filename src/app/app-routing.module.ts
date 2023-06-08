@@ -25,32 +25,38 @@ const routes: Routes = [
       },
       {
         path: 'utilisateurs',
+        //canActivate: [AuthGuard],
         loadChildren: () =>
           import('./utilisateur/utilisateur.module').then((m) => m.UtilisateurModule),
       },
       {
         path: 'terrain',
+        //canActivate: [AuthGuard],
         loadChildren: () =>
           import('./terrain/terrain.module').then((m) => m.TerrainModule),
       },
       {
         path: 'cours',
+        //canActivate: [AuthGuard],
         loadChildren: () =>
           import('./cours/cours.module').then((m) => m.CoursModule),
       },
       {
         path: 'planification',
+        //canActivate: [AuthGuard],
         loadChildren: () =>
           import('./planification/planification.module').then((m) => m.PlanificationModule),
       },
       {
         path: 'session',
+        //canActivate: [AuthGuard],
         loadChildren: () =>
           import('./session/session.module').then((m) => m.SessionModule),
       },
 
       {
         path: 'media',
+        //canActivate: [AuthGuard],
         loadChildren: () =>
           import('./media/media.module').then((m) => m.MediaModule),
       },

@@ -14,13 +14,13 @@ import { UtilisateurService } from '../all-utilisateur/utilisateur.service';
 })
 export class AddUtilisateurComponent {
   utilisateurForm: FormGroup;
-  private utilisateur = new Utilisateur();
+  public utilisateur = new Utilisateur();
   public img: File;
   public imgToEditUrl: string;
-  public roles:Array<Role>;
+  public roles: Array<Role>;
+  public connectedUserRole: any;
 
-  constructor(private fb: FormBuilder,private utilisateurService: UtilisateurService,
-    private router: Router) {
+  constructor(private fb: FormBuilder, private utilisateurService: UtilisateurService, private router: Router) {
     this.utilisateurForm = this.fb.group({
       prenom: ['', [Validators.required, Validators.pattern('[a-zA-Z]+')]],
       nom: ['', [Validators.required, Validators.pattern('[a-zA-Z]+')]],
@@ -29,7 +29,7 @@ export class AddUtilisateurComponent {
       password: ['', [Validators.required]],
       conformPassword: ['', [Validators.required]],
       addresse: ['', [Validators.required, Validators.pattern('[a-zA-Z]+')]],
-      verified:[false],
+      verified: [false],
       email: [
         '',
         [Validators.required, Validators.email, Validators.minLength(5)]
@@ -38,34 +38,40 @@ export class AddUtilisateurComponent {
       roles: [''],
       photo: ['']
     });
-
+    JSON.parse(localStorage.getItem('currentUser') || '{}');
+    const currentRoles = JSON.parse(localStorage.getItem('currentUser') || '{}').roles;
+    this.connectedUserRole = currentRoles.includes('ROLE_ADMIN');
+    if (!this.connectedUserRole){
+      this.router.navigate(['/page403']);
+    }
     this.getAllroles();
   }
 
   getAllroles(){
     this.utilisateurService.getAllRoles().subscribe(
       (data) => {
-        this.roles=data;
-        console.log("roles"+this.roles);
+        this.roles = data;
+        console.log("roles" + this.roles);
 
       }
     );
   }
 
   onChangeEventFunc(name: string, event) {
-    const index=this.roles.findIndex(r=>r.name===name);
+    const index = this.roles.findIndex(r => r.name === name);
     if (event.checked) {
       this.utilisateur.roles.push(this.roles[index]);
     } else {
-      this.utilisateur.roles.forEach((element,index)=>{
+      // tslint:disable-next-line:no-shadowed-variable
+      this.utilisateur.roles.forEach((element, index) => {
         console.log(element);
-        if(element.name===name) {
-          this.utilisateur.roles.splice(index,1);
+        if (element.name === name) {
+          this.utilisateur.roles.splice(index, 1);
         }
       });
     }
     console.log(this.utilisateur.roles.length);
-    
+
   }
 
   onSubmit() {
@@ -73,21 +79,21 @@ export class AddUtilisateurComponent {
       return;
   }
 
-  this.utilisateur.prenom=this.utilisateurForm.value.prenom;
-  this.utilisateur.nom=this.utilisateurForm.value.nom;
-  this.utilisateur.username=this.utilisateurForm.value.username;
-  this.utilisateur.addresse=this.utilisateurForm.value.addresse;
-  this.utilisateur.dateNaissance=this.utilisateurForm.value.dateNaissance;
-  this.utilisateur.email=this.utilisateurForm.value.email;
-  this.utilisateur.verified=this.utilisateurForm.value.verified;
-  this.utilisateur.password=this.utilisateurForm.value.password;
-  this.utilisateur.telephone=this.utilisateurForm.value.telephone;
+    this.utilisateur.prenom = this.utilisateurForm.value.prenom;
+    this.utilisateur.nom = this.utilisateurForm.value.nom;
+    this.utilisateur.username = this.utilisateurForm.value.username;
+    this.utilisateur.addresse = this.utilisateurForm.value.addresse;
+    this.utilisateur.dateNaissance = this.utilisateurForm.value.dateNaissance;
+    this.utilisateur.email = this.utilisateurForm.value.email;
+    this.utilisateur.verified = this.utilisateurForm.value.verified;
+    this.utilisateur.password = this.utilisateurForm.value.password;
+    this.utilisateur.telephone = this.utilisateurForm.value.telephone;
 
-  this.addUtilisateur();
+    this.addUtilisateur();
 }
 
 private addUtilisateur() {
-  
+
   this.utilisateurService.addUtilisateur(this.utilisateur).subscribe(
       data => {
           if (data) {
@@ -97,7 +103,7 @@ private addUtilisateur() {
               // this.messageService.add({
               //     severity: 'FAILED',
               //     summary: 'Error',
-              //     detail: 'Desole impossible dajouter le terrain',
+              //     detail: 'Desolé impossible d'ajouter le terrain',
               //     life: 3000
               // });
           }
