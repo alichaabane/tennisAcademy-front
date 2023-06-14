@@ -3,20 +3,20 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Role } from 'src/app/role/role.model';
 import { environment } from 'src/environments/environment';
-import { Utilisateur } from './utilisateur.model';
+import { User } from './user.model';
 
 @Injectable({
   providedIn: 'root'
 })
-export class UtilisateurService {
+export class UserService {
   private Url = environment.apiUrl + 'auth';
   IMG_BASE_URL = environment.IMG_BASE_URL;
   isTblLoading = true;
-  dataChange: BehaviorSubject<Utilisateur[]> = new BehaviorSubject<Utilisateur[]>([]);
+  dataChange: BehaviorSubject<User[]> = new BehaviorSubject<User[]>([]);
   // Temporarily stores data from dialogs
   dialogData: any;
   constructor(private httpClient: HttpClient) {}
-  get data(): Utilisateur[] {
+  get data(): User[] {
     return this.dataChange.value;
   }
   getDialogData() {
@@ -25,46 +25,47 @@ export class UtilisateurService {
 
   /** CRUD METHODS */
   getAllUtilisateurs(): void {
-    this.httpClient.get<Utilisateur[]>(this.Url).subscribe(
-      (data) => {
+    this.httpClient.get<User[]>(this.Url).subscribe({
+      next : (data) => {
         this.isTblLoading = false;
         this.dataChange.next(data);
       },
-      (error: HttpErrorResponse) => {
+      error : (error: HttpErrorResponse) => {
         this.isTblLoading = false;
         console.log(error.name + ' ' + error.message);
       }
+    }
     );
   }
 
-  getAllActiveAdmins(): Observable<Utilisateur[]> {
-    return this.httpClient.get<Utilisateur[]>(this.Url + '/admin');
+  getAllActiveAdmins(): Observable<User[]> {
+    return this.httpClient.get<User[]>(this.Url + '/admin');
   }
 
-  getAllActiveEntraineurs(): Observable<Utilisateur[]> {
-    return this.httpClient.get<Utilisateur[]>(this.Url + '/coach');
+  getAllActiveEntraineurs(): Observable<User[]> {
+    return this.httpClient.get<User[]>(this.Url + '/coach');
   }
 
-  getAllActiveJoueurs(): Observable<Utilisateur[]> {
-    return this.httpClient.get<Utilisateur[]>(this.Url + '/adherent');
+  getAllActiveJoueurs(): Observable<User[]> {
+    return this.httpClient.get<User[]>(this.Url + '/adherent');
   }
 
   getAllRoles(): Observable<Role[]>{
-    return this.httpClient.get<Role[]>(environment.apiUrl+"role");
+    return this.httpClient.get<Role[]>(environment.apiUrl + "role");
   }
 
   // DEMO ONLY, you can find working methods below
-  addUtilisateur(utilisateur: Utilisateur): Observable<Utilisateur> {
+  addUtilisateur(utilisateur: User): Observable<User> {
     this.dialogData = utilisateur;
-    return this.httpClient.post<Utilisateur>(this.Url+"/adminSignup",utilisateur);
+    return this.httpClient.post<User>(this.Url + "/adminSignup", utilisateur);
   }
-  updateUtilisateur(utilisateur: Utilisateur): Observable<Utilisateur> {
+  updateUtilisateur(utilisateur: User): Observable<User> {
     this.dialogData = utilisateur;
     console.log(utilisateur);
-    return this.httpClient.put<Utilisateur>(this.Url + '/edit',utilisateur);
+    return this.httpClient.put<User>(this.Url + '/edit', utilisateur);
   }
-  deleteUtilisateur(id: number):Observable<boolean> {
-    return this.httpClient.delete<boolean>(this.Url+'/'+id);
+  deleteUtilisateur(id: number): Observable<boolean> {
+    return this.httpClient.delete<boolean>(this.Url + '/' + id);
   }
 
   public getImageByUrl(imageName: string): Observable<any> {

@@ -38,7 +38,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
   public usernameProfile: string;
   public photoProfile: any;
   public addressProfile: string;
-  public authentifiee:boolean=false;
+  public authentifiee = false;
   constructor(
     @Inject(DOCUMENT) private document: Document,
     private renderer: Renderer2,
@@ -99,18 +99,19 @@ export class SidebarComponent implements OnInit, OnDestroy {
   }
   ngOnInit() {
     if (this.authService.currentUserValue) {
-      this.authentifiee=true;
+      this.authentifiee = true;
       this.authService.getUtilisateur(this.authService.currentUserValue.id).subscribe(
-        data=>{
-          if(data){
-            this.prenomProfile=data.prenom;
-            this.nomProfile=data.nom;
-            this.roleProfile=data.roles[0];
-            this.emailProfile=data.email;
-            this.usernameProfile=data.username;
-            this.photoProfile=data.mediaURL;
-            this.addressProfile=data.addresse;
-            this.roleProfile=data.roles;
+        data => {
+          if (data){
+            this.prenomProfile = data.prenom;
+            this.nomProfile = data.nom;
+            this.roleProfile = data.roles[0];
+            this.emailProfile = data.email;
+            this.usernameProfile = data.username;
+            this.photoProfile = data.mediaURL;
+            this.addressProfile = data.addresse;
+            console.log(this.roleProfile);
+          //  this.roleProfile = data.roles;
 
           }
         }
@@ -120,7 +121,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
     this.initLeftSidebar();
     this.bodyTag = this.document.body;
   }
-  
+
   logout(){
     console.log("hello");
     this.authService.logout();

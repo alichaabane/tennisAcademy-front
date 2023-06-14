@@ -21,12 +21,12 @@ import { NgxDropzoneModule } from 'ngx-dropzone';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { AddUtilisateurComponent } from './add-utilisateur/add-utilisateur.component';
-import { EditUtilisateurComponent } from './edit-utilisateur/edit-utilisateur.component';
-import { AllUtilisateurComponent } from './all-utilisateur/all-utilisateur.component';
-import { DeleteFormComponent } from './all-utilisateur/dialogs/delete-form/delete-form.component';
-import { FormDialogComponent } from './all-utilisateur/dialogs/form-dialog/form-dialog.component';
-import { UtilisateurService } from './all-utilisateur/utilisateur.service';
-import { UtilisateurRoutingModule } from './utilisateur-routing.module';
+import { EditUserComponent } from './edit-user/edit-user.component';
+import { AllUserComponent } from './all-user/all-user.component';
+import { DeleteFormComponent } from './all-user/dialogs/delete-form/delete-form.component';
+import { FormDialogComponent } from './all-user/dialogs/form-dialog/form-dialog.component';
+import { UserService } from './all-user/user.service';
+import { UserRoutingModule } from './user-routing.module';
 
 
 
@@ -35,8 +35,8 @@ import { UtilisateurRoutingModule } from './utilisateur-routing.module';
 @NgModule({
   declarations: [
     AddUtilisateurComponent,
-    EditUtilisateurComponent,
-    AllUtilisateurComponent,
+    EditUserComponent,
+    AllUserComponent,
     DeleteFormComponent,
     FormDialogComponent
   ],
@@ -63,8 +63,8 @@ import { UtilisateurRoutingModule } from './utilisateur-routing.module';
     MatMenuModule,
     MatSlideToggleModule,
     MatProgressSpinnerModule,
-    UtilisateurRoutingModule,
+    UserRoutingModule,
   ],
-  providers: [UtilisateurService],
+  providers: [UserService],
 })
-export class UtilisateurModule { }
+export class UserModule { }

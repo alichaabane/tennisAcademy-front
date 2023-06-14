@@ -12,6 +12,7 @@ import { AuthService } from 'src/app/core/service/auth.service';
 import { RightSidebarService } from 'src/app/core/service/rightsidebar.service';
 import { environment } from 'src/environments/environment';
 import {Router} from "@angular/router";
+import {NgxSpinnerService} from "ngx-spinner";
 const document: any = window.document;
 
 @Component({
@@ -23,8 +24,8 @@ export class HeaderComponent implements OnInit, AfterViewInit {
   public config: any = {};
   isNavbarCollapsed = false;
   isOpenSidebar: boolean;
-  public authentifiee:boolean=false;
-  photoProfile: any=null;
+  public authentifiee = false;
+  photoProfile: any = null;
   IMG_BASE_URL = environment.IMG_BASE_URL;
 
   constructor(
@@ -34,7 +35,8 @@ export class HeaderComponent implements OnInit, AfterViewInit {
     private rightSidebarService: RightSidebarService,
     private configService: ConfigService,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private spinner: NgxSpinnerService
   ) {}
   // notifications: any[] = [
   //   {
@@ -83,12 +85,12 @@ export class HeaderComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     this.callSidemenuCollapse();
     if (this.authService.currentUserValue) {
-      this.authentifiee=true;
-      this.isNavbarCollapsed=true;
+      this.authentifiee = true;
+      this.isNavbarCollapsed = true;
       this.authService.getUtilisateur(this.authService.currentUserValue.id).subscribe(
-        data=>{
-          if(data){
-            this.photoProfile=data.mediaURL;
+        data => {
+          if (data){
+            this.photoProfile = data.mediaURL;
           }
         }
       );
@@ -97,11 +99,18 @@ export class HeaderComponent implements OnInit, AfterViewInit {
   }
 
   logout(){
+    // this.authService.logout();
+    // this.router.navigateByUrl('/dashboard/main')
+    //   .then(() => {
+    //     window.location.reload();
+    //   });
+    this.spinner.show();
     this.authService.logout();
-    this.router.navigateByUrl('/dashboard/main')
-      .then(() => {
-        window.location.reload();
-      });
+    this.router.navigate(['/dashboard/main']).then();
+    setTimeout(() => {
+      this.spinner.hide();
+      window.location.reload();
+    }, 500);
 
   }
 

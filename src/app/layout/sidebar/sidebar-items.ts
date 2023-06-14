@@ -38,7 +38,7 @@ export const ROUTES: RouteInfo[] = [
       {
         path: '/utilisateurs/all-utilisateurs',
         title: 'Liste des adhérents',
-        moduleName: 'utilisateur',
+        moduleName: 'user',
         iconType: '',
         icon: '',
         class: 'ml-menu',
@@ -48,9 +48,9 @@ export const ROUTES: RouteInfo[] = [
         submenu: [],
       },
       {
-        path: '/utilisateurs/add-utilisateur',
+        path: '/utilisateurs/add-user',
         title: 'Ajouter de nouveaux adhérents',
-        moduleName: 'utilisateur',
+        moduleName: 'user',
         iconType: '',
         icon: '',
         class: 'ml-menu',

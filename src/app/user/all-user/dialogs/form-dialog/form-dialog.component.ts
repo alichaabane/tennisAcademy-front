@@ -5,8 +5,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Media } from 'src/app/media/media.model';
 import { Role } from 'src/app/role/role.model';
 import { environment } from 'src/environments/environment';
-import { Utilisateur } from '../../utilisateur.model';
-import { UtilisateurService } from '../../utilisateur.service';
+import { User } from '../../user.model';
+import { UserService } from '../../user.service';
 
 @Component({
   selector: 'app-form-dialog',
@@ -14,88 +14,88 @@ import { UtilisateurService } from '../../utilisateur.service';
   styleUrls: ['./form-dialog.component.sass']
 })
 export class FormDialogComponent{
-  chide = true;
-  hide = true;
-  public img: File;
-  public imgToEditUrl: string;
-  IMG_BASE_URL = environment.IMG_BASE_URL;
-  public roles:Array<Role>;
-  public rleAdmin:boolean=false;
-  public rleJoueur:boolean=false;
-  public rleEntrai:boolean=false;
-  public utiliRole:String[]=[];
-  private updatedRoles: Role[]=[];
-
-
-  action: string;
-  dialogTitle: string;
-  utilisateurForm: FormGroup;
-  utilisateur: Utilisateur;
   constructor(  private snackBar: MatSnackBar,
-    public dialogRef: MatDialogRef<FormDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any,
-    public utilisateurService: UtilisateurService,
-    private fb: FormBuilder
+                public dialogRef: MatDialogRef<FormDialogComponent>,
+                @Inject(MAT_DIALOG_DATA) public data: any,
+                public utilisateurService: UserService,
+                private fb: FormBuilder
   ) {
     // Set the defaults
     this.action = data.action;
     if (this.action === 'editer') {
-      this.dialogTitle = data.utilisateur.idUtilisateur;
+      this.dialogTitle = data.utilisateur.idUser;
       this.utilisateur = data.utilisateur;
-      data.utilisateur.roles.forEach(element=>this.checked(element));
+      data.utilisateur.roles.forEach(element => this.checked(element));
       console.log(data.utilisateur.photo);
-      if(data.utilisateur.photo){
+      if (data.utilisateur.photo){
         this.imgToEditUrl = data.utilisateur.photo.mediaURL;
         this.getImageByUrl(data.utilisateur.photo.mediaURL);
       }else{
-        this.imgToEditUrl="";
+        this.imgToEditUrl = "";
       }
-     
+
       console.log(this.utilisateur);
 
     } else {
-      this.dialogTitle = 'Nouveau Utilisateur';
-      this.utilisateur = new Utilisateur();
+      this.dialogTitle = 'Nouveau User';
+      this.utilisateur = new User();
     }
     this.utilisateurForm = this.createContactForm();
     console.log(this.utilisateurForm.getRawValue());
-    this.utilisateur.roles.forEach(role=>{
+    this.utilisateur.roles.forEach(role => {
       this.utiliRole.push(role.name);
       this.updatedRoles.push(role);
     });
     this.getAllroles();
 
   }
+  chide = true;
+  hide = true;
+  public img: File;
+  public imgToEditUrl: string;
+  IMG_BASE_URL = environment.IMG_BASE_URL;
+  public roles: Array<Role>;
+  public rleAdmin = false;
+  public rleJoueur = false;
+  public rleEntrai = false;
+  public utiliRole: any[] = [];
+  private updatedRoles: Role[] = [];
 
-  checked(element:Role){
-    if(element.name==="ROLE_ADMIN"){
-      this.rleAdmin=true;
-    }
-    if(element.name==="ROLE_JOUEUR"){
-      this.rleJoueur=true;
-  
 
-    }
-    if(element.name==="ROLE_ENTRAINEUR"){
-      this.rleEntrai=true;
-    }
-  }
-
-  getAllroles(){
-    this.utilisateurService.getAllRoles().subscribe(
-      (data) => {
-        this.roles=data;
-        console.log("roles"+this.roles);
-
-      }
-    );
-  }
+  action: string;
+  dialogTitle: string;
+  utilisateurForm: FormGroup;
+  utilisateur: User;
 
 
   formControl = new FormControl('', [
     Validators.required,
     // Validators.email,
   ]);
+
+  checked(element: Role){
+    if (element.name === "ROLE_ADMIN"){
+      this.rleAdmin = true;
+    }
+    if (element.name === "ROLE_JOUEUR"){
+      this.rleJoueur = true;
+
+
+    }
+    if (element.name === "ROLE_ENTRAINEUR"){
+      this.rleEntrai = true;
+    }
+  }
+
+  getAllroles(){
+    this.utilisateurService.getAllRoles().subscribe(
+      (data) => {
+        this.roles = data;
+        console.log("roles" + this.roles);
+
+      }
+    );
+  }
   getErrorMessage() {
     return this.formControl.hasError('required')
       ? 'Required field'
@@ -116,15 +116,15 @@ export class FormDialogComponent{
       password: [this.utilisateur.password, [Validators.required]],
       confirmPassword: [this.utilisateur.password, [Validators.required]],
       addresse: [this.utilisateur.addresse, [Validators.required, Validators.pattern('[a-zA-Z]+')]],
-      verified:[this.utilisateur.verified],
+      verified: [this.utilisateur.verified],
       email: [
         this.utilisateur.email,
         [Validators.required, Validators.email, Validators.minLength(5)]
       ],
       dateNaissance: [this.utilisateur.dateNaissance, [Validators.required]],
       dateEngagement: [this.utilisateur.dateEngagement],
-      //roles: [this.utilisateur.roles],
-      //photo: ['']
+      // roles: [this.user.roles],
+      // photo: ['']
     });
 
   }
@@ -137,31 +137,31 @@ export class FormDialogComponent{
     this.dialogRef.close();
   }
 
-  
+
   public confirmAdd(): void {
     console.log(this.utilisateurForm.getRawValue());
-    if (this.utilisateurForm.valid && this.updatedRoles!=null){
-      this.utilisateur.prenom=this.utilisateurForm.value.prenom;
-      this.utilisateur.nom=this.utilisateurForm.value.nom;
-      this.utilisateur.username=this.utilisateurForm.value.username;
-      this.utilisateur.addresse=this.utilisateurForm.value.addresse;
-      this.utilisateur.dateNaissance=this.utilisateurForm.value.dateNaissance;
-      this.utilisateur.dateEngagement=this.utilisateurForm.value.dateEngagement;
-      this.utilisateur.nbrMatchJoues=this.utilisateurForm.value.nbrMatchJoues;
-      this.utilisateur.rate=this.utilisateurForm.value.rate;
-      this.utilisateur.gender=this.utilisateurForm.value.gender;
-      this.utilisateur.email=this.utilisateurForm.value.email;
-      this.utilisateur.verified=this.utilisateurForm.value.verified;
-      this.utilisateur.password=this.utilisateurForm.value.password;
-      this.utilisateur.telephone=this.utilisateurForm.value.telephone;
+    if (this.utilisateurForm.valid && this.updatedRoles != null){
+      this.utilisateur.prenom = this.utilisateurForm.value.prenom;
+      this.utilisateur.nom = this.utilisateurForm.value.nom;
+      this.utilisateur.username = this.utilisateurForm.value.username;
+      this.utilisateur.addresse = this.utilisateurForm.value.addresse;
+      this.utilisateur.dateNaissance = this.utilisateurForm.value.dateNaissance;
+      this.utilisateur.dateEngagement = this.utilisateurForm.value.dateEngagement;
+      this.utilisateur.nbrMatchJoues = this.utilisateurForm.value.nbrMatchJoues;
+      this.utilisateur.rate = this.utilisateurForm.value.rate;
+      this.utilisateur.gender = this.utilisateurForm.value.gender;
+      this.utilisateur.email = this.utilisateurForm.value.email;
+      this.utilisateur.verified = this.utilisateurForm.value.verified;
+      this.utilisateur.password = this.utilisateurForm.value.password;
+      this.utilisateur.telephone = this.utilisateurForm.value.telephone;
       this.utilisateur.roles = this.updatedRoles;
       this.utilisateur.photo.mediaURL = this.imgToEditUrl;
     }
-    
+
   }
-  openedChange(idUtilisateur:number,opened: boolean) {
+  openedChange(idUser: number, opened: boolean) {
     console.log(opened ? 'opened' : 'closed');
-    console.log(idUtilisateur);
+    console.log(idUser);
 
   }
 
@@ -209,9 +209,9 @@ export class FormDialogComponent{
 
 onChangeEventFunc(event) {
 
-  this.updatedRoles.splice(0,this.updatedRoles.length)
-  event.value.forEach(element=>{
-    const index=this.roles.findIndex(r=>r.name===element);
+  this.updatedRoles.splice(0, this.updatedRoles.length);
+  event.value.forEach(element => {
+    const index = this.roles.findIndex(r => r.name === element);
     this.updatedRoles.push(this.roles[index]);
   });
 }

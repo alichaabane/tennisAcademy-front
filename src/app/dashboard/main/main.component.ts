@@ -21,8 +21,8 @@ import { Terrain } from 'src/app/terrain/all-terrain/terrain.model';
 import { TerrainService } from 'src/app/terrain/all-terrain/terrain.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { Utilisateur } from 'src/app/utilisateur/all-utilisateur/utilisateur.model';
-import { UtilisateurService } from 'src/app/utilisateur/all-utilisateur/utilisateur.service';
+import { User } from 'src/app/user/all-user/user.model';
+import { UserService } from 'src/app/user/all-user/user.service';
 
 export type SparklineChartOptions = {
   series: ApexAxisChartSeries;
@@ -238,12 +238,12 @@ export class MainComponent implements OnInit{
   IMG_BASE_URL = environment.IMG_BASE_URL;
   terrain$: Observable<Terrain[]>;
   activeTerrains: Terrain[];
-  activeEntraineurs: Utilisateur[];
+  activeEntraineurs: User[];
 
 
   // area chart end
   // tslint:disable-next-line:max-line-length
-  constructor(private authService: AuthService, private router: Router, private terrainService: TerrainService, private utilisateurService: UtilisateurService) {
+  constructor(private authService: AuthService, private router: Router, private terrainService: TerrainService, private utilisateurService: UserService) {
 
   }
   ngOnInit(): void {
@@ -266,18 +266,19 @@ export class MainComponent implements OnInit{
     this.getActiveTerrains();
     this.getActiveEntraineurs();
     this.getInfos();
+    // tslint:disable-next-line:no-unused-expression
     this.areaChartOptions.series[0].data;
   }
 
   getInfos(){
-    this.authService.getAdminInfo().subscribe(
-      data => {
-        if (data){
-          this.AdminInfo = data;
-
-        }
-      }
-    );
+    // this.authService.getAdminInfo().subscribe(
+    //   data => {
+    //     if (data){
+    //       this.AdminInfo = data;
+    //
+    //     }
+    //   }
+    // );
   }
 
   public getActiveEntraineurs(): void{

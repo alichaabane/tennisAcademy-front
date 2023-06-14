@@ -27,7 +27,7 @@ const routes: Routes = [
         path: 'utilisateurs',
         //canActivate: [AuthGuard],
         loadChildren: () =>
-          import('./utilisateur/utilisateur.module').then((m) => m.UtilisateurModule),
+          import('./user/user.module').then((m) => m.UserModule),
       },
       {
         path: 'terrain',

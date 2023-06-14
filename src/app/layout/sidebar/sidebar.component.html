@@ -14,7 +14,7 @@
           </div>
           <div class="profile-usertitle">
             <div class="sidebar-userpic-name">{{prenomProfile}} {{nomProfile}} </div>
-            <!--div class="profile-usertitle-job " *ngFor="let role of roleProfile">{{role.name}} </div-->
+<!--            div class="profile-usertitle-job " *ngFor="let role of roleProfile">{{role.name}} </div-->
           </div>
           <div class="sidebar-userpic-btn">
             <a mat-icon-button disabled routerLink="extra-pages/profile" matTooltip="Profile"
@@ -68,9 +68,10 @@
             <li [ngClass]="level2Menu === sidebarSubItem.moduleName? 'activeSub':''"
               *ngFor="let sidebarSubItem of sidebarItem.submenu"
               [routerLinkActive]="sidebarSubItem.submenu.length > 0 ? '' : 'active'">
-              <a [routerLink]="sidebarSubItem.submenu.length > 0 ? null : [sidebarSubItem.path]"
-                (click)="callLevel2Toggle($event,sidebarSubItem.moduleName)" [ngClass]="[sidebarSubItem.class]">
-                {{sidebarSubItem.title}}
+              <a
+                 [routerLink]="sidebarSubItem.submenu.length > 0 ? null : [sidebarSubItem.path]"
+                 (click)="callLevel2Toggle($event,sidebarSubItem.moduleName)" [ngClass]="[sidebarSubItem.class]">
+                 {{sidebarSubItem.title}}
               </a>
               <!-- Second level menu -->
               <ul class="ml-menu-2" *ngIf="sidebarSubItem.submenu.length > 0">

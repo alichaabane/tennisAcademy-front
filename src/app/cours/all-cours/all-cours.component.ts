@@ -17,7 +17,7 @@ import { BehaviorSubject, fromEvent,merge, map, Observable } from 'rxjs';
   templateUrl: './all-cours.component.html',
   styleUrls: ['./all-cours.component.sass']
 })
-export class AllCoursComponent{  
+export class AllCoursComponent{
   displayedColumns = [
     'select',
     'idCours',
@@ -44,14 +44,14 @@ export class AllCoursComponent{
   @ViewChild(MatMenuTrigger)
   contextMenu: MatMenuTrigger;
   contextMenuPosition = { x: '0px', y: '0px' };
-  
+
   ngOnInit() {
     this.loadData();
   }
   refresh() {
     this.loadData();
   }
-  
+
   addNew() {
     let tempDirection;
     if (localStorage.getItem('isRtl') === 'true') {
@@ -93,8 +93,8 @@ export class AllCoursComponent{
       );
     });
   }
-  
-  
+
+
   editCall(row) {
     this.id = row.id;
     let tempDirection;
@@ -115,7 +115,7 @@ export class AllCoursComponent{
       if (result) {
         console.log(result);
         // When using an edit things are little different, firstly we find record inside DataService by id
-  
+
         // Then you update that record using data from dialogData (values you enetered)
         this.coursService.updateCours(result).subscribe(
           res=>{
@@ -138,8 +138,8 @@ export class AllCoursComponent{
       }
     });
   }
-  
-  
+
+
   deleteItem(row) {
     this.id = row.id;
     let tempDirection;
@@ -164,39 +164,39 @@ export class AllCoursComponent{
               if (res) {
                 this.refresh();
                 this.showNotification(
-                  'snackbar-warning',
-                  'Cours effacer avec succes...!!!',
+                  'snackbar-success',
+                  'Cours effacé avec succés...!!!',
                   'bottom',
                   'center'
-                ); 
+                );
               } else {
                 this.showNotification(
                   'snackbar-danger',
-                  'Cours effacer avec succes...!!!',
+                  'Cours effacé avec succés...!!!',
                   'bottom',
                   'center'
-                ); 
+                );
               }
           },
           error => {
-          
+
           }
       );
       }
     });
   }
-  
+
   private refreshTable() {
     this.paginator._changePageSize(this.paginator.pageSize);
   }
-  
+
   /** Whether the number of selected elements matches the total number of rows. */
   isAllSelected() {
     const numSelected = this.selection.selected.length;
     const numRows = this.dataSource.renderedData.length;
     return numSelected === numRows;
   }
-  
+
   /** Selects all rows if they are not all selected; otherwise clear selection. */
   masterToggle() {
     this.isAllSelected()
@@ -205,7 +205,7 @@ export class AllCoursComponent{
           this.selection.select(row)
         );
   }
-  
+
   removeSelectedRows() {
     const totalSelect = this.selection.selected.length;
     this.selection.selected.forEach((item) => {
@@ -217,18 +217,18 @@ export class AllCoursComponent{
       this.coursService.deleteCours(item.idCours).subscribe(
         res => {
             if (res) {
-  
+
             } else {
               this.showNotification(
                 'snackbar-danger',
                 'Cours :'+item.idCours+' non effacer...!!!',
                 'bottom',
                 'center'
-              ); 
+              );
             }
         },
         error => {
-        
+
         }
     );    this.exampleDatabase.dataChange.value.splice(index, 1);
       this.refreshTable();
@@ -241,7 +241,7 @@ export class AllCoursComponent{
       'center'
     );
   }
-  
+
     //  public async changeDispo(terrain){
     //     if(terrain.enable==true)
     //       terrain.enable=false;
@@ -250,7 +250,7 @@ export class AllCoursComponent{
     //       this.coursService.changeCoursDispoById(terrain.idTerrain,terrain.enable).subscribe(
     //         res => {
     //             if (res) {
-                  
+
     //                 // this.messageService.add({
     //                 //     severity: 'SUCCESS',
     //                 //     summary: 'Success',
@@ -275,7 +275,7 @@ export class AllCoursComponent{
     //         }
     //     );
     //   }
-  
+
   public loadData() {
     this.exampleDatabase = new CoursService(this.httpClient);
     this.dataSource = new ExampleDataSource(

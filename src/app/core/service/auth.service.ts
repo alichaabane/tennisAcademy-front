@@ -4,8 +4,6 @@ import { BehaviorSubject, Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { User } from '../models/user';
 import { environment } from 'src/environments/environment';
-import { Utilisateur } from 'src/app/utilisateur/all-utilisateur/utilisateur.model';
-import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -27,12 +25,12 @@ export class AuthService {
     return this.currentUserSubject.value;
   }
 
-  getAdminInfo(): Observable<Object> {
-    return this.http.get<Utilisateur>(this.Url + "/infoAdmin");
-  }
+  // getAdminInfo(): Observable<any> {
+  //   return this.http.get<User>(this.Url + "/infoAdmin");
+  // }
 
-  getUtilisateur(idUtilisateur: number): Observable<Utilisateur> {
-    return this.http.get<Utilisateur>(this.Url + "/" + idUtilisateur);
+  getUtilisateur(idUser: number): Observable<User> {
+    return this.http.get<User>(this.Url + "/" + idUser);
   }
 
   login(username: string, password: string) {

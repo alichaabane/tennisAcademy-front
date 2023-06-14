@@ -2,7 +2,7 @@
     <div class="modalHeader">
       <div class="editRowModal">
         <div class="modalHeader clearfix">
-          <img [src]="utilisateur.photo ? IMG_BASE_URL + utilisateur.photo.mediaURL : 'assets/images/user.jpeg'"
+          <img [src]="utilisateur?.photo ? IMG_BASE_URL + utilisateur?.photo.mediaURL : 'assets/images/user.jpeg'"
            alt="avatar" width="50px" height="50px">
           <div class="modal-about">
             <div class="fw-bold p-t-5 font-17">
@@ -15,7 +15,7 @@
       </button>
     </div>
     <div mat-dialog-content>
-      
+
         <form class="register-form m-4" [formGroup]="utilisateurForm" (ngSubmit)="submit()">
             <div class="row">
               <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
@@ -33,11 +33,11 @@
                     </mat-option>
                 </mat-select>
                 </mat-form-field>
-                
+
                 <!-- <ul>
                     <mat-label>Role</mat-label>
                   <li *ngFor="let role of roles">
-                      <mat-checkbox [(checked)]="utilisateur.roles[0]" (change)="onChangeEventFunc(role.name, $event)">
+                      <mat-checkbox [(checked)]="user.roles[0]" (change)="onChangeEventFunc(role.name, $event)">
                           {{role.name}}
                       </mat-checkbox>
                   </li>
@@ -83,7 +83,7 @@
                 <input matInput [matDatepicker]="picker1" formControlName="dateEngagement">
                 <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
                 <mat-datepicker #picker1></mat-datepicker>
-                
+
               </mat-form-field>
             </div>
 
@@ -93,7 +93,7 @@
                 <input matInput formControlName="nbrMatchJoues" type="number">
               </mat-form-field>
             </div>
-            
+
           </div>
           <div class="row">
             <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
@@ -157,14 +157,14 @@
                 </mat-error>
               </mat-form-field>
           </div>
-         
+
           <div class="row">
               <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2" style="padding: 8px;">
-                  
+
                   <mat-slide-toggle formControlName="verified" [checked]="utilisateurForm.get('verified')">
                     Disponibilite de l'utilisateur  :
                   </mat-slide-toggle>
-        
+
                 </div>
 
                 <div *ngIf="rleEntrai&&rleJoueur" class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
@@ -173,7 +173,7 @@
                     <input matInput [matDatepicker]="picker1" formControlName="dateEngagement">
                     <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
                     <mat-datepicker #picker1></mat-datepicker>
-                    
+
                   </mat-form-field>
                 </div>
           </div>
@@ -187,7 +187,7 @@
             <div *ngIf="rleJoueur" class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
               <mat-form-field class="example-full-width mb-3" appearance="outline">
                 <mat-label>Sexe</mat-label>
-                <mat-select formControlName="gender" (openedChange)="openedChange(utilisateur.idUtilisateur,$event)" required>
+                <mat-select formControlName="gender" (openedChange)="openedChange(utilisateur.idUser,$event)" required>
                   <mat-option [value]="'Homme'">
                     Homme
                   </mat-option>
@@ -196,7 +196,7 @@
                   </mat-option>
                 </mat-select>
                 <mat-error *ngIf="utilisateurForm.get('gender').hasError('required')">
-                  Selectionnez le sexe 
+                  Selectionnez le sexe
                 </mat-error>
               </mat-form-field>
             </div>
@@ -235,9 +235,9 @@
           </div>
 
 
-            
 
-           
+
+
             <div class="row">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
                   <div class="example-button-row">

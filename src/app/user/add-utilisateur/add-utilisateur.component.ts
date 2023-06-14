@@ -4,8 +4,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Media } from 'src/app/media/media.model';
 import { Role } from 'src/app/role/role.model';
-import { Utilisateur } from '../all-utilisateur/utilisateur.model';
-import { UtilisateurService } from '../all-utilisateur/utilisateur.service';
+import { User } from '../all-user/user.model';
+import { UserService } from '../all-user/user.service';
 
 @Component({
   selector: 'app-add-utilisateur',
@@ -14,13 +14,13 @@ import { UtilisateurService } from '../all-utilisateur/utilisateur.service';
 })
 export class AddUtilisateurComponent {
   utilisateurForm: FormGroup;
-  public utilisateur = new Utilisateur();
+  public utilisateur = new User();
   public img: File;
   public imgToEditUrl: string;
   public roles: Array<Role>;
   public connectedUserRole: any;
 
-  constructor(private fb: FormBuilder, private utilisateurService: UtilisateurService, private router: Router) {
+  constructor(private fb: FormBuilder, private utilisateurService: UserService, private router: Router) {
     this.utilisateurForm = this.fb.group({
       prenom: ['', [Validators.required, Validators.pattern('[a-zA-Z]+')]],
       nom: ['', [Validators.required, Validators.pattern('[a-zA-Z]+')]],

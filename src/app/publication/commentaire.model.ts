@@ -1,19 +1,19 @@
-import { Utilisateur } from "../utilisateur/all-utilisateur/utilisateur.model";
+import { User } from "../user/all-user/user.model";
 import { Publication } from "../publication/publication.model";
 
 export class Commentaire {
-    idCommentaire:number;
+    idCommentaire: number;
     textCommentaire: string;
     localDateheureCommentaire: string;
-    utilisateur: Utilisateur;
-    publication:Publication;
+    utilisateur: User;
+    publication: Publication;
     constructor() {
       {
-        this.idCommentaire=0;
+        this.idCommentaire = 0;
         this.textCommentaire = '';
         this.localDateheureCommentaire = '';
-        this.utilisateur=new Utilisateur();
-        this.publication=new Publication();
+        this.utilisateur = new User();
+        this.publication = new Publication();
 
       }
     }

@@ -4,8 +4,8 @@ import { Role } from "../../role/role.model";
 
 
 
-export class Utilisateur {
-  idUtilisateur: number;
+export class User {
+  idUser: number;
   prenom: string;
   nom: string;
   dateNaissance: string;
@@ -16,19 +16,19 @@ export class Utilisateur {
   telephone: number;
   email: string;
   username: string;
-  addresse:string;
+  addresse;
   password: string;
   verified: boolean;
   photo: Media;
   mediaURL: any;
   roles: Role[];
-  accessToken:string;
+  accessToken;
   constructor() {
     {
-        this.idUtilisateur=0;
+        this.idUser = 0;
         this.prenom = '';
         this.nom = '';
-        this.email ='';
+        this.email = '';
         this.dateNaissance = formatDate(new Date(), 'yyyy-MM-dd', 'en') || '';
         this.dateEngagement = formatDate(new Date(), 'yyyy-MM-dd', 'en') || '';
         this.nbrMatchJoues = 0;
@@ -37,10 +37,10 @@ export class Utilisateur {
         this.username = '';
         this.password = '';
         this.addresse = '';
-        this.verified =false;
+        this.verified = false;
         this.photo = new Media();
         this.roles = [];
-        this.mediaURL= '';
+        this.mediaURL = '';
       }
   }
 }

@@ -6,4 +6,9 @@ export class User {
   lastName: string;
   roles: string[];
   accessToken: string;
+  prenom?: string;
+  nom?: string;
+  email?: any;
+  mediaURL?: any;
+  addresse?: string;
 }

@@ -10,21 +10,21 @@ import { BehaviorSubject, fromEvent, map, merge, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { DeleteFormComponent } from './dialogs/delete-form/delete-form.component';
 import { FormDialogComponent } from './dialogs/form-dialog/form-dialog.component';
-import { UtilisateurService } from './utilisateur.service';
-import { Utilisateur } from './utilisateur.model';
+import { UserService } from './user.service';
+import { User } from './user.model';
 
 
 @Component({
-  selector: 'app-all-utilisateur',
-  templateUrl: './all-utilisateur.component.html',
-  styleUrls: ['./all-utilisateur.component.sass']
+  selector: 'app-all-user',
+  templateUrl: './all-user.component.html',
+  styleUrls: ['./all-user.component.scss']
 })
-export class AllUtilisateurComponent {
+export class AllUserComponent {
   IMG_BASE_URL = environment.IMG_BASE_URL;
-  btnTous:String="";
-  btnAdmin:String="";
-  btnJou:String="";
-  btnEnt:String="";
+  btnTous = "";
+  btnAdmin = "";
+  btnJou = "";
+  btnEnt = "";
 
   displayedColumns = [
     'select',
@@ -38,19 +38,18 @@ export class AllUtilisateurComponent {
     'nbrMatchJoues',
     'rate',
     'gender',
-    'username',
-    'verified',
+     'verified',
     'actions',
   ];
-  exampleDatabase: UtilisateurService | null;
+  exampleDatabase: UserService | null;
   dataSource: ExampleDataSource | null;
-  selection = new SelectionModel<Utilisateur>(true, []);
+  selection = new SelectionModel<User>(true, []);
   id: number;
-  utilisateur: Utilisateur | null;
+  user: User | null;
   constructor(
     public httpClient: HttpClient,
     public dialog: MatDialog,
-    public utilisateurService: UtilisateurService,
+    public userService: UserService,
     private snackBar: MatSnackBar
   ) {}
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
@@ -91,7 +90,7 @@ export class AllUtilisateurComponent {
     }
     const dialogRef = this.dialog.open(FormDialogComponent, {
       data: {
-        utilisateur: this.utilisateur,
+        user: this.user,
         action: 'add',
       },
       direction: tempDirection,
@@ -100,14 +99,14 @@ export class AllUtilisateurComponent {
       if (result) {
         // After dialog is closed we're doing frontend updates
         // For add we're just pushing a new row inside DataService
-        this.utilisateurService.addUtilisateur(result).subscribe(
-                    res=>{
+        this.userService.addUtilisateur(result).subscribe(
+                    res => {
                       console.log(res);
-                      if(res){
+                      if (res){
                         this.refresh();
                         this.showNotification(
                           'snackbar-success',
-                          'Utilisateur ajouté avec succes...!!!',
+                          'User ajouté avec succes...!!!',
                           'bottom',
                           'center'
                         );
@@ -119,7 +118,7 @@ export class AllUtilisateurComponent {
         console.log("pas d'action");
       }
       this.exampleDatabase.dataChange.value.unshift(
-        this.utilisateurService.getDialogData()
+        this.userService.getDialogData()
       );
     });
   }
@@ -135,7 +134,7 @@ export class AllUtilisateurComponent {
     }
     const dialogRef = this.dialog.open(FormDialogComponent, {
       data: {
-        utilisateur: row,
+        user: row,
         action: 'editer',
       },
       direction: tempDirection,
@@ -147,10 +146,10 @@ export class AllUtilisateurComponent {
         // When using an edit things are little different, firstly we find record inside DataService by id
 
         // Then you update that record using data from dialogData (values you enetered)
-        this.utilisateurService.updateUtilisateur(result).subscribe(
-          res=>{
+        this.userService.updateUtilisateur(result).subscribe(
+          res => {
             console.log(res);
-            if(res){
+            if (res){
               this.refresh();
               this.showNotification(
                 'black',
@@ -161,7 +160,7 @@ export class AllUtilisateurComponent {
             }
           }
         );
-          this.utilisateurService.getDialogData();
+        this.userService.getDialogData();
         // And lastly refresh table
       }else {
         console.log("pas d'edit");
@@ -185,11 +184,11 @@ export class AllUtilisateurComponent {
     dialogRef.afterClosed().subscribe((result) => {
       if (result === 1) {
         const foundIndex = this.exampleDatabase.dataChange.value.findIndex(
-          (x) => x.idUtilisateur === this.id
+          (x) => x.idUser === this.id
         );
         // for delete we use splice in order to remove single object from DataService
         this.exampleDatabase.dataChange.value.splice(foundIndex, 1);
-        this.utilisateurService.deleteUtilisateur(row.idUtilisateur).subscribe(
+        this.userService.deleteUtilisateur(row.idUser).subscribe(
           res => {
               if (res) {
                 this.refresh();
@@ -244,14 +243,14 @@ export class AllUtilisateurComponent {
       );
       // console.log(this.dataSource.renderedData.findIndex((d) => d === item));
       console.log(item);
-      this.utilisateurService.deleteUtilisateur(item.idUtilisateur).subscribe(
+      this.userService.deleteUtilisateur(item.idUser).subscribe(
         res => {
             if (res) {
 
             } else {
               this.showNotification(
                 'snackbar-danger',
-                'Terrain :'+item.idUtilisateur+' non effacé...!!!',
+                'Terrain :' + item.idUser + ' non effacé...!!!',
                 'bottom',
                 'center'
               );
@@ -260,9 +259,10 @@ export class AllUtilisateurComponent {
         error => {
 
         }
-    );    this.exampleDatabase.dataChange.value.splice(index, 1);
+    );
+      this.exampleDatabase.dataChange.value.splice(index, 1);
       this.refreshTable();
-      this.selection = new SelectionModel<Utilisateur>(true, []);
+      this.selection = new SelectionModel<User>(true, []);
     });
     this.showNotification(
       'snackbar-danger',
@@ -272,12 +272,14 @@ export class AllUtilisateurComponent {
     );
   }
 
-     public async changeDispo(utilisateur){
-        if(utilisateur.verified==true)
-        utilisateur.verified=false;
-        else if(utilisateur.verified==false)
-        utilisateur.verified=true;
-          this.utilisateurService.changeUtilisateurDispoById(utilisateur.idUtilisateur,utilisateur.verified).subscribe(
+     public async changeDispo(user){
+        if (user.verified === true) {
+        user.verified = false;
+        }
+        else if (user.verified === false) {
+        user.verified = true;
+ }
+        this.userService.changeUtilisateurDispoById(user.idUser, user.verified).subscribe(
             res => {
                 if (res) {
 
@@ -307,7 +309,7 @@ export class AllUtilisateurComponent {
       }
 
   public loadData() {
-    this.exampleDatabase = new UtilisateurService(this.httpClient);
+    this.exampleDatabase = new UserService(this.httpClient);
     this.dataSource = new ExampleDataSource(
       this.exampleDatabase,
       this.paginator,
@@ -333,16 +335,17 @@ export class AllUtilisateurComponent {
     });
   }
   // context menu
-  onContextMenu(event: MouseEvent, item: Utilisateur) {
+  onContextMenu(event: MouseEvent, item: User) {
     event.preventDefault();
     this.contextMenuPosition.x = event.clientX + 'px';
     this.contextMenuPosition.y = event.clientY + 'px';
-    this.contextMenu.menuData = { item: item };
+    this.contextMenu.menuData = { item };
     this.contextMenu.menu.focusFirstItem('mouse');
     this.contextMenu.openMenu();
   }
   }
-  export class ExampleDataSource extends DataSource<Utilisateur> {
+export class ExampleDataSource extends DataSource<User> {
+  // tslint:disable-next-line:variable-name
   _filterChange = new BehaviorSubject('');
   get filter(): string {
     return this._filterChange.value;
@@ -350,11 +353,14 @@ export class AllUtilisateurComponent {
   set filter(filter: string) {
     this._filterChange.next(filter);
   }
-  filteredData: Utilisateur[] = [];
-  renderedData: Utilisateur[] = [];
+  filteredData: User[] = [];
+  renderedData: User[] = [];
   constructor(
-    public _exampleDatabase: UtilisateurService,
+    // tslint:disable-next-line:variable-name
+    public _exampleDatabase: UserService,
+    // tslint:disable-next-line:variable-name
     public _paginator: MatPaginator,
+    // tslint:disable-next-line:variable-name
     public _sort: MatSort
   ) {
     super();
@@ -362,7 +368,7 @@ export class AllUtilisateurComponent {
     this._filterChange.subscribe(() => (this._paginator.pageIndex = 0));
   }
   /** Connect function called by the table to retrieve one stream containing the data to render. */
-  connect(): Observable<Utilisateur[]> {
+  connect(): Observable<User[]> {
     // Listen for any changes in the base data, sorting, filtering, or pagination
     const displayDataChanges = [
       this._exampleDatabase.dataChange,
@@ -376,13 +382,13 @@ export class AllUtilisateurComponent {
         // Filter data
         this.filteredData = this._exampleDatabase.data
           .slice()
-          .filter((utilisateur: Utilisateur) => {
+          .filter((user: User) => {
             const searchStr = (
-              utilisateur.idUtilisateur +
-              utilisateur.prenom +
-              utilisateur.nom +
-              utilisateur.username +
-              utilisateur.email
+              user.idUser +
+              user.prenom +
+              user.nom +
+              user.username +
+              user.email
             ).toLowerCase();
             return searchStr.indexOf(this.filter.toLowerCase()) !== -1;
           });
@@ -400,7 +406,7 @@ export class AllUtilisateurComponent {
   }
   disconnect() {}
   /** Returns a sorted copy of the database data. */
-  sortData(data: Utilisateur[]): Utilisateur[] {
+  sortData(data: User[]): User[] {
     if (!this._sort.active || this._sort.direction === '') {
       return data;
     }
@@ -408,8 +414,8 @@ export class AllUtilisateurComponent {
       let propertyA: number | string = '';
       let propertyB: number | string = '';
       switch (this._sort.active) {
-        case 'idUtilisateur':
-          [propertyA, propertyB] = [a.idUtilisateur, b.idUtilisateur];
+        case 'idUser':
+          [propertyA, propertyB] = [a.idUser, b.idUser];
           break;
         case 'prenom':
           [propertyA, propertyB] = [a.prenom, b.prenom];

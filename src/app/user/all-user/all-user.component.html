@@ -5,11 +5,11 @@
           <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
             <ul class="breadcrumb breadcrumb-style ">
               <li class="breadcrumb-item">
-                <h4 class="page-title">TOUS les Utilisateurs</h4>
+                <h4 class="page-title">Tous les Utilisateurs</h4>
               </li>
               <li class="breadcrumb-item bcrumb-1">
                 <a routerLink="/dashboard/main">
-                  <i class="fas fa-home"></i> Home</a>
+                  <i class="fas fa-home"></i> Acceuil</a>
               </li>
               <li class="breadcrumb-item bcrumb-2">
                 <a href="#" onClick="return false;">Utilisateurs</a>
@@ -93,21 +93,21 @@
                   </ng-container>
                   <!-- ID Column -->
                   <ng-container matColumnDef="id">
-                    <mat-header-cell *matHeaderCellDef mat-sort-header >Id</mat-header-cell>
-                    <mat-cell *matCellDef="let row">{{row.idUtilisateur}}</mat-cell>
+                    <mat-header-cell class="mr-15"  *matHeaderCellDef mat-sort-header >Id</mat-header-cell>
+                    <mat-cell class="mr-15"  *matCellDef="let row">{{row.idUser}}</mat-cell>
                   </ng-container>
                   <ng-container matColumnDef="photo">
-                    <mat-header-cell mat-header-cell *matHeaderCellDef > Image
+                    <mat-header-cell class="mnl-15" mat-header-cell *matHeaderCellDef > Image
                     </mat-header-cell>
-                    <mat-cell mat-cell *matCellDef="let row"> 
-                      <img width="8500px" height="80px"
+                    <mat-cell class="mnl-15" mat-cell *matCellDef="let row">
+                      <img class="user-image"
                         [src]="row.photo ? IMG_BASE_URL + row.photo.mediaURL : 'assets/images/user.jpeg'"
                         />
                     </mat-cell>
                   </ng-container>
                   <ng-container matColumnDef="prenom">
-                    <mat-header-cell *matHeaderCellDef mat-sort-header>Prenom</mat-header-cell>
-                    <mat-cell *matCellDef="let row" (contextmenu)="onContextMenu($event, row)">
+                    <mat-header-cell class="ml-15" *matHeaderCellDef mat-sort-header>Prenom</mat-header-cell>
+                    <mat-cell class="ml-15" *matCellDef="let row" (contextmenu)="onContextMenu($event, row)">
                       {{row.prenom}}</mat-cell>
                   </ng-container>
                   <ng-container matColumnDef="nom">
@@ -120,11 +120,11 @@
                     <mat-cell *matCellDef="let row" (contextmenu)="onContextMenu($event, row)">
                       {{row.email}}</mat-cell>
                   </ng-container>
-                  <ng-container matColumnDef="username">
-                    <mat-header-cell *matHeaderCellDef mat-sort-header>Username</mat-header-cell>
-                    <mat-cell *matCellDef="let row" (contextmenu)="onContextMenu($event, row)">
-                      {{row.username}}</mat-cell>
-                  </ng-container>
+<!--                  <ng-container matColumnDef="username">-->
+<!--                    <mat-header-cell *matHeaderCellDef mat-sort-header>Username</mat-header-cell>-->
+<!--                    <mat-cell *matCellDef="let row" (contextmenu)="onContextMenu($event, row)">-->
+<!--                      {{row.username}}</mat-cell>-->
+<!--                  </ng-container>-->
                   <ng-container matColumnDef="dateNaissance">
                     <mat-header-cell *matHeaderCellDef mat-sort-header [ngClass]="'tbl-col-width-per-10'">Date naissance
                     </mat-header-cell>
@@ -157,7 +157,7 @@
                   <ng-container matColumnDef="verified">
                     <mat-header-cell *matHeaderCellDef mat-sort-header>Verified</mat-header-cell>
 
-                    <mat-cell *matCellDef="let row" (contextmenu)="onContextMenu($event, row)"> 
+                    <mat-cell *matCellDef="let row" (contextmenu)="onContextMenu($event, row)">
 
                       <mat-slide-toggle [checked]="row.verified"
                       (change)="changeDispo(row)"></mat-slide-toggle>
@@ -241,7 +241,7 @@
                 </div>
                 <mat-paginator #paginator [length]="dataSource.filteredData.length" [pageIndex]="0" [pageSize]="10"
                   [pageSizeOptions]="[5, 10, 25, 100]">
-                </mat-paginator> 
+                </mat-paginator>
               </div>
             </div>
           </div>
@@ -249,4 +249,3 @@
       </div>
     </div>
   </section>
-  
