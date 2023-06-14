@@ -25,7 +25,7 @@ export class AllUtilisateurComponent {
   btnAdmin:String="";
   btnJou:String="";
   btnEnt:String="";
-  
+
   displayedColumns = [
     'select',
     'id',
@@ -59,9 +59,9 @@ export class AllUtilisateurComponent {
   @ViewChild(MatMenuTrigger)
   contextMenu: MatMenuTrigger;
   contextMenuPosition = { x: '0px', y: '0px' };
-  
+  // tslint:disable-next-line:use-lifecycle-interface
   ngOnInit() {
-    this.btnTous="primary";
+    this.btnTous = "primary";
     this.loadData();
   }
   refresh() {
@@ -81,7 +81,7 @@ export class AllUtilisateurComponent {
   showJou(){
 
   }
-  
+
   addNew() {
     let tempDirection;
     if (localStorage.getItem('isRtl') === 'true') {
@@ -107,7 +107,7 @@ export class AllUtilisateurComponent {
                         this.refresh();
                         this.showNotification(
                           'snackbar-success',
-                          'Utilisateur ajouter avec succes...!!!',
+                          'Utilisateur ajouté avec succes...!!!',
                           'bottom',
                           'center'
                         );
@@ -116,15 +116,15 @@ export class AllUtilisateurComponent {
                   );
       }
       else{
-        console.log("pas de action");
+        console.log("pas d'action");
       }
       this.exampleDatabase.dataChange.value.unshift(
         this.utilisateurService.getDialogData()
       );
     });
   }
-  
-  
+
+
   editCall(row) {
     this.id = row.id;
     let tempDirection;
@@ -145,7 +145,7 @@ export class AllUtilisateurComponent {
       if (result) {
         console.log(result);
         // When using an edit things are little different, firstly we find record inside DataService by id
-  
+
         // Then you update that record using data from dialogData (values you enetered)
         this.utilisateurService.updateUtilisateur(result).subscribe(
           res=>{
@@ -164,12 +164,12 @@ export class AllUtilisateurComponent {
           this.utilisateurService.getDialogData();
         // And lastly refresh table
       }else {
-        console.log("pas dedit");
+        console.log("pas d'edit");
       }
     });
   }
-  
-  
+
+
   deleteItem(row) {
     this.id = row.id;
     let tempDirection;
@@ -198,35 +198,35 @@ export class AllUtilisateurComponent {
                   'Terrain effacer avec succes...!!!',
                   'bottom',
                   'center'
-                ); 
+                );
               } else {
                 this.showNotification(
                   'snackbar-danger',
-                  'Terrain effacer avec succes...!!!',
+                  'Terrain effacé avec succes...!!!',
                   'bottom',
                   'center'
-                ); 
+                );
               }
           },
           error => {
-          
+
           }
       );
       }
     });
   }
-  
+
   private refreshTable() {
     this.paginator._changePageSize(this.paginator.pageSize);
   }
-  
+
   /** Whether the number of selected elements matches the total number of rows. */
   isAllSelected() {
     const numSelected = this.selection.selected.length;
     const numRows = this.dataSource.renderedData.length;
     return numSelected === numRows;
   }
-  
+
   /** Selects all rows if they are not all selected; otherwise clear selection. */
   masterToggle() {
     this.isAllSelected()
@@ -235,7 +235,7 @@ export class AllUtilisateurComponent {
           this.selection.select(row)
         );
   }
-  
+
   removeSelectedRows() {
     const totalSelect = this.selection.selected.length;
     this.selection.selected.forEach((item) => {
@@ -247,18 +247,18 @@ export class AllUtilisateurComponent {
       this.utilisateurService.deleteUtilisateur(item.idUtilisateur).subscribe(
         res => {
             if (res) {
-  
+
             } else {
               this.showNotification(
                 'snackbar-danger',
-                'Terrain :'+item.idUtilisateur+' non effacer...!!!',
+                'Terrain :'+item.idUtilisateur+' non effacé...!!!',
                 'bottom',
                 'center'
-              ); 
+              );
             }
         },
         error => {
-        
+
         }
     );    this.exampleDatabase.dataChange.value.splice(index, 1);
       this.refreshTable();
@@ -271,7 +271,7 @@ export class AllUtilisateurComponent {
       'center'
     );
   }
-  
+
      public async changeDispo(utilisateur){
         if(utilisateur.verified==true)
         utilisateur.verified=false;
@@ -280,7 +280,7 @@ export class AllUtilisateurComponent {
           this.utilisateurService.changeUtilisateurDispoById(utilisateur.idUtilisateur,utilisateur.verified).subscribe(
             res => {
                 if (res) {
-                  
+
                     // this.messageService.add({
                     //     severity: 'SUCCESS',
                     //     summary: 'Success',
@@ -305,7 +305,7 @@ export class AllUtilisateurComponent {
             }
         );
       }
-  
+
   public loadData() {
     this.exampleDatabase = new UtilisateurService(this.httpClient);
     this.dataSource = new ExampleDataSource(

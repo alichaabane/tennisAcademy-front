@@ -28,8 +28,8 @@ export type SparklineChartOptions = {
   series: ApexAxisChartSeries;
   chart: ApexChart;
   xaxis: ApexXAxis;
-  markers: any; //ApexMarkers;
-  stroke: any; //ApexStroke;
+  markers: any; // ApexMarkers;
+  stroke: any; // ApexStroke;
   yaxis: ApexYAxis | ApexYAxis[];
   plotOptions: ApexPlotOptions;
   dataLabels: ApexDataLabels;
@@ -172,11 +172,11 @@ export class MainComponent implements OnInit{
     series: [
       {
         name: 'Session Libre',
-        data: [31, 40, 28, 51,42,85,44,44,77,55,76,6],
+        data: [31, 40, 28, 51, 42, 85, 44, 44, 77, 55, 76, 6],
       },
       {
         name: 'Session Planifiee',
-        data: [11, 32, 45, 32, 34, 52, 41,40, 28, 51, 42, 85],
+        data: [11, 32, 45, 32, 34, 52, 41, 40, 28, 51, 42, 85],
       },
     ],
     chart: {
@@ -225,20 +225,20 @@ export class MainComponent implements OnInit{
     },
   };
   usernameProfile: string;
-  admin: boolean=false;
-  entraineur: boolean=false;
-  joueur: boolean=false;
-  nbrTerrain:number=0;
-  nbrPlanification:number=0;
-  nbrUtilisateurs:number=0;
-  nbrSession:number=0;
-  AdminInfo:Object=new Object();
-  rolesProfile: string[]=[];
-  public authentifiee:boolean=false;
-  IMG_BASE_URL = environment.IMG_BASE_URL
-  terrain$: Observable<Terrain[]>
+  admin = false;
+  entraineur = false;
+  joueur = false;
+  nbrTerrain = 0;
+  nbrPlanification = 0;
+  nbrUtilisateurs = 0;
+  nbrSession = 0;
+  AdminInfo: Object = new Object();
+  rolesProfile: string[] = [];
+  public authentifiee = false;
+  IMG_BASE_URL = environment.IMG_BASE_URL;
+  terrain$: Observable<Terrain[]>;
   activeTerrains: Terrain[];
-  activeEntraineurs:Utilisateur[];
+  activeEntraineurs: Utilisateur[];
 
 
   // area chart end
@@ -252,35 +252,38 @@ export class MainComponent implements OnInit{
       this.usernameProfile = this.authService.currentUserValue.username;
       this.rolesProfile = this.authService.currentUserValue.roles;
       this.rolesProfile.forEach(element => {
-        if(element==="ROLE_ADMIN")
-          this.admin=true;
-        else if(element==="ROLE_ENTRAINEUR")
-          this.entraineur=true;
-        else
-          this.joueur=true;
+        if (element === "ROLE_ADMIN") {
+          this.admin = true;
+        }
+        else if (element === "ROLE_COACH") {
+          this.entraineur = true;
+ }
+        else {
+          this.joueur = true;
+ }
       });
-    };
+    }
     this.getActiveTerrains();
     this.getActiveEntraineurs();
     this.getInfos();
-    this.areaChartOptions.series[0].data
+    this.areaChartOptions.series[0].data;
   }
 
   getInfos(){
     this.authService.getAdminInfo().subscribe(
-      data=>{
-        if(data){
-          this.AdminInfo=data;
+      data => {
+        if (data){
+          this.AdminInfo = data;
 
         }
       }
     );
   }
 
-  public getActiveEntraineurs():void{
+  public getActiveEntraineurs(): void{
     this.utilisateurService.getAllActiveEntraineurs().subscribe(
-      (data)=>{
-        this.activeEntraineurs=data;
+      (data) => {
+        this.activeEntraineurs = data;
       },
       (error: HttpErrorResponse) => {
       console.log(error.name + ' ' + error.message);
@@ -290,8 +293,8 @@ export class MainComponent implements OnInit{
 
   public getActiveTerrains(): void {
     this.terrainService.getAllActiveTerrains().subscribe(
-      (data)=>{
-        this.activeTerrains=data;
+      (data) => {
+        this.activeTerrains = data;
       },
       (error: HttpErrorResponse) => {
       console.log(error.name + ' ' + error.message);

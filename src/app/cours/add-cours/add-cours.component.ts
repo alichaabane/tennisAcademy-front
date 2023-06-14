@@ -13,8 +13,7 @@ export class AddCoursComponent {
   coursForm: FormGroup;
   private cours = new Cours();
 
-  constructor(private fb: FormBuilder,private coursService: CoursService,
-    private router: Router) {
+  constructor(private fb: FormBuilder, private coursService: CoursService, private router: Router) {
     this.coursForm = this.fb.group({
       label: ["", [Validators.required]],
       description: ["",[Validators.required]],
@@ -30,12 +29,12 @@ export class AddCoursComponent {
     this.cours.label=this.coursForm.value.label;
     this.cours.description=this.coursForm.value.description;
     this.cours.duree=this.coursForm.value.duree;
-    this.cours.nbrPlaces=this.coursForm.value.nbrPlaces  
+    this.cours.nbrPlaces=this.coursForm.value.nbrPlaces
     this.addCours();
   }
 
   private addCours() {
-    
+
     this.coursService.addCours(this.cours).subscribe(
         data => {
             if (data) {

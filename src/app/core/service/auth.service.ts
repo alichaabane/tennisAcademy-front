@@ -15,7 +15,7 @@ export class AuthService {
   private currentUserSubject: BehaviorSubject<User>;
   public currentUser: Observable<User>;
 
-  constructor(private http: HttpClient,private router: Router,) {
+  constructor(private http: HttpClient ) {
 
     this.currentUserSubject = new BehaviorSubject<User>(
       JSON.parse(localStorage.getItem('currentUser'))
@@ -28,11 +28,11 @@ export class AuthService {
   }
 
   getAdminInfo(): Observable<Object> {
-    return this.http.get<Utilisateur>(this.Url+"/infoAdmin");
+    return this.http.get<Utilisateur>(this.Url + "/infoAdmin");
   }
 
   getUtilisateur(idUtilisateur: number): Observable<Utilisateur> {
-    return this.http.get<Utilisateur>(this.Url+"/"+idUtilisateur);
+    return this.http.get<Utilisateur>(this.Url + "/" + idUtilisateur);
   }
 
   login(username: string, password: string) {
@@ -51,8 +51,8 @@ export class AuthService {
       );
   }
 
-  signup(username: string,email: string, password: string,prenom: string,nom: string,
-    addresse: string,telephone: number) {
+  signup(username: string, email: string, password: string, prenom: string, nom: string,
+         addresse: string, telephone: number) {
     return this.http
       .post<any>(`${environment.apiUrl}auth/signup`, {
         username,
@@ -77,7 +77,6 @@ export class AuthService {
     // remove user from local storage to log user out
     localStorage.removeItem('currentUser');
     this.currentUserSubject.next(null);
-    this.router.navigate(['/dashboard/main']);
     return of({ success: false });
   }
 }

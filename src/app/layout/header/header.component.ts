@@ -11,6 +11,7 @@ import { ConfigService } from 'src/app/config/config.service';
 import { AuthService } from 'src/app/core/service/auth.service';
 import { RightSidebarService } from 'src/app/core/service/rightsidebar.service';
 import { environment } from 'src/environments/environment';
+import {Router} from "@angular/router";
 const document: any = window.document;
 
 @Component({
@@ -33,6 +34,7 @@ export class HeaderComponent implements OnInit, AfterViewInit {
     private rightSidebarService: RightSidebarService,
     private configService: ConfigService,
     private authService: AuthService,
+    private router: Router
   ) {}
   // notifications: any[] = [
   //   {
@@ -96,7 +98,11 @@ export class HeaderComponent implements OnInit, AfterViewInit {
 
   logout(){
     this.authService.logout();
-    window.location.reload();
+    this.router.navigateByUrl('/dashboard/main')
+      .then(() => {
+        window.location.reload();
+      });
+
   }
 
   ngAfterViewInit() {

@@ -37,7 +37,7 @@ export const ROUTES: RouteInfo[] = [
     submenu: [
       {
         path: '/utilisateurs/all-utilisateurs',
-        title: 'Tous les Utilisateurs',
+        title: 'Liste des adhérents',
         moduleName: 'utilisateur',
         iconType: '',
         icon: '',
@@ -49,7 +49,7 @@ export const ROUTES: RouteInfo[] = [
       },
       {
         path: '/utilisateurs/add-utilisateur',
-        title: 'Ajouter utilisateur',
+        title: 'Ajouter de nouveaux adhérents',
         moduleName: 'utilisateur',
         iconType: '',
         icon: '',
@@ -75,7 +75,7 @@ export const ROUTES: RouteInfo[] = [
     submenu: [
       {
         path: '/terrain/all-terrain',
-        title: 'Tous les Terrains',
+        title: 'Nos Terrains',
         moduleName: 'terrain',
         iconType: '',
         icon: '',
@@ -87,7 +87,7 @@ export const ROUTES: RouteInfo[] = [
       },
       {
         path: '/terrain/add-terrain',
-        title: 'Ajouter Terrain',
+        title: 'Ajouter un terrain',
         moduleName: 'terrain',
         iconType: '',
         icon: '',
@@ -113,7 +113,7 @@ export const ROUTES: RouteInfo[] = [
     submenu: [
       {
         path: '/cours/all-cours',
-        title: 'Tous les Cours',
+        title: 'Nos Cours',
         moduleName: 'cours',
         iconType: '',
         icon: '',
@@ -125,7 +125,7 @@ export const ROUTES: RouteInfo[] = [
       },
       {
         path: '/cours/add-cours',
-        title: 'Ajouter Cours',
+        title: 'Ajouter des Cours',
         moduleName: 'cours',
         iconType: '',
         icon: '',
@@ -150,7 +150,7 @@ export const ROUTES: RouteInfo[] = [
     submenu: [
       {
         path: '/planification/all-planifications',
-        title: 'Tous les Planifications',
+        title: 'Toutes les planifications',
         moduleName: 'Planification',
         iconType: '',
         icon: '',
@@ -162,7 +162,7 @@ export const ROUTES: RouteInfo[] = [
       },
       {
         path: '/planification/add-planification',
-        title: 'Ajouter Planification',
+        title: 'Ajouter une planification',
         moduleName: 'Planification',
         iconType: '',
         icon: '',
@@ -187,7 +187,7 @@ export const ROUTES: RouteInfo[] = [
     submenu: [
       {
         path: '/session/all-sessions',
-        title: 'Tous les Sessions',
+        title: ' Les sessions',
         moduleName: 'Session',
         iconType: '',
         icon: '',
@@ -199,7 +199,7 @@ export const ROUTES: RouteInfo[] = [
       },
       {
         path: '/session/add-session',
-        title: 'Ajouter Session',
+        title: 'Ajouter une session',
         moduleName: 'Session',
         iconType: '',
         icon: '',

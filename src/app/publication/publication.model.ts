@@ -7,14 +7,14 @@ export class Publication {
     localDateheurePublication: string;
     utilisateur: Utilisateur;
     commentaires: Commentaire[];
-    constructor() {
-      {
-        this.idPublication=0;
-        this.text = '';
-        this.localDateheurePublication = '';
-        this.utilisateur=new Utilisateur();
-        this.commentaires=[];
-      }
-    }
+    // constructor() {
+    //   {
+    //     this.idPublication=0;
+    //     this.text = '';
+    //     this.localDateheurePublication = '';
+    //     this.utilisateur=new Utilisateur();
+    //     this.commentaires=[];
+    //   }
+    // }
 
   }

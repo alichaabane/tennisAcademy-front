@@ -22,7 +22,7 @@ export class UtilisateurService {
   getDialogData() {
     return this.dialogData;
   }
-  
+
   /** CRUD METHODS */
   getAllUtilisateurs(): void {
     this.httpClient.get<Utilisateur[]>(this.Url).subscribe(
@@ -38,15 +38,15 @@ export class UtilisateurService {
   }
 
   getAllActiveAdmins(): Observable<Utilisateur[]> {
-    return this.httpClient.get<Utilisateur[]>(this.Url + '/admin');  
+    return this.httpClient.get<Utilisateur[]>(this.Url + '/admin');
   }
 
   getAllActiveEntraineurs(): Observable<Utilisateur[]> {
-    return this.httpClient.get<Utilisateur[]>(this.Url + '/entraineur');  
+    return this.httpClient.get<Utilisateur[]>(this.Url + '/coach');
   }
 
   getAllActiveJoueurs(): Observable<Utilisateur[]> {
-    return this.httpClient.get<Utilisateur[]>(this.Url + '/joueur');  
+    return this.httpClient.get<Utilisateur[]>(this.Url + '/adherent');
   }
 
   getAllRoles(): Observable<Role[]>{
@@ -66,14 +66,14 @@ export class UtilisateurService {
   deleteUtilisateur(id: number):Observable<boolean> {
     return this.httpClient.delete<boolean>(this.Url+'/'+id);
   }
-  
+
   public getImageByUrl(imageName: string): Observable<any> {
     return this.httpClient.get(this.IMG_BASE_URL + 'media/' + imageName, {responseType: 'blob'});
   }
-  
-  
+
+
     public changeUtilisateurDispoById(utilisateurId: number, status: boolean): Observable<boolean> {
         return this.httpClient.put<boolean>(this.Url + '/changeDispo/' + utilisateurId, status);
     }
-    
+
   }
