@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/core/service/auth.service';
+import {environment} from "../../../environments/environment";
 @Component({
   selector: 'app-signin',
   templateUrl: './signin.component.html',
@@ -10,6 +11,7 @@ import { AuthService } from 'src/app/core/service/auth.service';
 export class SigninComponent implements OnInit {
   loginForm: FormGroup;
   submitted = false;
+  appVersion = environment.version;
   error = '';
   hide = true;
   constructor(
