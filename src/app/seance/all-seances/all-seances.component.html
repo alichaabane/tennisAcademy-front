@@ -101,7 +101,7 @@
                     <ng-container matColumnDef="dateFin">
                       <mat-header-cell *matHeaderCellDef mat-sort-header>dateFin</mat-header-cell>
                       <mat-cell *matCellDef="let row" (contextmenu)="onContextMenu($event, row)">
-                        {{row.dateHeureFin | date: 'shortDate'}}</mat-cell>
+                        {{row?.dateHeureFin | date: 'shortDate'}}</mat-cell>
                     </ng-container>
                     <ng-container matColumnDef="HeureFin">
                         <mat-header-cell *matHeaderCellDef mat-sort-header>HeureFin</mat-header-cell>
@@ -111,19 +111,19 @@
                     <ng-container matColumnDef="terrain">
                       <mat-header-cell *matHeaderCellDef mat-sort-header>Terrain</mat-header-cell>
                       <mat-cell *matCellDef="let row" (contextmenu)="onContextMenu($event, row)">
-                        {{row.terrain.label}}</mat-cell>
+                        {{row.terrain?.label}}</mat-cell>
                     </ng-container>
                     <ng-container matColumnDef="type">
                         <mat-header-cell *matHeaderCellDef mat-sort-header>Type</mat-header-cell>
                         <mat-cell  *matCellDef="let row" (contextmenu)="onContextMenu($event, row)">
-                          <span *ngIf="row.planification">Planifiee</span>
-                          <span *ngIf="!row.planification">Libre</span>
+                          <span *ngIf="row?.planification">Planifiee</span>
+                          <span *ngIf="!row?.planification">Libre</span>
                         </mat-cell>
                       </ng-container>
                     <ng-container matColumnDef="cours">
                       <mat-header-cell *matHeaderCellDef mat-sort-header>cours</mat-header-cell>
                       <mat-cell *matCellDef="let row" (contextmenu)="onContextMenu($event, row)">
-                        {{row.planification.cours.label}}</mat-cell>
+                        {{row.planification?.cours?.label}}</mat-cell>
                     </ng-container>
 
                     <!-- actions -->

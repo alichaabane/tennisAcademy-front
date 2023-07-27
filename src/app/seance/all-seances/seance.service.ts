@@ -41,13 +41,13 @@ export class SeanceService {
     );
   }
 
-  // DEMO ONLY, you can find working methods below
   addSeance(seance: Seance): Observable<Seance> {
     this.dialogData = seance;
-    return this.httpClient.post<Seance>(this.Url, seance);
+    return this.httpClient.post<Seance>(this.Url + '/add', seance);
   }
 
   updateSeance(seance: Seance): Observable<Seance> {
+    this.dialogData = seance;
     return this.httpClient.put<Seance>(this.Url + '/edit', seance);
   }
 

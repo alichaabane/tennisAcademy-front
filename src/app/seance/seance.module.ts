@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {CommonModule, DatePipe} from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
@@ -45,6 +45,7 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatTableModule,
     MatPaginatorModule,
     MatFormFieldModule,
+    FormsModule,
     MatInputModule,
     MatSnackBarModule,
     MatButtonModule,
@@ -61,8 +62,7 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatProgressSpinnerModule,
     SeanceRoutingModule,
     MatNativeDateModule,
-
   ],
-  providers: [SeanceService],
+  providers: [SeanceService, DatePipe]
 })
 export class SeanceModule { }

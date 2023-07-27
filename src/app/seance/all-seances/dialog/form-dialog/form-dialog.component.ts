@@ -1,4 +1,4 @@
-import { formatDate } from '@angular/common';
+import {DatePipe, formatDate} from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
@@ -16,6 +16,7 @@ import { SeanceService } from '../../seance.service';
 })
 export class FormDialogComponent {
   constructor(  private snackBar: MatSnackBar,
+                private datePipe: DatePipe,
                 public dialogRef: MatDialogRef<FormDialogComponent>,
                 @Inject(MAT_DIALOG_DATA) public data: any,
                 public seanceService: SeanceService,
@@ -34,9 +35,9 @@ export class FormDialogComponent {
       this.seance = new Seance();
       this.oldPlanification = new Planification();
     }
-    this.seanceForm = this.createContactForm();
     this.getAllPlanification();
     this.getAllTerrains();
+    this.seanceForm = this.createContactForm();
 
   }
   public planificationsList: Planification[] = [];
@@ -99,8 +100,8 @@ export class FormDialogComponent {
     return this.fb.group({
       dateHeureDebut: [this.seance.dateHeureDebut, [Validators.required]],
       dateHeureFin: [this.seance.dateHeureFin, [Validators.required]],
-      terrain: [this.seance.terrain.idTerrain, [Validators.required]],
-      planification: [this.seance.planification.idPlanification, [Validators.required]],
+      terrain: [this.seance.terrain?.idTerrain, [Validators.required]],
+      planification: [this.seance.planification?.idPlanification, [Validators.required]],
     });
   }
 
@@ -116,9 +117,11 @@ export class FormDialogComponent {
   public confirmAdd(): void {
     console.log(this.seanceForm.getRawValue());
     if (this.seanceForm.valid){
-      this.seance.dateHeureDebut = this.seanceForm.value.dateDebut;
-      // this.seance.dateHeureFin=formatDate(this.seance.,'yyyy-MM-dd',"en-US");
+      this.seance.dateHeureDebut = this.seanceForm.value.dateHeureDebut;
+      this.seance.dateHeureDebut =  this.datePipe.transform(this.seance.dateHeureDebut, 'yyyy-MM-ddTHH:mm:ss');
+
       this.seance.dateHeureFin = this.seanceForm.value.dateHeureFin;
+      this.seance.dateHeureFin =  this.datePipe.transform(this.seance.dateHeureFin, 'yyyy-MM-ddTHH:mm:ss');
       this.seance.planification = this.seanceForm.value.planification;
       this.seance.terrain = this.seanceForm.value.terrain;
 

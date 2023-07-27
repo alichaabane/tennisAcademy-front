@@ -1,15 +1,14 @@
-import { Component, OnInit } from '@angular/core';
-import {FormGroup} from "@angular/forms";
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {HttpErrorResponse} from "@angular/common/http";
 import {PlanificationService} from "../../planification/all-planifications/planification.service";
 import {TerrainService} from "../../terrain/all-terrain/terrain.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
-import {formatDate} from "@angular/common";
-import {Planification} from "../../planification/all-planifications/planification.model";
+import {DatePipe, formatDate} from "@angular/common";
 import {Seance} from "../all-seances/Seance.model";
 import {SeanceService} from "../all-seances/seance.service";
 import {Router} from "@angular/router";
-import {MessageService} from "primeng/api";
+import {Planification} from "../../planification/all-planifications/planification.model";
 
 @Component({
   selector: 'app-add-seance',
@@ -25,9 +24,19 @@ export class AddSeanceComponent implements OnInit {
   constructor(private planificationService: PlanificationService,
               private seanceService: SeanceService,
               private terrainService: TerrainService,
-              private messageService: MessageService,
+              private datePipe: DatePipe,
               private router: Router,
-              private snackBar: MatSnackBar) { }
+              private fb: FormBuilder,
+              private snackBar: MatSnackBar) {
+
+    this.seanceForm = this.fb.group({
+      dateHeureDebut: ["", [Validators.required]],
+      dateHeureFin: ["", [Validators.required]],
+      terrain: [null, [Validators.required]],
+      planification: [null, [Validators.required]],
+    });
+
+  }
 
   ngOnInit(): void {
     this.getAllTerrains();
@@ -76,12 +85,13 @@ export class AddSeanceComponent implements OnInit {
     if (this.seanceForm.invalid) {
       return;
     }
-    this.seance.dateHeureDebut = this.seanceForm.value.dateDebut;
-    this.seance.dateHeureDebut = formatDate(this.seance.dateHeureDebut, 'yyyy-MM-dd', "en-US");
-    this.seance.dateHeureFin = this.seanceForm.value.dateFin;
-    this.seance.dateHeureFin =  formatDate(this.seance.dateHeureFin, 'yyyy-MM-dd', "en-US");
+    this.seance.dateHeureDebut = this.seanceForm.value.dateHeureDebut;
+    this.seance.dateHeureDebut = this.datePipe.transform(this.seance.dateHeureDebut, 'yyyy-MM-ddTHH:mm:ss');
+    this.seance.dateHeureFin = this.seanceForm.value.dateHeureFin;
+    this.seance.dateHeureFin =  this.datePipe.transform(this.seance.dateHeureFin, 'yyyy-MM-ddTHH:mm:ss');
     this.seance.terrain = this.seanceForm.value.terrain;
     this.seance.planification = this.seanceForm.value.planification;
+    console.log('seance = ', this.seance.terrain);
     this.addSeance();
   }
 
@@ -93,20 +103,20 @@ export class AddSeanceComponent implements OnInit {
           this.router.navigate(['/seance/all-seances']);
 
         } else {
-          this.messageService.add({
-              severity: 'FAILED',
-              summary: 'Error',
-              detail: 'Désole impossible d ajouter une séance',
-              life: 3000
-          });
+          // this.messageService.add({
+          //     severity: 'FAILED',
+          //     summary: 'Error',
+          //     detail: 'Désole impossible d ajouter une séance',
+          //     life: 3000
+          // });
         }
       }, error => {
-        this.messageService.add({
-            severity: 'FAILED',
-            summary: 'Désole impossible d ajouter une séance',
-            detail: error.error,
-            life: 3000
-        });
+        // this.messageService.add({
+        //     severity: 'FAILED',
+        //     summary: 'Désole impossible d ajouter une séance',
+        //     detail: error.error,
+        //     life: 3000
+        // });
       }
     );
   }

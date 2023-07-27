@@ -101,6 +101,7 @@ export class AllSeancesComponent {
 
 
   editCall(row) {
+    console.log('row = ', row);
     this.id = row.id;
     let tempDirection;
     if (localStorage.getItem('isRtl') === 'true') {
