@@ -1,9 +1,9 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { Cours } from 'src/app/cours/all-cours/cours.model';
-import { environment } from 'src/environments/environment';
-import { Planification } from './planification.model';
+import {HttpClient, HttpErrorResponse} from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {BehaviorSubject, Observable} from 'rxjs';
+import {Cours} from 'src/app/cours/all-cours/cours.model';
+import {environment} from 'src/environments/environment';
+import {Planification} from './planification.model';
 
 
 @Injectable({
@@ -15,13 +15,18 @@ export class PlanificationService {
   dataChange: BehaviorSubject<Planification[]> = new BehaviorSubject<Planification[]>([]);
   // Temporarily stores data from dialogs
   dialogData: any;
-  constructor(private httpClient: HttpClient) {}
+
+  constructor(private httpClient: HttpClient) {
+  }
+
   get data(): Planification[] {
     return this.dataChange.value;
   }
+
   getDialogData() {
     return this.dialogData;
   }
+
   /** CRUD METHODS */
   getAllPlanifications(): void {
     this.httpClient.get<Planification[]>(this.Url).subscribe(
@@ -36,23 +41,30 @@ export class PlanificationService {
       }
     );
   }
+
   // DEMO ONLY, you can find working methods below
   addPlanification(terrain: Planification): Observable<Planification> {
     this.dialogData = terrain;
-    return this.httpClient.post<Planification>(this.Url,terrain);
+    return this.httpClient.post<Planification>(this.Url, terrain);
   }
+
   updatePlanification(terrain: Planification): Observable<Planification> {
     this.dialogData = terrain;
     console.log(terrain);
-    return this.httpClient.put<Planification>(this.Url + '/edit',terrain);
+    return this.httpClient.put<Planification>(this.Url + '/edit', terrain);
   }
-  deletePlanification(id: number):Observable<boolean> {
-    return this.httpClient.delete<boolean>(this.Url+'/'+id);
+
+  deletePlanification(id: number): Observable<boolean> {
+    return this.httpClient.delete<boolean>(this.Url + '/' + id);
   }
 
 
   getAllCours(): Observable<Cours[]> {
-    return this.httpClient.get<Cours[]>(environment.apiUrl+"cours");
+    return this.httpClient.get<Cours[]>(environment.apiUrl + "cours");
   }
 
+  getAllPlans(): Observable<any> {
+    return this.httpClient.get<Cours[]>(this.Url);
   }
+
+}

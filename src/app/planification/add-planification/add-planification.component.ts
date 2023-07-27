@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { Cours } from 'src/app/cours/all-cours/cours.model';
 import { Planification } from '../all-planifications/planification.model';
 import { PlanificationService } from '../all-planifications/planification.service';
+import {Message, MessageService} from "primeng/api";
 
 @Component({
   selector: 'app-add-planification',
@@ -19,12 +20,13 @@ export class AddPlanificationComponent{
   public coursList: Cours[];
   private snackBar: MatSnackBar;
 
-  constructor(private fb: FormBuilder,private planificationService: PlanificationService,
-    private router: Router) {
+  constructor(private fb: FormBuilder, private planificationService: PlanificationService,
+              private messageService: MessageService,
+              private router: Router) {
     this.seanceForm = this.fb.group({
       dateDebut: ["", [Validators.required]],
-      dateFin: ["",[Validators.required]],
-      jourSemaine: ["",[Validators.required]],
+      dateFin: ["", [Validators.required]],
+      jourSemaine: ["", [Validators.required]],
       cours: [null, [Validators.required]],
     });
 
@@ -34,7 +36,7 @@ export class AddPlanificationComponent{
   getAllCours(){
     this.planificationService.getAllCours().subscribe(
       (data) => {
-        this.coursList=data;
+        this.coursList = data;
       },
       (error: HttpErrorResponse) => {
         console.log(error.name + ' ' + error.message);
@@ -52,17 +54,17 @@ export class AddPlanificationComponent{
       if (this.seanceForm.invalid) {
         return;
     }
-    this.planification.dateDebut=this.seanceForm.value.dateDebut;
-    this.planification.dateDebut=formatDate(this.planification.dateDebut,'yyyy-MM-dd',"en-US");
-    this.planification.dateFin=this.seanceForm.value.dateFin;
-    this.planification.dateFin=formatDate(this.planification.dateFin,'yyyy-MM-dd',"en-US");
+      this.planification.dateDebut = this.seanceForm.value.dateDebut;
+      this.planification.dateDebut = formatDate(this.planification.dateDebut, 'yyyy-MM-dd', "en-US");
+      this.planification.dateFin = this.seanceForm.value.dateFin;
+      this.planification.dateFin = formatDate(this.planification.dateFin, 'yyyy-MM-dd', "en-US");
 
-    this.seanceForm.value.JourSemaine.forEach(element => {
-      this.planification.jourSemaine=this.planification.jourSemaine+element
+      this.seanceForm.value.JourSemaine.forEach(element => {
+      this.planification.jourSemaine = this.planification.jourSemaine + element;
     });
 
-    this.planification.cours=this.seanceForm.value.cours
-    this.addPlanification();
+      this.planification.cours = this.seanceForm.value.cours;
+      this.addPlanification();
   }
 
   private addPlanification() {
@@ -73,20 +75,20 @@ export class AddPlanificationComponent{
               this.router.navigate(['/planification/all-planifications']);
 
             } else {
-                // this.messageService.add({
-                //     severity: 'FAILED',
-                //     summary: 'Error',
-                //     detail: 'Desole impossible dajouter le terrain',
-                //     life: 3000
-                // });
+                this.messageService.add({
+                    severity: 'FAILED',
+                    summary: 'Error',
+                    detail: 'Désole impossible d ajouter le terrain',
+                    life: 3000
+                });
             }
         }, error => {
-            // this.messageService.add({
-            //     severity: 'FAILED',
-            //     summary: 'Error',
-            //     detail: error.error,
-            //     life: 3000
-            // });
+            this.messageService.add({
+                severity: 'FAILED',
+                summary: 'Désole impossible d ajouter le terrain',
+                detail: error.error,
+                life: 3000
+            });
         }
     );
   }
