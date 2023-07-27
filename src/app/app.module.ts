@@ -31,36 +31,35 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 };
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    AuthLayoutComponent,
-    MainLayoutComponent,
-    HeaderComponent,
-    PageLoaderComponent,
-    SidebarComponent,
-    RightSidebarComponent,
-  ],
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    AppRoutingModule,
-    HttpClientModule,
-    PerfectScrollbarModule,
-    ClickOutsideModule,
-    CoreModule,
-    SharedModule,
-  ],
-  providers: [
-    { provide: LocationStrategy, useClass: HashLocationStrategy },
-    {
-      provide: PERFECT_SCROLLBAR_CONFIG,
-      useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG,
-    },
-    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
-    fakeBackendProvider,
-  ],
-  entryComponents: [],
-  bootstrap: [AppComponent],
+    declarations: [
+        AppComponent,
+        AuthLayoutComponent,
+        MainLayoutComponent,
+        HeaderComponent,
+        PageLoaderComponent,
+        SidebarComponent,
+        RightSidebarComponent,
+    ],
+    imports: [
+        BrowserModule,
+        BrowserAnimationsModule,
+        AppRoutingModule,
+        HttpClientModule,
+        PerfectScrollbarModule,
+        ClickOutsideModule,
+        CoreModule,
+        SharedModule,
+    ],
+    providers: [
+        { provide: LocationStrategy, useClass: HashLocationStrategy },
+        {
+            provide: PERFECT_SCROLLBAR_CONFIG,
+            useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG,
+        },
+        { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+        { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+        fakeBackendProvider,
+    ],
+    bootstrap: [AppComponent]
 })
 export class AppModule {}
