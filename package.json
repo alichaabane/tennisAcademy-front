@@ -33,7 +33,7 @@
     "@fullcalendar/timegrid": "^5.7.0",
     "@ng-bootstrap/ng-bootstrap": "^12.0.1",
     "@swimlane/ngx-charts": "^18.0.1",
-    "@swimlane/ngx-datatable": "^19.0.0",
+    "@swimlane/ngx-datatable": "^20.1.0",
     "@types/d3-shape": "^2.0.0",
     "acorn": "^8.2.4",
     "angular-gauge": "^4.0.0",
