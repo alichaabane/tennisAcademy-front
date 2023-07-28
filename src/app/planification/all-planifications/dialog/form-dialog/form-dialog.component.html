@@ -40,37 +40,7 @@
                   </div>
             </div>
             <div class="row">
-                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
-                    <mat-form-field class="example-full-width mb-3" appearance="fill">
-                      <mat-label>JourSemaine</mat-label>
-                      <mat-select formControlName="jourSemaine" required multiple>
-                        <mat-option [value]="'1'">
-                          Lundi
-                        </mat-option>
-                        <mat-option [value]="'2'">
-                            mardi
-                        </mat-option>
-                        <mat-option [value]="'3'">
-                            Mercredi
-                        </mat-option>
-                        <mat-option [value]="'4'">
-                            Jeudi
-                        </mat-option>
-                        <mat-option [value]="'5'">
-                            Vendredi
-                        </mat-option>
-                        <mat-option [value]="'6'">
-                            Samedi
-                        </mat-option>
-                        <mat-option [value]="'7'">
-                            Dimanche
-                          </mat-option>
-                      </mat-select>
-                      <mat-error *ngIf="seanceForm.get('jourSemaine').hasError('required')">
-                        Selectionner les jours de la semaine
-                      </mat-error>
-                    </mat-form-field>
-                  </div>
+
                   <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
                     <mat-form-field class="example-full-width mb-3" appearance="fill">
                       <mat-label>Cours</mat-label>
@@ -89,7 +59,7 @@
             <div class="row">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
                   <div class="example-button-row">
-                    <button mat-raised-button color="primary" [type]="submit" [disabled]="!seanceForm.valid"
+                    <button mat-raised-button color="primary" (submit)="submit" [disabled]="!seanceForm.valid"
                       [mat-dialog-close]="planification" (click)="confirmAdd()">Save</button>
                     <button mat-raised-button color="warn" (click)="onNoClick()" tabindex="-1">Cancel</button>
                   </div>

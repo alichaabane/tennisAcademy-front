@@ -14,7 +14,6 @@ import { PlanificationService } from '../../planification.service';
 })
 export class FormDialogComponent{
   public coursList: Cours[];
-  public joursSemaine:String[]=[];
   minDate: Date;
   maxDate: Date;
   action: string;
@@ -40,15 +39,8 @@ export class FormDialogComponent{
       this.dialogTitle = 'New Planififcation';
       this.planification = new Planification();
     }
-    for(let i=0;i<this.planification.jourSemaine.length;i++){
-      const str=this.planification.jourSemaine[i];
-      this.joursSemaine.push(str);
-    }
     this.seanceForm = this.createContactForm();
     this.getAllCours();
-
-
-
     console.log(this.minDate);
 
   }
@@ -86,7 +78,6 @@ export class FormDialogComponent{
     return this.fb.group({
       dateDebut: [this.planification.dateDebut, [Validators.required]],
       dateFin: [this.planification.dateFin,[Validators.required]],
-      jourSemaine: [this.joursSemaine,[Validators.required]],
       cours: [this.planification.cours.idCours,[Validators.required]],
     });
   }
@@ -107,10 +98,6 @@ export class FormDialogComponent{
       this.planification.dateDebut=formatDate(this.planification.dateDebut,'yyyy-MM-dd',"en-US");
       this.planification.dateFin=this.seanceForm.value.dateFin;
       this.planification.dateFin=formatDate(this.planification.dateFin,'yyyy-MM-dd',"en-US");
-
-      this.seanceForm.value.jourSemaine.forEach(element => {
-        this.planification.jourSemaine=this.planification.jourSemaine+element
-    });
     this.planification.cours=this.seanceForm.value.cours;
     }
 

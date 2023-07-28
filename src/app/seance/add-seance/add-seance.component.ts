@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import { Observable } from 'rxjs';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {HttpErrorResponse} from "@angular/common/http";
 import {PlanificationService} from "../../planification/all-planifications/planification.service";
@@ -9,6 +10,8 @@ import {Seance} from "../all-seances/Seance.model";
 import {SeanceService} from "../all-seances/seance.service";
 import {Router} from "@angular/router";
 import {Planification} from "../../planification/all-planifications/planification.model";
+import {User} from "../../core/models/user";
+import {UserService} from "../../user/all-user/user.service";
 
 @Component({
   selector: 'app-add-seance',
@@ -20,10 +23,12 @@ export class AddSeanceComponent implements OnInit {
   private seance = new Seance();
   terrainList: any;
   seancePlanifieeList: any;
+  utilisateurList: any;
 
   constructor(private planificationService: PlanificationService,
               private seanceService: SeanceService,
               private terrainService: TerrainService,
+              private userService: UserService,
               private datePipe: DatePipe,
               private router: Router,
               private fb: FormBuilder,
@@ -34,6 +39,7 @@ export class AddSeanceComponent implements OnInit {
       dateHeureFin: ["", [Validators.required]],
       terrain: [null, [Validators.required]],
       planification: [null, [Validators.required]],
+      utilisateur: [null, [Validators.required]],
     });
 
   }
@@ -41,10 +47,11 @@ export class AddSeanceComponent implements OnInit {
   ngOnInit(): void {
     this.getAllTerrains();
     this.getAllSeancePlanifiee();
+    this.getAllUsers();
   }
 
 
-  getAllTerrains(){
+  getAllTerrains() {
     this.terrainService.getAllActiveTerrains().subscribe(
       (data) => {
         this.terrainList = data;
@@ -53,17 +60,17 @@ export class AddSeanceComponent implements OnInit {
       },
       (error: HttpErrorResponse) => {
         console.log(error.name + ' ' + error.message);
-        this.showNotification(
-          'snackbar-danger',
-          error.message,
-          'bottom',
-          'center'
-        );
+        // this.showNotification(
+        //   'snackbar-danger',
+        //   error.message,
+        //   'bottom',
+        //   'center'
+        // );
       }
     );
   }
 
-  getAllSeancePlanifiee(){
+  getAllSeancePlanifiee() {
     this.planificationService.getAllPlans().subscribe(
       (data) => {
         this.seancePlanifieeList = data;
@@ -71,30 +78,48 @@ export class AddSeanceComponent implements OnInit {
       },
       (error: HttpErrorResponse) => {
         console.log(error.name + ' ' + error.message);
-        this.showNotification(
-          'snackbar-danger',
-          error.message,
-          'bottom',
-          'center'
-        );
+        // this.showNotification(
+        //   'snackbar-danger',
+        //   error.message,
+        //   'bottom',
+        //   'center'
+        // );
       }
     );
   }
+
+   getAllUsers() {
+     this.userService.getAllUtilisateurs().subscribe(
+      (data) => {
+        this.utilisateurList = data;
+        console.log('utilisateurList = ', this.utilisateurList);
+      },
+      (error: HttpErrorResponse) => {
+        console.log(error.name + ' ' + error.message);
+      }
+    );
+  }
+
 
   onSubmit() {
     if (this.seanceForm.invalid) {
       return;
     }
+
     this.seance.dateHeureDebut = this.seanceForm.value.dateHeureDebut;
     this.seance.dateHeureDebut = this.datePipe.transform(this.seance.dateHeureDebut, 'yyyy-MM-ddTHH:mm:ss');
     this.seance.dateHeureFin = this.seanceForm.value.dateHeureFin;
-    this.seance.dateHeureFin =  this.datePipe.transform(this.seance.dateHeureFin, 'yyyy-MM-ddTHH:mm:ss');
+    this.seance.dateHeureFin = this.datePipe.transform(this.seance.dateHeureFin, 'yyyy-MM-ddTHH:mm:ss');
     this.seance.terrain = this.seanceForm.value.terrain;
     this.seance.planification = this.seanceForm.value.planification;
+    this.seance.utilisateur = this.seanceForm.value.utilisateur;
     console.log('seance = ', this.seance.terrain);
     this.addSeance();
   }
 
+// tslint:disable-next-line:align
+
+// tslint:disable-next-line:align
   private addSeance() {
 
     this.seanceService.addSeance(this.seance).subscribe(
@@ -121,13 +146,15 @@ export class AddSeanceComponent implements OnInit {
     );
   }
 
-  showNotification(colorName, text, placementFrom, placementAlign) {
-    this.snackBar.open(text, '', {
-      duration: 2000,
-      verticalPosition: placementFrom,
-      horizontalPosition: placementAlign,
-      panelClass: colorName,
-    });
-  }
+// showNotification(colorName, text, placementFrom, placementAlign);
+// {
+//   this.snackBar.open(text, '', {
+//     duration: 2000,
+//     verticalPosition: placementFrom,
+//     horizontalPosition: placementAlign,
+//     panelClass: colorName,
+//   });
+// }
+
 
 }

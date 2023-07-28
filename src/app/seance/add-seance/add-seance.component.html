@@ -80,6 +80,19 @@
                     </mat-error>
                   </mat-form-field>
                 </div>
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width mb-3" appearance="fill">
+                    <mat-label>Adhérent</mat-label>
+                    <mat-select formControlName="utilisateur" required>
+                      <mat-option *ngFor="let utilisateur of utilisateurList" [value]="utilisateur">
+                        {{utilisateur.username}}
+                      </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="seanceForm.get('utilisateur')?.hasError('required')">
+                      SVP selectionnez l'adhérent'
+                    </mat-error>
+                  </mat-form-field>
+                </div>
               </div>
 
               <div class="row">

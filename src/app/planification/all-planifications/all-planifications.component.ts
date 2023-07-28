@@ -18,13 +18,12 @@ import { DeleteFormComponent } from './dialog/delete-form/delete-form.component'
   styleUrls: ['./all-planifications.component.sass']
 })
 export class AllPlanificationsComponent{
-  
+
   displayedColumns = [
     'select',
     'idPlanification',
     'dateDebut',
     'dateFin',
-    'JourSemaine',
     'cours',
     'actions',
   ];
@@ -45,14 +44,14 @@ export class AllPlanificationsComponent{
   @ViewChild(MatMenuTrigger)
   contextMenu: MatMenuTrigger;
   contextMenuPosition = { x: '0px', y: '0px' };
-  
+
   ngOnInit() {
     this.loadData();
   }
   refresh() {
     this.loadData();
   }
-  
+
   addNew() {
     let tempDirection;
     if (localStorage.getItem('isRtl') === 'true') {
@@ -78,7 +77,7 @@ export class AllPlanificationsComponent{
                         this.refresh();
                         this.showNotification(
                           'snackbar-success',
-                          'planification ajouter avec succes...!!!',
+                          'planification ajoutée avec succes...!!!',
                           'bottom',
                           'center'
                         );
@@ -94,8 +93,8 @@ export class AllPlanificationsComponent{
       );
     });
   }
-  
-  
+
+
   editCall(row) {
     this.id = row.id;
     let tempDirection;
@@ -116,16 +115,16 @@ export class AllPlanificationsComponent{
       if (result) {
         console.log(result);
         // When using an edit things are little different, firstly we find record inside DataService by id
-  
+
         // Then you update that record using data from dialogData (values you enetered)
         this.planificationService.updatePlanification(result).subscribe(
-          res=>{
+          res=> {
             console.log(res);
-            if(res){
+            if (res){
               this.refresh();
               this.showNotification(
                 'black',
-                'planification editer avec succes...!!!',
+                'planification mise à jour avec succès...!!!',
                 'bottom',
                 'center'
               );
@@ -135,12 +134,12 @@ export class AllPlanificationsComponent{
           this.planificationService.getDialogData();
         // And lastly refresh table
       }else {
-        console.log("pas dedit");
+        console.log("pas de mise à jour");
       }
     });
   }
-  
-  
+
+
   deleteItem(row) {
     this.id = row.id;
     let tempDirection;
@@ -166,38 +165,38 @@ export class AllPlanificationsComponent{
                 this.refresh();
                 this.showNotification(
                   'snackbar-warning',
-                  'planification effacer avec succes...!!!',
+                  'planification effacée avec succes...!!!',
                   'bottom',
                   'center'
-                ); 
+                );
               } else {
                 this.showNotification(
                   'snackbar-danger',
-                  'planification effacer avec succes...!!!',
+                  'planification effacée avec succes...!!!',
                   'bottom',
                   'center'
-                ); 
+                );
               }
           },
           error => {
-          
+
           }
       );
       }
     });
   }
-  
+
   private refreshTable() {
     this.paginator._changePageSize(this.paginator.pageSize);
   }
-  
+
   /** Whether the number of selected elements matches the total number of rows. */
   isAllSelected() {
     const numSelected = this.selection.selected.length;
     const numRows = this.dataSource.renderedData.length;
     return numSelected === numRows;
   }
-  
+
   /** Selects all rows if they are not all selected; otherwise clear selection. */
   masterToggle() {
     this.isAllSelected()
@@ -206,7 +205,7 @@ export class AllPlanificationsComponent{
           this.selection.select(row)
         );
   }
-  
+
   removeSelectedRows() {
     const totalSelect = this.selection.selected.length;
     this.selection.selected.forEach((item) => {
@@ -218,18 +217,18 @@ export class AllPlanificationsComponent{
       this.planificationService.deletePlanification(item.idPlanification).subscribe(
         res => {
             if (res) {
-  
+
             } else {
               this.showNotification(
                 'snackbar-danger',
-                'Planification :'+item.idPlanification+' non effacer...!!!',
+                'Planification :'+item.idPlanification+' non effacée...!!!',
                 'bottom',
                 'center'
-              ); 
+              );
             }
         },
         error => {
-        
+
         }
     );    this.exampleDatabase.dataChange.value.splice(index, 1);
       this.refreshTable();
@@ -242,8 +241,8 @@ export class AllPlanificationsComponent{
       'center'
     );
   }
-  
-  
+
+
   public loadData() {
     this.exampleDatabase = new PlanificationService(this.httpClient);
     this.dataSource = new ExampleDataSource(
@@ -317,8 +316,7 @@ export class AllPlanificationsComponent{
             const searchStr = (
               planification.idPlanification +
               planification.dateDebut +
-              planification.dateFin +
-              planification.jourSemaine
+              planification.dateFin
             ).toLowerCase();
             return searchStr.indexOf(this.filter.toLowerCase()) !== -1;
           });
@@ -352,9 +350,6 @@ export class AllPlanificationsComponent{
           break;
         case 'dateFin':
           [propertyA, propertyB] = [a.dateFin, b.dateFin];
-          break;
-        case 'JourSemaine':
-          [propertyA, propertyB] = [a.jourSemaine, b.jourSemaine];
           break;
       }
       const valueA = isNaN(+propertyA) ? propertyA : +propertyA;

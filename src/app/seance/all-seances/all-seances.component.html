@@ -93,21 +93,11 @@
                       <mat-cell *matCellDef="let row" (contextmenu)="onContextMenu($event, row)">
                         {{row.dateHeureDebut | date: 'shortDate'}}</mat-cell>
                     </ng-container>
-                    <ng-container matColumnDef="heureDebut">
-                        <mat-header-cell *matHeaderCellDef mat-sort-header>heureDebut</mat-header-cell>
-                        <mat-cell *matCellDef="let row" (contextmenu)="onContextMenu($event, row)">
-                          {{row.dateHeureDebut | date: 'shortTime'}}</mat-cell>
-                      </ng-container>
                     <ng-container matColumnDef="dateFin">
                       <mat-header-cell *matHeaderCellDef mat-sort-header>dateFin</mat-header-cell>
                       <mat-cell *matCellDef="let row" (contextmenu)="onContextMenu($event, row)">
                         {{row?.dateHeureFin | date: 'shortDate'}}</mat-cell>
                     </ng-container>
-                    <ng-container matColumnDef="HeureFin">
-                        <mat-header-cell *matHeaderCellDef mat-sort-header>HeureFin</mat-header-cell>
-                        <mat-cell *matCellDef="let row" (contextmenu)="onContextMenu($event, row)">
-                          {{row.dateHeureFin | date: 'shortTime'}}</mat-cell>
-                      </ng-container>
                     <ng-container matColumnDef="terrain">
                       <mat-header-cell *matHeaderCellDef mat-sort-header>Terrain</mat-header-cell>
                       <mat-cell *matCellDef="let row" (contextmenu)="onContextMenu($event, row)">
@@ -120,10 +110,10 @@
                           <span *ngIf="!row?.planification">Libre</span>
                         </mat-cell>
                       </ng-container>
-                    <ng-container matColumnDef="cours">
-                      <mat-header-cell *matHeaderCellDef mat-sort-header>cours</mat-header-cell>
+                    <ng-container matColumnDef="adhérent">
+                      <mat-header-cell *matHeaderCellDef mat-sort-header>adhérent</mat-header-cell>
                       <mat-cell *matCellDef="let row" (contextmenu)="onContextMenu($event, row)">
-                        {{row.planification?.cours?.label}}</mat-cell>
+                        {{row.user}}</mat-cell>
                     </ng-container>
 
                     <!-- actions -->

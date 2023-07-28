@@ -11,6 +11,7 @@ import { MatMenuTrigger } from '@angular/material/menu';
 import { FormDialogComponent } from './dialog/form-dialog/form-dialog.component';
 import { DeleteFormComponent } from './dialog/delete-form/delete-form.component';
 import { BehaviorSubject, fromEvent, map, Observable, merge } from 'rxjs';
+import {User} from "../../core/models/user";
 
 
 @Component({
@@ -24,12 +25,10 @@ export class AllSeancesComponent {
     'select',
     'idSeance',
     'dateDebut',
-    'heureDebut',
     'dateFin',
-    'HeureFin',
     'terrain',
     'type',
-    'cours',
+    'adhérent',
     'actions',
   ];
   exampleDatabase: SeanceService | null;
@@ -82,7 +81,7 @@ export class AllSeancesComponent {
                         this.refresh();
                         this.showNotification(
                           'snackbar-success',
-                          'seance ajouter avec succes...!!!',
+                          'seance ajoutée avec succes...!!!',
                           'bottom',
                           'center'
                         );
@@ -91,7 +90,7 @@ export class AllSeancesComponent {
                   );
       }
       else{
-        console.log("pas de action");
+        console.log("pas d'action");
       }
       this.exampleDatabase.dataChange.value.unshift(
         this.seanceService.getDialogData()
@@ -130,7 +129,7 @@ export class AllSeancesComponent {
               this.refresh();
               this.showNotification(
                 'black',
-                'seance  editer avec succes...!!!',
+                'seance  mise à jour avec succes...!!!',
                 'bottom',
                 'center'
               );
@@ -140,7 +139,7 @@ export class AllSeancesComponent {
           this.seanceService.getDialogData();
         // And lastly refresh table
       }else {
-        console.log("pas dedit");
+        console.log("pas de mise à jour");
       }
     });
   }
@@ -171,14 +170,14 @@ export class AllSeancesComponent {
                 this.refresh();
                 this.showNotification(
                   'snackbar-warning',
-                  'seance effacer avec succes...!!!',
+                  'seance effacée avec succes...!!!',
                   'bottom',
                   'center'
                 );
               } else {
                 this.showNotification(
                   'snackbar-danger',
-                  'seance effacer avec succes...!!!',
+                  'seance effacée avec succes...!!!',
                   'bottom',
                   'center'
                 );
@@ -227,7 +226,7 @@ export class AllSeancesComponent {
             } else {
               this.showNotification(
                 'snackbar-danger',
-                'Seance :'+item.idSeance+' non effacer...!!!',
+                'Seance :'+item.idSeance+' non effacé..!!!',
                 'bottom',
                 'center'
               );
@@ -283,7 +282,10 @@ export class AllSeancesComponent {
     this.contextMenu.menu.focusFirstItem('mouse');
     this.contextMenu.openMenu();
   }
-  }
+
+  protected readonly User = User;
+
+}
   export class ExampleDataSource extends DataSource<Seance> {
   _filterChange = new BehaviorSubject('');
   get filter(): string {
@@ -321,8 +323,6 @@ export class AllSeancesComponent {
           .filter((seance: Seance) => {
             const searchStr = (
               seance.idSeance +
-              seance.dateHeureDebut +
-              seance.dateHeureFin +
               seance.planification.cours.label
             ).toLowerCase();
             return searchStr.indexOf(this.filter.toLowerCase()) !== -1;
@@ -351,12 +351,6 @@ export class AllSeancesComponent {
       switch (this._sort.active) {
         case 'idSeance':
           [propertyA, propertyB] = [a.idSeance, b.idSeance];
-          break;
-        case 'dateHeureDebut':
-          [propertyA, propertyB] = [a.dateHeureDebut, b.dateHeureDebut];
-          break;
-        case 'dateHeureFin':
-          [propertyA, propertyB] = [a.dateHeureFin, b.dateHeureFin];
           break;
         case 'planification.cours.label':
           [propertyA, propertyB] = [a.planification.cours.label, b.planification.cours.label];

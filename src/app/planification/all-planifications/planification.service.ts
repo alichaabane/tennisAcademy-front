@@ -43,15 +43,15 @@ export class PlanificationService {
   }
 
   // DEMO ONLY, you can find working methods below
-  addPlanification(terrain: Planification): Observable<Planification> {
-    this.dialogData = terrain;
-    return this.httpClient.post<Planification>(this.Url, terrain);
+  addPlanification(planification: Planification): Observable<Planification> {
+    this.dialogData = planification;
+    return this.httpClient.post<Planification>(this.Url, planification);
   }
 
-  updatePlanification(terrain: Planification): Observable<Planification> {
-    this.dialogData = terrain;
-    console.log(terrain);
-    return this.httpClient.put<Planification>(this.Url + '/edit', terrain);
+  updatePlanification(planification: Planification): Observable<Planification> {
+    this.dialogData = planification;
+    console.log(planification);
+    return this.httpClient.put<Planification>(this.Url + '/edit', planification);
   }
 
   deletePlanification(id: number): Observable<boolean> {

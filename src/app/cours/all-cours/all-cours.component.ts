@@ -124,7 +124,7 @@ export class AllCoursComponent{
               this.refresh();
               this.showNotification(
                 'black',
-                'Cours editer avec succes...!!!',
+                'Cours mis à jour avec succes...!!!',
                 'bottom',
                 'center'
               );
@@ -134,7 +134,7 @@ export class AllCoursComponent{
           this.coursService.getDialogData();
         // And lastly refresh table
       }else {
-        console.log("pas dedit");
+        console.log("pas de mise à jour");
       }
     });
   }

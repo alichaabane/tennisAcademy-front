@@ -14,17 +14,16 @@ import { PlanificationService } from '../all-planifications/planification.servic
   styleUrls: ['./add-planification.component.sass']
 })
 export class AddPlanificationComponent{
-  planificationForm: FormGroup;
+  seanceForm: FormGroup;
   private planification = new Planification();
   public coursList: Cours[];
   private snackBar: MatSnackBar;
 
-  constructor(private fb: FormBuilder, private planificationService: PlanificationService,
-              private router: Router) {
-    this.planificationForm = this.fb.group({
+  constructor(private fb: FormBuilder,private planificationService: PlanificationService,
+    private router: Router) {
+    this.seanceForm = this.fb.group({
       dateDebut: ["", [Validators.required]],
-      dateFin: ["", [Validators.required]],
-      jourSemaine: ["", [Validators.required]],
+      dateFin: ["",[Validators.required]],
       cours: [null, [Validators.required]],
     });
 
@@ -34,7 +33,7 @@ export class AddPlanificationComponent{
   getAllCours(){
     this.planificationService.getAllCours().subscribe(
       (data) => {
-        this.coursList = data;
+        this.coursList=data;
       },
       (error: HttpErrorResponse) => {
         console.log(error.name + ' ' + error.message);
@@ -49,20 +48,16 @@ export class AddPlanificationComponent{
   }
 
   onSubmit() {
-      if (this.planificationForm.invalid) {
+      if (this.seanceForm.invalid) {
         return;
     }
-      this.planification.dateDebut = this.planificationForm.value.dateDebut;
-      this.planification.dateDebut = formatDate(this.planification.dateDebut, 'yyyy-MM-dd', "en-US");
-      this.planification.dateFin = this.planificationForm.value.dateFin;
-      this.planification.dateFin = formatDate(this.planification.dateFin, 'yyyy-MM-dd', "en-US");
+    this.planification.dateDebut=this.seanceForm.value.dateDebut;
+    this.planification.dateDebut=formatDate(this.planification.dateDebut,'yyyy-MM-dd',"en-US");
+    this.planification.dateFin=this.seanceForm.value.dateFin;
+    this.planification.dateFin=formatDate(this.planification.dateFin,'yyyy-MM-dd',"en-US");
 
-      this.planificationForm.value.jourSemaine.forEach(element => {
-      this.planification.jourSemaine = this.planification.jourSemaine + element;
-    });
-
-      this.planification.cours = this.planificationForm.value.cours;
-      this.addPlanification();
+    this.planification.cours=this.seanceForm.value.cours
+    this.addPlanification();
   }
 
   private addPlanification() {
@@ -76,14 +71,14 @@ export class AddPlanificationComponent{
                 // this.messageService.add({
                 //     severity: 'FAILED',
                 //     summary: 'Error',
-                //     detail: 'Désole impossible d ajouter le terrain',
+                //     detail: 'Desole impossible dajouter le terrain',
                 //     life: 3000
                 // });
             }
         }, error => {
             // this.messageService.add({
             //     severity: 'FAILED',
-            //     summary: 'Désole impossible d ajouter le terrain',
+            //     summary: 'Error',
             //     detail: error.error,
             //     life: 3000
             // });

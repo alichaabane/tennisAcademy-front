@@ -4,6 +4,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { Role } from 'src/app/role/role.model';
 import { environment } from 'src/environments/environment';
 import { User } from './user.model';
+import {Cours} from "../../cours/all-cours/cours.model";
 
 @Injectable({
   providedIn: 'root'
@@ -23,19 +24,10 @@ export class UserService {
     return this.dialogData;
   }
 
+  // @ts-ignore
   /** CRUD METHODS */
-  getAllUtilisateurs(): void {
-    this.httpClient.get<User[]>(this.Url).subscribe({
-      next : (data) => {
-        this.isTblLoading = false;
-        this.dataChange.next(data);
-      },
-      error : (error: HttpErrorResponse) => {
-        this.isTblLoading = false;
-        console.log(error.name + ' ' + error.message);
-      }
-    }
-    );
+  getAllUtilisateurs(): Observable<User[]> {
+    return this.httpClient.get<User[]>(this.Url);
   }
 
   getAllActiveAdmins(): Observable<User[]> {

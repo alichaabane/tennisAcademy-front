@@ -5,7 +5,6 @@ export class Planification {
   idPlanification: number;
   dateDebut: string;
   dateFin: string;
-  jourSemaine: string;
   cours: Cours;
   joueursInscrits: User[];
 
@@ -14,7 +13,6 @@ export class Planification {
       this.idPlanification = 0;
       this.dateDebut = '';
       this.dateFin = '';
-      this.jourSemaine = '';
       this.cours = new Cours();
       this.joueursInscrits = [];
     }

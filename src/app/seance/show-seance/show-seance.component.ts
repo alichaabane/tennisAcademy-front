@@ -49,7 +49,7 @@ export class ShowSeanceComponent {
 //     {
 //     this.dialogTitle = 'Add New Event';
 //     this.seance = new Calendar({});
-//     this.addCusForm = this.createSeanceForm(this.seance);
+//     this.addCusForm = this.createseanceForm(this.seance);
 
 //   }
 
@@ -264,7 +264,7 @@ export class ShowSeanceComponent {
 //     // this.currentEvents = events;
 //   }
 
-//   createSeanceForm(calendar): FormGroup {
+//   createseanceForm(calendar): FormGroup {
 //     return this.fb.group({
 //       id: [calendar.id],
 //       title: [
