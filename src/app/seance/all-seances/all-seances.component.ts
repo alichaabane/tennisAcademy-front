@@ -12,6 +12,7 @@ import {FormDialogComponent} from './dialog/form-dialog/form-dialog.component';
 import {DeleteFormComponent} from './dialog/delete-form/delete-form.component';
 import {BehaviorSubject, fromEvent, map, Observable, merge} from 'rxjs';
 import {User} from "../../core/models/user";
+import {Router} from "@angular/router";
 
 
 @Component({
@@ -19,7 +20,16 @@ import {User} from "../../core/models/user";
   templateUrl: './all-seances.component.html',
   styleUrls: ['./all-seances.component.sass']
 })
-export class AllSeancesComponent implements  OnInit {
+export class AllSeancesComponent implements OnInit {
+
+  constructor(
+    public httpClient: HttpClient,
+    public dialog: MatDialog,
+    public seanceService: SeanceService,
+    public router: Router,
+    private snackBar: MatSnackBar
+  ) {
+  }
 
   displayedColumns = [
     'select',
@@ -37,14 +47,6 @@ export class AllSeancesComponent implements  OnInit {
   id: number;
   seance: Seance | null;
 
-  constructor(
-    public httpClient: HttpClient,
-    public dialog: MatDialog,
-    public seanceService: SeanceService,
-    private snackBar: MatSnackBar
-  ) {
-  }
-
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   @ViewChild('filter', {static: true}) filter: ElementRef;
@@ -52,53 +54,18 @@ export class AllSeancesComponent implements  OnInit {
   contextMenu: MatMenuTrigger;
   contextMenuPosition = {x: '0px', y: '0px'};
 
+  protected readonly User = User;
+
   ngOnInit() {
     this.loadData();
   }
 
   refresh() {
-    this.loadData();
+    this.ngOnInit();
   }
 
   addNew() {
-    let tempDirection;
-    if (localStorage.getItem('isRtl') === 'true') {
-      tempDirection = 'rtl';
-    } else {
-      tempDirection = 'ltr';
-    }
-    const dialogRef = this.dialog.open(FormDialogComponent, {
-      data: {
-        seance: this.seance,
-        action: 'add',
-      },
-      direction: tempDirection,
-    });
-    dialogRef.afterClosed().subscribe((result) => {
-      if (result) {
-        // After dialog is closed we're doing frontend updates
-        // For add we're just pushing a new row inside DataService
-        this.seanceService.addSeance(result).subscribe(
-          res => {
-            console.log(res);
-            if (res) {
-              this.refresh();
-              this.showNotification(
-                'snackbar-success',
-                'seance ajoutée avec succes...!!!',
-                'bottom',
-                'center'
-              );
-            }
-          }
-        );
-      } else {
-        console.log("pas d'action");
-      }
-      this.exampleDatabase.dataChange.value.unshift(
-        this.seanceService.getDialogData()
-      );
-    });
+    this.router.navigate(['/seance/add-seance']);
   }
 
 
@@ -268,6 +235,7 @@ export class AllSeancesComponent implements  OnInit {
         }
         this.dataSource.filter = this.filter.nativeElement.value;
       });
+
   }
 
   showNotification(colorName, text, placementFrom, placementAlign) {
@@ -284,12 +252,10 @@ export class AllSeancesComponent implements  OnInit {
     event.preventDefault();
     this.contextMenuPosition.x = event.clientX + 'px';
     this.contextMenuPosition.y = event.clientY + 'px';
-    this.contextMenu.menuData = {item: item};
+    this.contextMenu.menuData = {item};
     this.contextMenu.menu.focusFirstItem('mouse');
     this.contextMenu.openMenu();
   }
-
-  protected readonly User = User;
 
 }
 

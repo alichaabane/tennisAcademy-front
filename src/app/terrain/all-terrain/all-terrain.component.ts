@@ -13,6 +13,7 @@ import {DeleteComponent} from './dialogs/delete/delete.component';
 import {FormDialogComponent} from './dialogs/form-dialog/form-dialog.component';
 import {Terrain} from './terrain.model';
 import {TerrainService} from './terrain.service';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-all-terrain',
@@ -39,6 +40,7 @@ export class AllTerrainComponent implements OnInit {
 
   constructor(
     public httpClient: HttpClient,
+    public router: Router,
     public dialog: MatDialog,
     public terrainService: TerrainService,
     private snackBar: MatSnackBar
@@ -61,44 +63,7 @@ export class AllTerrainComponent implements OnInit {
   }
 
   addNew() {
-    let tempDirection;
-    if (localStorage.getItem('isRtl') === 'true') {
-      tempDirection = 'rtl';
-    } else {
-      tempDirection = 'ltr';
-    }
-    const dialogRef = this.dialog.open(FormDialogComponent, {
-      data: {
-        terrain: this.terrain,
-        action: 'add',
-      },
-      direction: tempDirection,
-    });
-    dialogRef.afterClosed().subscribe((result) => {
-      if (result) {
-        // After dialog is closed we're doing frontend updates
-        // For add we're just pushing a new row inside DataService
-        this.terrainService.addTerrain(result).subscribe(
-          res => {
-            console.log(res);
-            if (res) {
-              this.refresh();
-              this.showNotification(
-                'snackbar-success',
-                'Terrain ajouter avec succes...!!!',
-                'bottom',
-                'center'
-              );
-            }
-          }
-        );
-      } else {
-        console.log("pas de action");
-      }
-      this.exampleDatabase.dataChange.value.unshift(
-        this.terrainService.getDialogData()
-      );
-    });
+    this.router.navigate(['/terrain/add-terrain']);
   }
 
 

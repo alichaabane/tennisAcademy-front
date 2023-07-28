@@ -12,6 +12,7 @@ import {DeleteFormComponent} from './dialogs/delete-form/delete-form.component';
 import {FormDialogComponent} from './dialogs/form-dialog/form-dialog.component';
 import {UserService} from './user.service';
 import {User} from './user.model';
+import {Router} from "@angular/router";
 
 
 @Component({
@@ -51,6 +52,7 @@ export class AllUserComponent {
     public httpClient: HttpClient,
     public dialog: MatDialog,
     public userService: UserService,
+    public router: Router,
     private snackBar: MatSnackBar
   ) {
   }
@@ -88,47 +90,10 @@ export class AllUserComponent {
 
   }
 
-  addNew() {
-    let tempDirection;
-    if (localStorage.getItem('isRtl') === 'true') {
-      tempDirection = 'rtl';
-    } else {
-      tempDirection = 'ltr';
-    }
-    const dialogRef = this.dialog.open(FormDialogComponent, {
-      data: {
-        user: this.user,
-        action: 'add',
-      },
-      direction: tempDirection,
-    });
-    dialogRef.afterClosed().subscribe((result) => {
-      if (result) {
-        // After dialog is closed we're doing frontend updates
-        // For add we're just pushing a new row inside DataService
-        this.userService.addUtilisateur(result).subscribe(
-          res => {
-            console.log(res);
-            if (res) {
-              this.refresh();
-              this.showNotification(
-                'snackbar-success',
-                'User ajouté avec succes...!!!',
-                'bottom',
-                'center'
-              );
-            }
-          }
-        );
-      } else {
-        console.log("pas d'action");
-      }
-      this.exampleDatabase.dataChange.value.unshift(
-        this.userService.getDialogData()
-      );
-    });
-  }
 
+  addNew() {
+    this.router.navigate(['/user/add-user']);
+  }
 
   editCall(row) {
     this.id = row.id;
@@ -174,7 +139,6 @@ export class AllUserComponent {
       }
     });
   }
-
 
   deleteItem(row) {
     this.id = row.id;
@@ -330,6 +294,7 @@ export class AllUserComponent {
         }
         this.dataSource.filter = this.filter.nativeElement.value;
       });
+    console.log('data user = ', this.dataSource);
   }
 
   showNotification(colorName, text, placementFrom, placementAlign) {

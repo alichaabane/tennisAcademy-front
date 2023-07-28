@@ -11,6 +11,7 @@ import {MatDialog} from '@angular/material/dialog';
 import {FormDialogComponent} from './dialogs/form-dialog/form-dialog.component';
 import {DeleteComponent} from './dialogs/delete/delete.component';
 import {BehaviorSubject, fromEvent, merge, map, Observable} from 'rxjs';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-all-cours',
@@ -37,7 +38,8 @@ export class AllCoursComponent {
     public httpClient: HttpClient,
     public dialog: MatDialog,
     public coursService: CoursService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    public router: Router
   ) {
   }
 
@@ -57,44 +59,7 @@ export class AllCoursComponent {
   }
 
   addNew() {
-    let tempDirection;
-    if (localStorage.getItem('isRtl') === 'true') {
-      tempDirection = 'rtl';
-    } else {
-      tempDirection = 'ltr';
-    }
-    const dialogRef = this.dialog.open(FormDialogComponent, {
-      data: {
-        cours: this.cours,
-        action: 'add',
-      },
-      direction: tempDirection,
-    });
-    dialogRef.afterClosed().subscribe((result) => {
-      if (result) {
-        // After dialog is closed we're doing frontend updates
-        // For add we're just pushing a new row inside DataService
-        this.coursService.addCours(result).subscribe(
-          res => {
-            console.log(res);
-            if (res) {
-              this.refresh();
-              this.showNotification(
-                'snackbar-success',
-                'Cours ajouter avec succes...!!!',
-                'bottom',
-                'center'
-              );
-            }
-          }
-        );
-      } else {
-        console.log("pas de action");
-      }
-      this.exampleDatabase.dataChange.value.unshift(
-        this.coursService.getDialogData()
-      );
-    });
+    this.router.navigate(['/cours/add-cours']);
   }
 
 

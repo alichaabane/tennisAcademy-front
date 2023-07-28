@@ -11,6 +11,7 @@ import {BehaviorSubject, merge, fromEvent, map, Observable} from 'rxjs';
 import {PlanificationService} from './planification.service';
 import {FormDialogComponent} from './dialog/form-dialog/form-dialog.component';
 import {DeleteFormComponent} from './dialog/delete-form/delete-form.component';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-all-planifications',
@@ -35,6 +36,7 @@ export class AllPlanificationsComponent {
 
   constructor(
     public httpClient: HttpClient,
+    private router: Router,
     public dialog: MatDialog,
     public planificationService: PlanificationService,
     private snackBar: MatSnackBar
@@ -57,45 +59,9 @@ export class AllPlanificationsComponent {
   }
 
   addNew() {
-    let tempDirection;
-    if (localStorage.getItem('isRtl') === 'true') {
-      tempDirection = 'rtl';
-    } else {
-      tempDirection = 'ltr';
-    }
-    const dialogRef = this.dialog.open(FormDialogComponent, {
-      data: {
-        planification: this.planification,
-        action: 'add',
-      },
-      direction: tempDirection,
-    });
-    dialogRef.afterClosed().subscribe((result) => {
-      if (result) {
-        // After dialog is closed we're doing frontend updates
-        // For add we're just pushing a new row inside DataService
-        this.planificationService.addPlanification(result).subscribe(
-          res => {
-            console.log(res);
-            if (res) {
-              this.refresh();
-              this.showNotification(
-                'snackbar-success',
-                'planification ajoutée avec succes...!!!',
-                'bottom',
-                'center'
-              );
-            }
-          }
-        );
-      } else {
-        console.log("pas de action");
-      }
-      this.exampleDatabase.dataChange.value.unshift(
-        this.planificationService.getDialogData()
-      );
-    });
+    this.router.navigate(['/planification/add-planification']);
   }
+
 
 
   editCall(row) {

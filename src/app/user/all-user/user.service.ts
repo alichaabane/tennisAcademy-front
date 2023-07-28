@@ -18,9 +18,10 @@ export class UserService {
   dialogData: any;
 
   constructor(private httpClient: HttpClient) {
+
   }
 
-  get data(): User[] {
+  get data(): any[] {
     return this.dataChange.value;
   }
 
@@ -30,8 +31,21 @@ export class UserService {
 
   // @ts-ignore
   /** CRUD METHODS */
-  getAllUtilisateurs(): Observable<User[]> {
+  getUsers(): Observable<User[]> {
     return this.httpClient.get<User[]>(this.Url);
+  }
+
+  getAllUtilisateurs(): void {
+    this.httpClient.get<User[]>(this.Url).subscribe(
+      (data) => {
+        this.isTblLoading = false;
+        this.dataChange.next(data);
+      },
+      (error: HttpErrorResponse) => {
+        this.isTblLoading = false;
+        console.log(error.name + ' ' + error.message);
+      }
+    );
   }
 
   getAllActiveAdmins(): Observable<User[]> {

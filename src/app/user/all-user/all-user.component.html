@@ -8,7 +8,7 @@
               <h4 class="page-title">Tous les Utilisateurs</h4>
             </li>
             <li class="breadcrumb-item bcrumb-1">
-              <a routerLink="/dashboard/main">
+              <a [routerLink]="'/dashboard/main'">
                 <i class="fas fa-home"></i> Acceuil</a>
             </li>
             <li class="breadcrumb-item bcrumb-2">
@@ -40,8 +40,7 @@
                       <li>
                         <div class="icon-button-demo m-l-10" [hidden]=!selection.hasValue()>
                           <button mat-mini-fab color="warn" (click)="removeSelectedRows()">
-                            <mat-icon class="col-white">delete
-                            </mat-icon>
+                            <mat-icon class="col-white">delete</mat-icon>
                           </button>
                         </div>
                       </li>

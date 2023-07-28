@@ -112,8 +112,8 @@
                 </ng-container>
                 <ng-container matColumnDef="adhérent">
                   <mat-header-cell *matHeaderCellDef mat-sort-header>adhérent</mat-header-cell>
-                  <mat-cell *matCellDef="let row" (contextmenu)="onContextMenu($event, row)">
-                    {{row.user}}</mat-cell>
+                  <mat-cell style="text-align: center" *matCellDef="let row" (contextmenu)="onContextMenu($event, row)">
+                    {{row.user?.username? row.user?.username : '-----' }}</mat-cell>
                 </ng-container>
 
                 <!-- actions -->
