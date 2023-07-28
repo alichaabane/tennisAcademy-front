@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { EChartOption } from 'echarts';
+import {Component, OnInit} from '@angular/core';
+import {EChartOption} from 'echarts';
 
 @Component({
   selector: 'app-echart',
@@ -596,5 +596,7 @@ export class EchartComponent {
     ],
     color: ['#575B7A', '#DE725C', '#DFC126', '#72BE81', '#50A5D8']
   };
-  constructor() { }
+
+  constructor() {
+  }
 }

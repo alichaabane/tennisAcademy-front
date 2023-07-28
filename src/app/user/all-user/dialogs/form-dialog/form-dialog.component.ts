@@ -1,24 +1,24 @@
-import { Component, Inject, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { Media } from 'src/app/media/media.model';
-import { Role } from 'src/app/role/role.model';
-import { environment } from 'src/environments/environment';
-import { User } from '../../user.model';
-import { UserService } from '../../user.service';
+import {Component, Inject, OnInit} from '@angular/core';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {Media} from 'src/app/media/media.model';
+import {Role} from 'src/app/role/role.model';
+import {environment} from 'src/environments/environment';
+import {User} from '../../user.model';
+import {UserService} from '../../user.service';
 
 @Component({
   selector: 'app-form-dialog',
   templateUrl: './form-dialog.component.html',
   styleUrls: ['./form-dialog.component.sass']
 })
-export class FormDialogComponent{
-  constructor(  private snackBar: MatSnackBar,
-                public dialogRef: MatDialogRef<FormDialogComponent>,
-                @Inject(MAT_DIALOG_DATA) public data: any,
-                public utilisateurService: UserService,
-                private fb: FormBuilder
+export class FormDialogComponent {
+  constructor(private snackBar: MatSnackBar,
+              public dialogRef: MatDialogRef<FormDialogComponent>,
+              @Inject(MAT_DIALOG_DATA) public data: any,
+              public utilisateurService: UserService,
+              private fb: FormBuilder
   ) {
     // Set the defaults
     this.action = data.action;
@@ -27,10 +27,10 @@ export class FormDialogComponent{
       this.utilisateur = data.utilisateur;
       data.utilisateur.roles.forEach(element => this.checked(element));
       console.log(data.utilisateur.photo);
-      if (data.utilisateur.photo){
+      if (data.utilisateur.photo) {
         this.imgToEditUrl = data.utilisateur.photo.mediaURL;
         this.getImageByUrl(data.utilisateur.photo.mediaURL);
-      }else{
+      } else {
         this.imgToEditUrl = "";
       }
 
@@ -49,6 +49,7 @@ export class FormDialogComponent{
     this.getAllroles();
 
   }
+
   chide = true;
   hide = true;
   public img: File;
@@ -73,21 +74,21 @@ export class FormDialogComponent{
     // Validators.email,
   ]);
 
-  checked(element: Role){
-    if (element.name === "ROLE_ADMIN"){
+  checked(element: Role) {
+    if (element.name === "ROLE_ADMIN") {
       this.rleAdmin = true;
     }
-    if (element.name === "ROLE_JOUEUR"){
+    if (element.name === "ROLE_JOUEUR") {
       this.rleJoueur = true;
 
 
     }
-    if (element.name === "ROLE_ENTRAINEUR"){
+    if (element.name === "ROLE_ENTRAINEUR") {
       this.rleEntrai = true;
     }
   }
 
-  getAllroles(){
+  getAllroles() {
     this.utilisateurService.getAllRoles().subscribe(
       (data) => {
         this.roles = data;
@@ -96,12 +97,13 @@ export class FormDialogComponent{
       }
     );
   }
+
   getErrorMessage() {
     return this.formControl.hasError('required')
       ? 'Required field'
       : this.formControl.hasError('email')
-      ? 'Not a valid email'
-      : '';
+        ? 'Not a valid email'
+        : '';
   }
 
   createContactForm(): FormGroup {
@@ -133,6 +135,7 @@ export class FormDialogComponent{
   submit() {
     // emppty stuff
   }
+
   onNoClick(): void {
     this.dialogRef.close();
   }
@@ -140,7 +143,7 @@ export class FormDialogComponent{
 
   public confirmAdd(): void {
     console.log(this.utilisateurForm.getRawValue());
-    if (this.utilisateurForm.valid && this.updatedRoles != null){
+    if (this.utilisateurForm.valid && this.updatedRoles != null) {
       this.utilisateur.prenom = this.utilisateurForm.value.prenom;
       this.utilisateur.nom = this.utilisateurForm.value.nom;
       this.utilisateur.username = this.utilisateurForm.value.username;
@@ -159,6 +162,7 @@ export class FormDialogComponent{
     }
 
   }
+
   openedChange(idUser: number, opened: boolean) {
     console.log(opened ? 'opened' : 'closed');
     console.log(idUser);
@@ -199,22 +203,22 @@ export class FormDialogComponent{
   async getImageByUrl(url): Promise<void> {
     const data = await this.utilisateurService.getImageByUrl(url).toPromise();
     const file = new File([data], 'image', {
-        type: 'image/png',
-        lastModified: new Date().getTime()
+      type: 'image/png',
+      lastModified: new Date().getTime()
     });
     console.log(file);
     this.img = file;
     this.covertImgToByte();
-}
+  }
 
-onChangeEventFunc(event) {
+  onChangeEventFunc(event) {
 
-  this.updatedRoles.splice(0, this.updatedRoles.length);
-  event.value.forEach(element => {
-    const index = this.roles.findIndex(r => r.name === element);
-    this.updatedRoles.push(this.roles[index]);
-  });
-}
+    this.updatedRoles.splice(0, this.updatedRoles.length);
+    event.value.forEach(element => {
+      const index = this.roles.findIndex(r => r.name === element);
+      this.updatedRoles.push(this.roles[index]);
+    });
+  }
 
   showNotification(colorName, text, placementFrom, placementAlign) {
     this.snackBar.open(text, '', {

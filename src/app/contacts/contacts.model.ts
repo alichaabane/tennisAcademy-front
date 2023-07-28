@@ -1,4 +1,5 @@
-import { formatDate } from '@angular/common';
+import {formatDate} from '@angular/common';
+
 export class Contacts {
   id: number;
   img: string;
@@ -21,6 +22,7 @@ export class Contacts {
       this.note = contacts.note || '';
     }
   }
+
   public getRandomID(): string {
     const S4 = () => {
       return (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);

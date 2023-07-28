@@ -25,9 +25,9 @@
     background: #1a202e;
     border: none;
     box-shadow: 0 0.46875rem 2.1875rem rgba(90, 97, 105, 0.1),
-      0 0.9375rem 1.40625rem rgba(90, 97, 105, 0.1),
-      0 0.25rem 0.53125rem rgba(90, 97, 105, 0.12),
-      0 0.125rem 0.1875rem rgba(90, 97, 105, 0.1);
+    0 0.9375rem 1.40625rem rgba(90, 97, 105, 0.1),
+    0 0.25rem 0.53125rem rgba(90, 97, 105, 0.12),
+    0 0.125rem 0.1875rem rgba(90, 97, 105, 0.1);
 
     .body {
       color: #96a2b4;
@@ -113,6 +113,7 @@
 
   .breadcrumb {
     color: #96a2b4;
+
     li {
       &.active {
         color: #a5abb1;
@@ -299,6 +300,7 @@
 
   .table {
     color: #96a2b4;
+
     tbody {
       tr {
         color: #96a2b4;
@@ -695,9 +697,9 @@
     }
 
     &.fixed-header
-      .datatable-header
-      .datatable-header-inner
-      .datatable-header-cell {
+    .datatable-header
+    .datatable-header-inner
+    .datatable-header-cell {
       color: #bbb;
     }
   }
@@ -796,9 +798,9 @@
     }
 
     &.fixed-header
-      .datatable-header
-      .datatable-header-inner
-      .datatable-header-cell {
+    .datatable-header
+    .datatable-header-inner
+    .datatable-header-cell {
       color: #bbb;
     }
   }
@@ -1006,7 +1008,7 @@
   .mat-cell {
     color: #96a2b4;
     border-bottom-color: rgba(234, 229, 229, 0.12);
-    
+
   }
 
   .mat-footer-cell {
@@ -1263,45 +1265,56 @@
   .mat-row {
     border-bottom-color: rgba(255, 255, 255, 0.12);
   }
+
   .material-icons-two-tone {
-    filter: invert(99%) sepia(95%) saturate(4461%) hue-rotate(181deg)
-      brightness(134%) contrast(83%);
+    filter: invert(99%) sepia(95%) saturate(4461%) hue-rotate(181deg) brightness(134%) contrast(83%);
   }
+
   .owl-dt-calendar-table {
     .owl-dt-calendar-cell {
       color: #96a2b4;
     }
+
     .owl-dt-calendar-header {
       color: #96a2b4;
     }
   }
+
   .owl-dt-container {
     background: #11141b;
   }
+
   .owl-dt-calendar-control {
     color: #ffffff;
   }
+
   .owl-dt-timer-content .owl-dt-timer-input {
     border: 1px solid #717070;
     background-color: #000000;
   }
+
   .owl-dt-container-buttons {
     color: #ffffff;
   }
+
   .show-pwd-icon {
     color: #96a2b4;
   }
+
   .lecture-list {
     background: #11141b;
   }
+
   .timetable-block {
     background: #11141b;
     border: 1px solid #11141b;
   }
+
   .mat-form-field-prefix,
   .mat-form-field-suffix {
     color: #96a2b4;
   }
+
   .media .media-body {
     color: #96a2b4;
   }

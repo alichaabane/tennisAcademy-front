@@ -1,19 +1,19 @@
-import { Component, ViewChild, OnInit } from '@angular/core';
+import {Component, ViewChild, OnInit} from '@angular/core';
 import {
   CalendarOptions,
   DateSelectArg,
   EventClickArg,
   EventApi,
 } from '@fullcalendar/angular';
-import { EventInput } from '@fullcalendar/angular';
+import {EventInput} from '@fullcalendar/angular';
 
-import { MatDialog } from '@angular/material/dialog';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { FormDialogComponent } from '../all-seances/dialog/form-dialog/form-dialog.component';
-import { ShowSeanceService } from './show-seance.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { MatCheckboxChange } from '@angular/material/checkbox';
-import { Seance } from '../all-seances/Seance.model';
+import {MatDialog} from '@angular/material/dialog';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormDialogComponent} from '../all-seances/dialog/form-dialog/form-dialog.component';
+import {ShowSeanceService} from './show-seance.service';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {MatCheckboxChange} from '@angular/material/checkbox';
+import {Seance} from '../all-seances/Seance.model';
 
 @Component({
   selector: 'app-show-seance',

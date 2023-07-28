@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AuthService } from 'src/app/core/service/auth.service';
+import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {AuthService} from 'src/app/core/service/auth.service';
 import {environment} from "../../../environments/environment";
+
 @Component({
   selector: 'app-signin',
   templateUrl: './signin.component.html',
@@ -14,20 +15,25 @@ export class SigninComponent implements OnInit {
   appVersion = environment.version;
   error = '';
   hide = true;
+
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
     private authService: AuthService
-  ) {}
+  ) {
+  }
+
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
       username: ['', Validators.required],
       password: ['', Validators.required],
     });
   }
+
   get f() {
     return this.loginForm.controls;
   }
+
   onSubmit() {
     this.submitted = true;
     this.error = '';
@@ -39,7 +45,7 @@ export class SigninComponent implements OnInit {
         .login(this.f.username.value, this.f.password.value)
         .subscribe(
           (res) => {
-            if (res == null){
+            if (res == null) {
               this.error = 'Invalid Login';
 
 

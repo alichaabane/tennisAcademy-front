@@ -35,7 +35,7 @@
                             <li class="dropdown m-l-20">
                               <label for="search-input"><i class="material-icons search-icon">search</i></label>
                               <input placeholder="Search" type="text" #filter class="browser-default search-field"
-                                aria-label="Search box">
+                                     aria-label="Search box">
                             </li>
                             <li>
                               <div class="icon-button-demo m-l-10" [hidden]=!selection.hasValue()>
@@ -73,14 +73,16 @@
                       <ng-container matColumnDef="select">
                         <mat-header-cell *matHeaderCellDef [ngClass]="'tbl-col-width-per-6'">
                           <mat-checkbox (change)="$event ? masterToggle() : null"
-                            [checked]="selection.hasValue() && isAllSelected()"
-                            [indeterminate]="selection.hasValue() && !isAllSelected()" [ngClass]="'tbl-checkbox'">
+                                        [checked]="selection.hasValue() && isAllSelected()"
+                                        [indeterminate]="selection.hasValue() && !isAllSelected()"
+                                        [ngClass]="'tbl-checkbox'">
                           </mat-checkbox>
                         </mat-header-cell>
                         <mat-cell *matCellDef="let row" [ngClass]="'tbl-col-width-per-6'">
                           <mat-checkbox (click)="$event.stopPropagation()"
-                            (change)="$event ? selection.toggle(row) : null" [checked]="selection.isSelected(row)"
-                            [ngClass]="'tbl-checkbox'">
+                                        (change)="$event ? selection.toggle(row) : null"
+                                        [checked]="selection.isSelected(row)"
+                                        [ngClass]="'tbl-checkbox'">
                           </mat-checkbox>
                         </mat-cell>
                       </ng-container>
@@ -93,8 +95,8 @@
                       <ng-container matColumnDef="img">
                         <mat-header-cell mat-header-cell *matHeaderCellDef [ngClass]="'tbl-col-width-per-6'"> Image
                         </mat-header-cell>
-                        <mat-cell mat-cell *matCellDef="let row" class="table-img tbl-col-width-per-6"> <img
-                            [src]="row.img" />
+                        <mat-cell mat-cell *matCellDef="let row" class="table-img tbl-col-width-per-6"><img
+                          [src]="row.img"/>
                         </mat-cell>
                       </ng-container>
                       <ng-container matColumnDef="name">
@@ -157,7 +159,7 @@
                       <mat-header-row *matHeaderRowDef="displayedColumns">
                       </mat-header-row>
                       <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="detailsCall(row)"
-                        [style.cursor]="'pointer'" matRipple>
+                               [style.cursor]="'pointer'" matRipple>
                       </mat-row>
                     </mat-table>
                     <!-- Loading spinner -->
@@ -166,11 +168,11 @@
                       </mat-progress-spinner>
                     </div>
                     <div *ngIf="!exampleDatabase.isTblLoading" class="no-results"
-                      [style.display]="dataSource.renderedData.length == 0 ? '' : 'none'">
+                         [style.display]="dataSource.renderedData.length == 0 ? '' : 'none'">
                       No results
                     </div>
                     <mat-paginator #paginator [length]="dataSource.filteredData.length" [pageIndex]="0" [pageSize]="10"
-                      [pageSizeOptions]="[5, 10, 25, 100]">
+                                   [pageSizeOptions]="[5, 10, 25, 100]">
                     </mat-paginator>
                   </div>
                 </div>

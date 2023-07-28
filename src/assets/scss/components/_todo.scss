@@ -10,6 +10,7 @@
   min-height: 311px;
   float: left;
   width: 100%;
+
   li {
     padding: 15px 0;
     border-radius: 3px;
@@ -19,24 +20,29 @@
     font-size: 14px;
     background: #fff;
     border-bottom: 1px dotted rgba(0, 0, 0, 0.2);
+
     p {
       margin: 0;
       padding-left: 50px;
     }
+
     .todo-check input[type="checkbox"] {
       visibility: hidden;
     }
   }
 }
+
 .todo-actionlist {
   position: absolute;
   right: -5px;
   top: 22px;
+
   a {
     height: 24px;
     width: 24px;
     display: inline-block;
     float: left;
+
     i {
       height: 24px;
       width: 24px;
@@ -45,25 +51,31 @@
       line-height: 24px;
       color: #ccc;
     }
+
     &:hover i {
       color: #666;
     }
   }
 }
+
 .line-through {
   text-decoration: line-through;
 }
+
 .todo-action-bar {
   margin-top: 20px;
 }
+
 .todo-check {
   width: 20px;
   position: relative;
   margin-right: 10px;
   margin-left: 10px;
+
   input[type="checkbox"] {
     visibility: hidden;
   }
+
   label {
     cursor: pointer;
     position: absolute;
@@ -74,12 +86,15 @@
     border-radius: 2px;
   }
 }
+
 .todo-done i {
   font-size: 14px;
 }
+
 .todo-remove i {
   font-size: 10px;
 }
+
 .inbox-small-cells .todo-check input[type="checkbox"] {
   visibility: hidden;
 }

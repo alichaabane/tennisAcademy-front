@@ -1,13 +1,14 @@
 import {DatePipe, formatDate} from '@angular/common';
-import { HttpErrorResponse } from '@angular/common/http';
-import { Component, Inject, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { Planification } from 'src/app/planification/all-planifications/planification.model';
-import { Terrain } from 'src/app/terrain/all-terrain/terrain.model';
-import { Seance } from '../../Seance.model';
-import { SeanceService } from '../../seance.service';
+import {HttpErrorResponse} from '@angular/common/http';
+import {Component, Inject, OnInit} from '@angular/core';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {Planification} from 'src/app/planification/all-planifications/planification.model';
+import {Terrain} from 'src/app/terrain/all-terrain/terrain.model';
+import {Seance} from '../../Seance.model';
+import {SeanceService} from '../../seance.service';
+import {User} from "../../../../user/all-user/user.model";
 
 @Component({
   selector: 'app-form-dialog',
@@ -15,12 +16,12 @@ import { SeanceService } from '../../seance.service';
   styleUrls: ['./form-dialog.component.sass']
 })
 export class FormDialogComponent {
-  constructor(  private snackBar: MatSnackBar,
-                private datePipe: DatePipe,
-                public dialogRef: MatDialogRef<FormDialogComponent>,
-                @Inject(MAT_DIALOG_DATA) public data: any,
-                public seanceService: SeanceService,
-                private fb: FormBuilder
+  constructor(private snackBar: MatSnackBar,
+              private datePipe: DatePipe,
+              public dialogRef: MatDialogRef<FormDialogComponent>,
+              @Inject(MAT_DIALOG_DATA) public data: any,
+              public seanceService: SeanceService,
+              private fb: FormBuilder
   ) {
     // Set the defaults
     this.action = data.action;
@@ -31,7 +32,7 @@ export class FormDialogComponent {
       console.log(this.seance);
 
     } else {
-      this.dialogTitle = 'New Seance';
+      this.dialogTitle = 'Ajouter une seance';
       this.seance = new Seance();
       this.oldPlanification = new Planification();
     }
@@ -40,8 +41,10 @@ export class FormDialogComponent {
     this.seanceForm = this.createContactForm();
 
   }
+
   public planificationsList: Planification[] = [];
   public terrainsList: Terrain[] = [];
+  public utilisateurList: User[] = [];
   public oldPlanification: Planification;
 
   action: string;
@@ -54,7 +57,7 @@ export class FormDialogComponent {
     // Validators.email,
   ]);
 
-  getAllPlanification(){
+  getAllPlanification() {
     this.seanceService.getAllPlanification().subscribe(
       (data) => {
         this.planificationsList = data;
@@ -72,7 +75,7 @@ export class FormDialogComponent {
 
   }
 
-  getAllTerrains(){
+  getAllTerrains() {
     this.seanceService.getAllTerrain().subscribe(
       (data) => {
         this.terrainsList = data;
@@ -88,12 +91,13 @@ export class FormDialogComponent {
       }
     );
   }
+
   getErrorMessage() {
     return this.formControl.hasError('required')
       ? 'Required field'
       : this.formControl.hasError('email')
-      ? 'Not a valid email'
-      : '';
+        ? 'Not a valid email'
+        : '';
   }
 
   createContactForm(): FormGroup {
@@ -109,29 +113,31 @@ export class FormDialogComponent {
   submit() {
     // emppty stuff
   }
+
   onNoClick(): void {
     this.dialogRef.close();
-}
+  }
 
 
   public confirmAdd(): void {
     console.log(this.seanceForm.getRawValue());
-    if (this.seanceForm.valid){
+    if (this.seanceForm.valid) {
       this.seance.dateHeureDebut = this.seanceForm.value.dateHeureDebut;
-      this.seance.dateHeureDebut =  this.datePipe.transform(this.seance.dateHeureDebut, 'yyyy-MM-ddTHH:mm:ss');
+      this.seance.dateHeureDebut = this.datePipe.transform(this.seance.dateHeureDebut, 'yyyy-MM-ddTHH:mm:ss');
 
       this.seance.dateHeureFin = this.seanceForm.value.dateHeureFin;
-      this.seance.dateHeureFin =  this.datePipe.transform(this.seance.dateHeureFin, 'yyyy-MM-ddTHH:mm:ss');
+      this.seance.dateHeureFin = this.datePipe.transform(this.seance.dateHeureFin, 'yyyy-MM-ddTHH:mm:ss');
       this.seance.planification = this.seanceForm.value.planification;
       this.seance.terrain = this.seanceForm.value.terrain;
 
-    //   this.seanceForm.value.jourSemaine.forEach(element => {
-    //     this.planification.jourSemaine=this.planification.jourSemaine+element
-    // });
-    // this.planification.cours=this.seanceForm.value.cours;
+      //   this.seanceForm.value.jourSemaine.forEach(element => {
+      //     this.planification.jourSemaine=this.planification.jourSemaine+element
+      // });
+      // this.planification.cours=this.seanceForm.value.cours;
     }
 
   }
+
   openedChange(opened: boolean) {
     console.log(opened ? 'opened' : 'closed');
   }

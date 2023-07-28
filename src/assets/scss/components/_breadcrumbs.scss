@@ -19,6 +19,7 @@
 
   li {
     display: inline-block;
+
     a {
       color: #444;
       text-decoration: none;
@@ -39,6 +40,7 @@
       top: 4px;
       float: none;
     }
+
     &.active {
       color: #444444;
     }
@@ -49,6 +51,7 @@
     color: #444444;
     padding-left: 5px;
   }
+
   .page-title {
     border-right: 1px solid #c5c5c5;
     padding-right: 10px;
@@ -56,9 +59,11 @@
     font-weight: 600;
     color: #444444;
   }
+
   .breadcrumb-item + .breadcrumb-item {
     padding-top: 3px;
     padding-left: 0px;
+
     &::before {
       float: unset;
       padding-right: 5px;
@@ -97,13 +102,16 @@
     }
   }
 }
+
 .breadcrumb-style {
   border-radius: 30px;
   margin-top: 15px;
   margin-bottom: 15px;
 }
+
 .breadcrumb-chart {
   display: inline-block;
+
   .chart-info p {
     font-size: 13px;
   }

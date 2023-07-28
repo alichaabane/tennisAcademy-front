@@ -2,10 +2,10 @@
   <div class="container-fluid">
     <div class="navbar-header">
       <a href="#" onClick="return false;" class="navbar-toggle collapsed"
-        (click)="isNavbarCollapsed = !isNavbarCollapsed" aria-expanded="false"></a>
+         (click)="isNavbarCollapsed = !isNavbarCollapsed" aria-expanded="false"></a>
       <a href="#" onClick="return false;" class="bars" (click)="mobileMenuSidebarOpen($event,'overlay-open')"></a>
       <a class="navbar-brand" routerLink="dashboard/main">
-        <img src="assets/images/logoClub.png" height="70px" width="70px" alt="" />
+        <img src="assets/images/logoClub.png" height="70px" width="70px" alt=""/>
         <span class="logo-name">Academy</span>
       </a>
     </div>
@@ -59,7 +59,7 @@
         <li class="nav-item user_profile" ngbDropdown>
           <a href="#" onClick="return false;" ngbDropdownToggle role="button" class="nav-notification-icons pt-0">
             <img [src]="photoProfile ? IMG_BASE_URL + photoProfile.mediaURL: 'assets/images/user.jpeg'"
-            class="rounded-circle" width="32" height="32" alt="User">
+                 class="rounded-circle" width="32" height="32" alt="User">
           </a>
           <div ngbDropdownMenu class="notification-dropdown pullDown">
             <div class="noti-list" style="position: relative; max-width: 600px; max-height: 300px;" [perfectScrollbar]>
@@ -68,12 +68,14 @@
                   <ul class="user_dw_menu">
                     <li *ngIf="authentifiee">
                       <a href="#" onClick="return false;">
-                        <mat-icon aria-hidden="false" class="msr-2">person</mat-icon>Profile
+                        <mat-icon aria-hidden="false" class="msr-2">person</mat-icon>
+                        Profile
                       </a>
                     </li>
                     <li *ngIf="!authentifiee">
                       <a routerLink="/authentication/signup" onClick="return false;">
-                        <mat-icon aria-hidden="false" class="msr-2">contacts</mat-icon>signup
+                        <mat-icon aria-hidden="false" class="msr-2">contacts</mat-icon>
+                        signup
                       </a>
                     </li>
                     <!-- <li>
@@ -88,12 +90,14 @@
                     </li> -->
                     <li *ngIf="!authentifiee">
                       <a routerLink="/authentication/signin" onClick="return false;">
-                        <mat-icon aria-hidden="false" class="msr-2">login</mat-icon>Login
+                        <mat-icon aria-hidden="false" class="msr-2">login</mat-icon>
+                        Login
                       </a>
                     </li>
                     <li *ngIf="authentifiee" routerLinkActive="active">
                       <a role="button" (click)="logout()">
-                        <mat-icon aria-hidden="false" class="msr-2">power_settings_new</mat-icon>Logout
+                        <mat-icon aria-hidden="false" class="msr-2">power_settings_new</mat-icon>
+                        Logout
                       </a>
                     </li>
                   </ul>

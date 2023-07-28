@@ -51,7 +51,7 @@
   border: none !important;
   background-color: #007bff !important;
   box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.14),
-    0 7px 10px -5px rgba(0, 154, 255, 0.4);
+  0 7px 10px -5px rgba(0, 154, 255, 0.4);
   color: #fff;
 }
 
@@ -59,7 +59,7 @@
   border: none !important;
   background-color: #ff9800 !important;
   box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.14),
-    0 7px 10px -5px rgba(255, 152, 0, 0.4);
+  0 7px 10px -5px rgba(255, 152, 0, 0.4);
   color: #fff;
 }
 
@@ -68,7 +68,7 @@
   position: relative;
   background-color: #53b958 !important;
   box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.14),
-    0 7px 10px -5px rgba(76, 175, 80, 0.4);
+  0 7px 10px -5px rgba(76, 175, 80, 0.4);
   font-weight: 400;
   color: #fff;
 }
@@ -77,7 +77,7 @@
   border: none !important;
   background-color: #f9483b !important;
   box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.14),
-    0 7px 10px -5px rgba(244, 67, 54, 0.4);
+  0 7px 10px -5px rgba(244, 67, 54, 0.4);
   color: #fff;
 }
 
@@ -86,7 +86,7 @@
   position: relative;
   background-color: #03c5de !important;
   box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.14),
-    0 7px 10px -5px rgba(0, 188, 212, 0.4);
+  0 7px 10px -5px rgba(0, 188, 212, 0.4);
   font-weight: 400;
   color: #fff;
 }
@@ -221,23 +221,28 @@
   color: #ffffff;
   text-align: left;
 }
+
 .fc-daygrid-block-event .fc-event-time {
   font-weight: 400 !important;
   font-size: 12px;
 }
+
 .fc-daygrid-event-dot {
   display: none;
 }
+
 .fc-daygrid-dot-event .fc-event-title {
   font-weight: 400 !important;
   text-align: left;
   font-size: 12px;
 }
+
 .fc-daygrid-dot-event .fc-event-time {
   font-weight: 400 !important;
   text-align: left;
   font-size: 12px;
 }
+
 .fc-event-title-container .fc-event-title {
   font-weight: 400 !important;
   text-align: left;
@@ -305,6 +310,7 @@ tr:first-child > td > .fc-day-grid-event {
 .fc-daygrid-day-top {
   text-align: center;
   display: block !important;
+
   .fc-daygrid-day-number {
     color: #666;
     display: inline-flex;
@@ -314,6 +320,7 @@ tr:first-child > td > .fc-day-grid-event {
     font-size: 12px !important;
   }
 }
+
 .fc-day-today .fc-daygrid-day-number {
   display: inline-flex;
   align-items: center;
@@ -326,9 +333,11 @@ tr:first-child > td > .fc-day-grid-event {
   background: #6777ef;
   color: #fff;
 }
+
 .fc .fc-daygrid-day.fc-day-today {
   background-color: transparent !important;
 }
+
 .fc .fc-col-header-cell-cushion {
   color: #666;
 }

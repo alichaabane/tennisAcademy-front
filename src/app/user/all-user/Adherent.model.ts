@@ -1,13 +1,14 @@
-import { User } from "./user.model";
+import {User} from "./user.model";
 
-export class Adherent extends User{
-    nbrMatchJoues: number;
-    gender: string;
-    constructor() {
+export class Adherent extends User {
+  nbrMatchJoues: number;
+  gender: string;
+
+  constructor() {
     super();
-      {
-          this.nbrMatchJoues = 0;
-          this.gender = '';
-        }
+    {
+      this.nbrMatchJoues = 0;
+      this.gender = '';
     }
   }
+}

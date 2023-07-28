@@ -1,5 +1,6 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import {Injectable} from '@angular/core';
+import {BehaviorSubject} from 'rxjs';
+
 @Injectable()
 export class RightSidebarService {
   private sidebarSubject: BehaviorSubject<boolean> = new BehaviorSubject(false);
@@ -9,5 +10,6 @@ export class RightSidebarService {
     this.sidebarSubject.next(value);
   };
 
-  constructor() {}
+  constructor() {
+  }
 }

@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {
   ChartComponent,
   ApexAxisChartSeries,
@@ -13,16 +13,16 @@ import {
   ApexTitleSubtitle,
   ApexFill,
 } from 'ng-apexcharts';
-import { EChartOption } from 'echarts';
-import { AuthService } from 'src/app/core/service/auth.service';
-import { environment } from 'src/environments/environment';
-import { Observable } from 'rxjs';
-import { Terrain } from 'src/app/terrain/all-terrain/terrain.model';
-import { TerrainService } from 'src/app/terrain/all-terrain/terrain.service';
-import { HttpErrorResponse } from '@angular/common/http';
-import { Router } from '@angular/router';
-import { User } from 'src/app/user/all-user/user.model';
-import { UserService } from 'src/app/user/all-user/user.service';
+import {EChartOption} from 'echarts';
+import {AuthService} from 'src/app/core/service/auth.service';
+import {environment} from 'src/environments/environment';
+import {Observable} from 'rxjs';
+import {Terrain} from 'src/app/terrain/all-terrain/terrain.model';
+import {TerrainService} from 'src/app/terrain/all-terrain/terrain.service';
+import {HttpErrorResponse} from '@angular/common/http';
+import {Router} from '@angular/router';
+import {User} from 'src/app/user/all-user/user.model';
+import {UserService} from 'src/app/user/all-user/user.service';
 
 export type SparklineChartOptions = {
   series: ApexAxisChartSeries;
@@ -59,7 +59,7 @@ export type areaChartOptions = {
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.scss'],
 })
-export class MainComponent implements OnInit{
+export class MainComponent implements OnInit {
   @ViewChild('chart') chart: ChartComponent;
 
   // sparkline chart start
@@ -246,6 +246,7 @@ export class MainComponent implements OnInit{
   constructor(private authService: AuthService, private router: Router, private terrainService: TerrainService, private utilisateurService: UserService) {
 
   }
+
   ngOnInit(): void {
     if (this.authService.currentUserValue) {
       this.authentifiee = true;
@@ -254,13 +255,11 @@ export class MainComponent implements OnInit{
       this.rolesProfile.forEach(element => {
         if (element === "ROLE_ADMIN") {
           this.admin = true;
-        }
-        else if (element === "ROLE_COACH") {
+        } else if (element === "ROLE_COACH") {
           this.entraineur = true;
- }
-        else {
+        } else {
           this.joueur = true;
- }
+        }
       });
     }
     this.getActiveTerrains();
@@ -270,7 +269,7 @@ export class MainComponent implements OnInit{
     this.areaChartOptions.series[0].data;
   }
 
-  getInfos(){
+  getInfos() {
     // this.authService.getAdminInfo().subscribe(
     //   data => {
     //     if (data){
@@ -281,13 +280,13 @@ export class MainComponent implements OnInit{
     // );
   }
 
-  public getActiveEntraineurs(): void{
+  public getActiveEntraineurs(): void {
     this.utilisateurService.getAllActiveEntraineurs().subscribe(
       (data) => {
         this.activeEntraineurs = data;
       },
       (error: HttpErrorResponse) => {
-      console.log(error.name + ' ' + error.message);
+        console.log(error.name + ' ' + error.message);
       }
     );
   }
@@ -298,12 +297,12 @@ export class MainComponent implements OnInit{
         this.activeTerrains = data;
       },
       (error: HttpErrorResponse) => {
-      console.log(error.name + ' ' + error.message);
+        console.log(error.name + ' ' + error.message);
       }
     );
   }
 
-  reservez(){
+  reservez() {
     if (!this.authentifiee) {
       this.router.navigate(['/authentication/signin']);
     }

@@ -1,17 +1,17 @@
-import { DataSource, SelectionModel } from '@angular/cdk/collections';
-import { HttpClient } from '@angular/common/http';
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { MatMenuTrigger } from '@angular/material/menu';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { MatSort } from '@angular/material/sort';
-import { BehaviorSubject, fromEvent, map, merge, Observable } from 'rxjs';
-import { environment } from 'src/environments/environment';
-import { DeleteFormComponent } from './dialogs/delete-form/delete-form.component';
-import { FormDialogComponent } from './dialogs/form-dialog/form-dialog.component';
-import { UserService } from './user.service';
-import { User } from './user.model';
+import {DataSource, SelectionModel} from '@angular/cdk/collections';
+import {HttpClient} from '@angular/common/http';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {MatDialog} from '@angular/material/dialog';
+import {MatMenuTrigger} from '@angular/material/menu';
+import {MatPaginator} from '@angular/material/paginator';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {MatSort} from '@angular/material/sort';
+import {BehaviorSubject, fromEvent, map, merge, Observable} from 'rxjs';
+import {environment} from 'src/environments/environment';
+import {DeleteFormComponent} from './dialogs/delete-form/delete-form.component';
+import {FormDialogComponent} from './dialogs/form-dialog/form-dialog.component';
+import {UserService} from './user.service';
+import {User} from './user.model';
 
 
 @Component({
@@ -38,7 +38,7 @@ export class AllUserComponent {
     'nbrMatchJoues',
     'rate',
     'gender',
-     'verified',
+    'verified',
     'actions',
   ];
   exampleDatabase: UserService | null;
@@ -46,38 +46,45 @@ export class AllUserComponent {
   selection = new SelectionModel<User>(true, []);
   id: number;
   user: User | null;
+
   constructor(
     public httpClient: HttpClient,
     public dialog: MatDialog,
     public userService: UserService,
     private snackBar: MatSnackBar
-  ) {}
-  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
-  @ViewChild(MatSort, { static: true }) sort: MatSort;
-  @ViewChild('filter', { static: true }) filter: ElementRef;
+  ) {
+  }
+
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
+  @ViewChild('filter', {static: true}) filter: ElementRef;
   @ViewChild(MatMenuTrigger)
   contextMenu: MatMenuTrigger;
-  contextMenuPosition = { x: '0px', y: '0px' };
+  contextMenuPosition = {x: '0px', y: '0px'};
+
   // tslint:disable-next-line:use-lifecycle-interface
   ngOnInit() {
     this.btnTous = "primary";
     this.loadData();
   }
+
   refresh() {
     this.loadData();
   }
 
-  showTous(){
+  showTous() {
 
   }
 
-  showAdmin(){
+  showAdmin() {
 
   }
-  showEnt(){
+
+  showEnt() {
 
   }
-  showJou(){
+
+  showJou() {
 
   }
 
@@ -100,21 +107,20 @@ export class AllUserComponent {
         // After dialog is closed we're doing frontend updates
         // For add we're just pushing a new row inside DataService
         this.userService.addUtilisateur(result).subscribe(
-                    res => {
-                      console.log(res);
-                      if (res){
-                        this.refresh();
-                        this.showNotification(
-                          'snackbar-success',
-                          'User ajouté avec succes...!!!',
-                          'bottom',
-                          'center'
-                        );
-                      }
-                    }
-                  );
-      }
-      else{
+          res => {
+            console.log(res);
+            if (res) {
+              this.refresh();
+              this.showNotification(
+                'snackbar-success',
+                'User ajouté avec succes...!!!',
+                'bottom',
+                'center'
+              );
+            }
+          }
+        );
+      } else {
         console.log("pas d'action");
       }
       this.exampleDatabase.dataChange.value.unshift(
@@ -150,7 +156,7 @@ export class AllUserComponent {
         this.userService.updateUtilisateur(result).subscribe(
           res => {
             console.log(res);
-            if (res){
+            if (res) {
               this.refresh();
               this.showNotification(
                 'black',
@@ -163,7 +169,7 @@ export class AllUserComponent {
         );
         this.userService.getDialogData();
         // And lastly refresh table
-      }else {
+      } else {
         console.log("pas d'edit");
       }
     });
@@ -191,27 +197,27 @@ export class AllUserComponent {
         this.exampleDatabase.dataChange.value.splice(foundIndex, 1);
         this.userService.deleteUtilisateur(row.idUser).subscribe(
           res => {
-              if (res) {
-                this.refresh();
-                this.showNotification(
-                  'snackbar-warning',
-                  'Terrain effacer avec succes...!!!',
-                  'bottom',
-                  'center'
-                );
-              } else {
-                this.showNotification(
-                  'snackbar-danger',
-                  'Terrain effacé avec succes...!!!',
-                  'bottom',
-                  'center'
-                );
-              }
+            if (res) {
+              this.refresh();
+              this.showNotification(
+                'snackbar-warning',
+                'Terrain effacer avec succes...!!!',
+                'bottom',
+                'center'
+              );
+            } else {
+              this.showNotification(
+                'snackbar-danger',
+                'Terrain effacé avec succes...!!!',
+                'bottom',
+                'center'
+              );
+            }
           },
           error => {
 
           }
-      );
+        );
       }
     });
   }
@@ -232,8 +238,8 @@ export class AllUserComponent {
     this.isAllSelected()
       ? this.selection.clear()
       : this.dataSource.renderedData.forEach((row) =>
-          this.selection.select(row)
-        );
+        this.selection.select(row)
+      );
   }
 
   removeSelectedRows() {
@@ -246,21 +252,21 @@ export class AllUserComponent {
       console.log(item);
       this.userService.deleteUtilisateur(item.idUser).subscribe(
         res => {
-            if (res) {
+          if (res) {
 
-            } else {
-              this.showNotification(
-                'snackbar-danger',
-                'Terrain :' + item.idUser + ' non effacé...!!!',
-                'bottom',
-                'center'
-              );
-            }
+          } else {
+            this.showNotification(
+              'snackbar-danger',
+              'Terrain :' + item.idUser + ' non effacé...!!!',
+              'bottom',
+              'center'
+            );
+          }
         },
         error => {
 
         }
-    );
+      );
       this.exampleDatabase.dataChange.value.splice(index, 1);
       this.refreshTable();
       this.selection = new SelectionModel<User>(true, []);
@@ -273,41 +279,40 @@ export class AllUserComponent {
     );
   }
 
-     public async changeDispo(user){
-        if (user.verified === true) {
-        user.verified = false;
-        }
-        else if (user.verified === false) {
-        user.verified = true;
- }
-        this.userService.changeUtilisateurDispoById(user.idUser, user.verified).subscribe(
-            res => {
-                if (res) {
+  public async changeDispo(user) {
+    if (user.verified === true) {
+      user.verified = false;
+    } else if (user.verified === false) {
+      user.verified = true;
+    }
+    this.userService.changeUtilisateurDispoById(user.idUser, user.verified).subscribe(
+      res => {
+        if (res) {
 
-                    // this.messageService.add({
-                    //     severity: 'SUCCESS',
-                    //     summary: 'Success',
-                    //     detail: 'Your Sponsor visibility status changed successfully.'
-                    // });
-                } else {
-                    // this.sponsors[index].enable = !this.sponsors[index].enable;
-                    // this.messageService.add({
-                    //     severity: 'FAILED',
-                    //     summary: 'Error',
-                    //     detail: 'Your Sponsor status cannot be changed, please try again'
-                    // });
-                }
-            },
-            error => {
-                // this.sponsors[index].enable = !this.sponsors[index].enable;
-                // this.messageService.add({
-                //     severity: 'FAILED',
-                //     summary: 'Error',
-                //     detail: error.error
-                // });
-            }
-        );
+          // this.messageService.add({
+          //     severity: 'SUCCESS',
+          //     summary: 'Success',
+          //     detail: 'Your Sponsor visibility status changed successfully.'
+          // });
+        } else {
+          // this.sponsors[index].enable = !this.sponsors[index].enable;
+          // this.messageService.add({
+          //     severity: 'FAILED',
+          //     summary: 'Error',
+          //     detail: 'Your Sponsor status cannot be changed, please try again'
+          // });
+        }
+      },
+      error => {
+        // this.sponsors[index].enable = !this.sponsors[index].enable;
+        // this.messageService.add({
+        //     severity: 'FAILED',
+        //     summary: 'Error',
+        //     detail: error.error
+        // });
       }
+    );
+  }
 
   public loadData() {
     this.exampleDatabase = new UserService(this.httpClient);
@@ -335,27 +340,33 @@ export class AllUserComponent {
       panelClass: colorName,
     });
   }
+
   // context menu
   onContextMenu(event: MouseEvent, item: User) {
     event.preventDefault();
     this.contextMenuPosition.x = event.clientX + 'px';
     this.contextMenuPosition.y = event.clientY + 'px';
-    this.contextMenu.menuData = { item };
+    this.contextMenu.menuData = {item};
     this.contextMenu.menu.focusFirstItem('mouse');
     this.contextMenu.openMenu();
   }
-  }
+}
+
 export class ExampleDataSource extends DataSource<User> {
   // tslint:disable-next-line:variable-name
   _filterChange = new BehaviorSubject('');
+
   get filter(): string {
     return this._filterChange.value;
   }
+
   set filter(filter: string) {
     this._filterChange.next(filter);
   }
+
   filteredData: User[] = [];
   renderedData: User[] = [];
+
   constructor(
     // tslint:disable-next-line:variable-name
     public _exampleDatabase: UserService,
@@ -368,6 +379,7 @@ export class ExampleDataSource extends DataSource<User> {
     // Reset to the first page when the user changes the filter.
     this._filterChange.subscribe(() => (this._paginator.pageIndex = 0));
   }
+
   /** Connect function called by the table to retrieve one stream containing the data to render. */
   connect(): Observable<User[]> {
     // Listen for any changes in the base data, sorting, filtering, or pagination
@@ -405,7 +417,10 @@ export class ExampleDataSource extends DataSource<User> {
       })
     );
   }
-  disconnect() {}
+
+  disconnect() {
+  }
+
   /** Returns a sorted copy of the database data. */
   sortData(data: User[]): User[] {
     if (!this._sort.active || this._sort.direction === '') {
@@ -424,12 +439,12 @@ export class ExampleDataSource extends DataSource<User> {
         case 'nom':
           [propertyA, propertyB] = [a.nom, b.nom];
           break;
-          case 'email':
-            [propertyA, propertyB] = [a.email, b.email];
-            break;
-            case 'username':
-              [propertyA, propertyB] = [a.username, b.username];
-              break;
+        case 'email':
+          [propertyA, propertyB] = [a.email, b.email];
+          break;
+        case 'username':
+          [propertyA, propertyB] = [a.username, b.username];
+          break;
       }
       const valueA = isNaN(+propertyA) ? propertyA : +propertyA;
       const valueB = isNaN(+propertyB) ? propertyB : +propertyB;
@@ -438,4 +453,4 @@ export class ExampleDataSource extends DataSource<User> {
       );
     });
   }
-  }
+}

@@ -22,8 +22,8 @@
     box-shadow: 0 1px 5px rgba(0, 0, 0, 0.25);
 
     .nav {
-      >li {
-        >a {
+      > li {
+        > a {
           color: #fff;
         }
       }
@@ -55,8 +55,8 @@
   }
 
   .nav {
-    >li {
-      >a {
+    > li {
+      > a {
         &:hover {
           background-color: $theme-black-nav-anchor_hover;
           text-decoration: none;
@@ -70,7 +70,7 @@
     }
 
     .open {
-      >a {
+      > a {
         background-color: $theme-black-nav-anchor-opened;
 
         &:hover {
@@ -195,7 +195,7 @@
     .horizontal-menu {
       li {
         &.active {
-          >a {
+          > a {
             color: $theme-black;
           }
         }
@@ -214,7 +214,7 @@
     }
   }
 
-  .nav-tabs>li>a:before {
+  .nav-tabs > li > a:before {
     border-bottom: 2px solid $theme-black;
   }
 }

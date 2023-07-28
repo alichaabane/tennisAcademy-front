@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AuthService } from 'src/app/core/service/auth.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {AuthService} from 'src/app/core/service/auth.service';
+import {MatSnackBar} from '@angular/material/snack-bar';
 import {environment} from "../../../environments/environment";
 
 @Component({
@@ -19,44 +19,47 @@ export class SignupComponent implements OnInit {
   appVersion = environment.version;
 
   constructor(private formBuilder: FormBuilder,
-              private snackBar: MatSnackBar, private authService: AuthService, private router: Router) {}
+              private snackBar: MatSnackBar, private authService: AuthService, private router: Router) {
+  }
+
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
-      prenom: ['', Validators.required],
-      nom: ['', Validators.required],
-      addresse: ['', Validators.required],
-      telephone: [0, Validators.required],
-      username: ['', Validators.required],
-      email: [
-        '',
-        [Validators.required, Validators.email, Validators.minLength(5)],
-      ],
-      password: ['', [Validators.required, Validators.minLength(6)]],
-      cpassword: ['', Validators.required],
-    }, {
-      validators: this.MustMatch('password', 'cpassword')
-    }
+        prenom: ['', Validators.required],
+        nom: ['', Validators.required],
+        addresse: ['', Validators.required],
+        telephone: [0, Validators.required],
+        username: ['', Validators.required],
+        email: [
+          '',
+          [Validators.required, Validators.email, Validators.minLength(5)],
+        ],
+        password: ['', [Validators.required, Validators.minLength(6)]],
+        cpassword: ['', Validators.required],
+      }, {
+        validators: this.MustMatch('password', 'cpassword')
+      }
     );
   }
+
   get f() {
     return this.loginForm.controls;
   }
 
-  MustMatch(controlPassword: string, controlCPassword: string){
-    return(formGroup: FormGroup) => {
+  MustMatch(controlPassword: string, controlCPassword: string) {
+    return (formGroup: FormGroup) => {
       const control = formGroup.controls[controlPassword];
       const matchControl = formGroup.controls[controlCPassword];
-      if (matchControl.errors && !matchControl.errors.MustMatch){
+      if (matchControl.errors && !matchControl.errors.MustMatch) {
         return;
       }
-      if (control.value !== matchControl.value){
+      if (control.value !== matchControl.value) {
         matchControl.setErrors({MustMatch: true});
-      }
-      else{
+      } else {
         matchControl.setErrors(null);
       }
     };
   }
+
   onSubmit() {
     this.submitted = true;
     this.error = '';
@@ -65,40 +68,40 @@ export class SignupComponent implements OnInit {
       return;
     } else {
       this.authService
-      .signup(this.f.username.value, this.f.email.value, this.f.password.value,
-        this.f.prenom.value, this.f.nom.value, this.f.addresse.value, this.f.telephone.value)
-      .subscribe(
-        (res) => {
-          if (res) {
-            console.log(res);
+        .signup(this.f.username.value, this.f.email.value, this.f.password.value,
+          this.f.prenom.value, this.f.nom.value, this.f.addresse.value, this.f.telephone.value)
+        .subscribe(
+          (res) => {
+            if (res) {
+              console.log(res);
+              this.showNotification(
+                'snackbar-info',
+                res.message + '...!!!',
+                'bottom',
+                'center'
+              );
+              this.router.navigate(['/authentication/signin']);
+            } else {
+              this.error = 'Invalid registration';
+              this.showNotification(
+                'snackbar-danger',
+                this.error + '...!!!',
+                'bottom',
+                'center'
+              );
+
+            }
+          },
+          (errors) => {
             this.showNotification(
               'snackbar-info',
-              res.message + '...!!!',
+              errors + '...!!!',
               'bottom',
               'center'
             );
-            this.router.navigate(['/authentication/signin']);
-          } else {
-            this.error = 'Invalid registration';
-            this.showNotification(
-              'snackbar-danger',
-              this.error + '...!!!',
-              'bottom',
-              'center'
-            );
-
+            this.submitted = false;
           }
-        },
-        (errors) => {
-          this.showNotification(
-            'snackbar-info',
-            errors + '...!!!',
-            'bottom',
-            'center'
-          );
-          this.submitted = false;
-        }
-      );
+        );
     }
 
 

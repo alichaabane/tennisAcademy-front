@@ -26,11 +26,13 @@
     .panel-title {
       margin-bottom: 0;
       font-size: 16px;
+
       .material-icons {
         float: left;
         line-height: 16px;
         margin-right: 8px;
       }
+
       > a,
       > small,
       > .small,
@@ -68,6 +70,7 @@
 
     .panel-title {
       background-color: #f5f5f5;
+
       a {
         color: #757575;
         font-weight: 400;

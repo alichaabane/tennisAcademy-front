@@ -1,4 +1,5 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import {Component, OnInit, OnDestroy} from '@angular/core';
+
 @Component({
   selector: 'app-gauge',
   templateUrl: './gauge.component.html',
@@ -18,7 +19,7 @@ export class GaugeComponent implements OnInit, OnDestroy {
   // ngx-guage end
 
   constructor() {
-    this.percentageValue = function (value: number): string {
+    this.percentageValue = function(value: number): string {
       return `${Math.round(value)} / ${this['max']}`;
     };
   }
@@ -51,6 +52,7 @@ export class GaugeComponent implements OnInit, OnDestroy {
     this.interval = setInterval(updateValues, INTERVAL);
     updateValues();
   }
+
   ngOnDestroy(): void {
     clearInterval(this.interval);
   }

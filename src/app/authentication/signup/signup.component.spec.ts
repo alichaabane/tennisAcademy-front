@@ -1,5 +1,6 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { SignupComponent } from './signup.component';
+import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
+import {SignupComponent} from './signup.component';
+
 describe('SignupComponent', () => {
   let component: SignupComponent;
   let fixture: ComponentFixture<SignupComponent>;

@@ -47,7 +47,7 @@
                     <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
                     <mat-datepicker #picker1></mat-datepicker>
                     <mat-error *ngIf="seanceForm.get('dateHeureFin')?.hasError('required')">
-                       SVP Selectionnez la date de fin
+                      SVP Selectionnez la date de fin
                     </mat-error>
                   </mat-form-field>
                 </div>
@@ -97,8 +97,9 @@
 
               <div class="row">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
-                  <button class="msr-3" [disabled]="seanceForm.invalid "   mat-raised-button color="primary">Submit</button>
-                  <button type="button" mat-button>Cancel</button>
+                  <button class="msr-3" [disabled]="seanceForm.invalid " mat-raised-button color="primary">Submit
+                  </button>
+                  <button type="button" [routerLink]="'/seance/all-seances'" mat-button>Cancel</button>
                 </div>
               </div>
             </form>

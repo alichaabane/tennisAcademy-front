@@ -1,5 +1,6 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { NgxchartComponent } from './ngxchart.component';
+import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
+import {NgxchartComponent} from './ngxchart.component';
+
 describe('NgxchartComponent', () => {
   let component: NgxchartComponent;
   let fixture: ComponentFixture<NgxchartComponent>;

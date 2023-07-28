@@ -1,5 +1,5 @@
-import { Router, NavigationEnd } from '@angular/router';
-import { DOCUMENT } from '@angular/common';
+import {Router, NavigationEnd} from '@angular/router';
+import {DOCUMENT} from '@angular/common';
 import {
   Component,
   Inject,
@@ -9,8 +9,9 @@ import {
   HostListener,
   OnDestroy,
 } from '@angular/core';
-import { ROUTES } from './sidebar-items';
-import { AuthService } from 'src/app/core/service/auth.service';
+import {ROUTES} from './sidebar-items';
+import {AuthService} from 'src/app/core/service/auth.service';
+
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
@@ -39,6 +40,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
   public photoProfile: any;
   public addressProfile: string;
   public authentifiee = false;
+
   constructor(
     @Inject(DOCUMENT) private document: Document,
     private renderer: Renderer2,
@@ -59,17 +61,20 @@ export class SidebarComponent implements OnInit, OnDestroy {
       }
     });
   }
+
   @HostListener('window:resize', ['$event'])
   windowResizecall(event) {
     this.setMenuHeight();
     this.checkStatuForResize(false);
   }
+
   @HostListener('document:mousedown', ['$event'])
   onGlobalClick(event): void {
     if (!this.elementRef.nativeElement.contains(event.target)) {
       this.renderer.removeClass(this.document.body, 'overlay-open');
     }
   }
+
   callLevel1Toggle(event: any, element: any) {
     if (element === this.level1Menu) {
       this.level1Menu = '0';
@@ -83,6 +88,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
       this.renderer.addClass(event.target, 'toggled');
     }
   }
+
   callLevel2Toggle(event: any, element: any) {
     if (element === this.level2Menu) {
       this.level2Menu = '0';
@@ -90,6 +96,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
       this.level2Menu = element;
     }
   }
+
   callLevel3Toggle(event: any, element: any) {
     if (element === this.level3Menu) {
       this.level3Menu = '0';
@@ -97,12 +104,13 @@ export class SidebarComponent implements OnInit, OnDestroy {
       this.level3Menu = element;
     }
   }
+
   ngOnInit() {
     if (this.authService.currentUserValue) {
       this.authentifiee = true;
       this.authService.getUtilisateur(this.authService.currentUserValue.id).subscribe(
         data => {
-          if (data){
+          if (data) {
             this.prenomProfile = data.prenom;
             this.nomProfile = data.nom;
             this.roleProfile = data.roles[0];
@@ -111,7 +119,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
             this.photoProfile = data.mediaURL;
             this.addressProfile = data.addresse;
             console.log(this.roleProfile);
-          //  this.roleProfile = data.roles;
+            //  this.roleProfile = data.roles;
 
           }
         }
@@ -122,7 +130,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
     this.bodyTag = this.document.body;
   }
 
-  logout(){
+  logout() {
     console.log("hello");
     this.authService.logout();
   }
@@ -130,21 +138,25 @@ export class SidebarComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.routerObj.unsubscribe();
   }
+
   initLeftSidebar() {
     const _this = this;
     // Set menu height
     _this.setMenuHeight();
     _this.checkStatuForResize(true);
   }
+
   setMenuHeight() {
     this.innerHeight = window.innerHeight;
     const height = this.innerHeight - this.headerHeight;
     this.listMaxHeight = height + '';
     this.listMaxWidth = '500px';
   }
+
   isOpen() {
     return this.bodyTag.classList.contains('overlay-open');
   }
+
   checkStatuForResize(firstTime) {
     if (window.innerWidth < 1170) {
       this.renderer.addClass(this.document.body, 'ls-closed');
@@ -152,6 +164,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
       this.renderer.removeClass(this.document.body, 'ls-closed');
     }
   }
+
   mouseHover(e) {
     const body = this.elementRef.nativeElement.closest('body');
     if (body.classList.contains('submenu-closed')) {
@@ -159,6 +172,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
       this.renderer.removeClass(this.document.body, 'submenu-closed');
     }
   }
+
   mouseOut(e) {
     const body = this.elementRef.nativeElement.closest('body');
     if (body.classList.contains('side-closed-hover')) {

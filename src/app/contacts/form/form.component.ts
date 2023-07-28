@@ -1,14 +1,14 @@
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { Component, Inject } from '@angular/core';
-import { ContactsService } from '../contacts.service';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import {Component, Inject} from '@angular/core';
+import {ContactsService} from '../contacts.service';
 import {
   FormControl,
   Validators,
   FormGroup,
   FormBuilder,
 } from '@angular/forms';
-import { Contacts } from '../contacts.model';
-import { formatDate } from '@angular/common';
+import {Contacts} from '../contacts.model';
+import {formatDate} from '@angular/common';
 
 @Component({
   selector: 'app-form',
@@ -21,6 +21,7 @@ export class FormComponent {
   isDetails = false;
   contactsForm: FormGroup;
   contacts: Contacts;
+
   constructor(
     public dialogRef: MatDialogRef<FormComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -44,17 +45,20 @@ export class FormComponent {
       this.contactsForm = this.createContactForm();
     }
   }
+
   formControl = new FormControl('', [
     Validators.required,
     // Validators.email,
   ]);
+
   getErrorMessage() {
     return this.formControl.hasError('required')
       ? 'Required field'
       : this.formControl.hasError('email')
-      ? 'Not a valid email'
-      : '';
+        ? 'Not a valid email'
+        : '';
   }
+
   createContactForm(): FormGroup {
     return this.fb.group({
       id: [this.contacts.id],
@@ -73,12 +77,15 @@ export class FormComponent {
       note: [this.contacts.note],
     });
   }
+
   submit() {
     // emppty stuff
   }
+
   onNoClick(): void {
     this.dialogRef.close();
   }
+
   public confirmAdd(): void {
     this.contactsService.addContacts(this.contactsForm.getRawValue());
   }

@@ -1,5 +1,6 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { ChartjsComponent } from './chartjs.component';
+import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
+import {ChartjsComponent} from './chartjs.component';
+
 describe('ChartjsComponent', () => {
   let component: ChartjsComponent;
   let fixture: ComponentFixture<ChartjsComponent>;

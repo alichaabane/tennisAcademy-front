@@ -1,5 +1,6 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { LockedComponent } from './locked.component';
+import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
+import {LockedComponent} from './locked.component';
+
 describe('LockedComponent', () => {
   let component: LockedComponent;
   let fixture: ComponentFixture<LockedComponent>;

@@ -27,12 +27,14 @@
       background-color: transparent;
     }
   }
+
   .previous {
     > a,
     > span {
       float: left;
     }
   }
+
   .next {
     > a,
     > span {
@@ -55,6 +57,7 @@
 
   li.active {
     background-color: transparent !important;
+
     a {
       background-color: #ffc107;
       border-color: #ffc107;
@@ -91,6 +94,7 @@
       line-height: 1.25;
     }
   }
+
   > li {
     > a:hover {
       font-weight: bold;
@@ -131,6 +135,7 @@
       }
     }
   }
+
   > li > a,
   > li > span {
     padding: 5px 10px;
@@ -153,12 +158,14 @@
       }
     }
   }
+
   > li > a,
   > li > span {
     padding: 10px 16px;
     font-size: 18px;
   }
 }
+
 .page-link:focus,
 .page-link:hover {
   color: #65686b;

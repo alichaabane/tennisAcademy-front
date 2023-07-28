@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
-import { Event, Router, NavigationStart, NavigationEnd } from '@angular/router';
-import { NgxSpinnerService } from 'ngx-spinner';
+import {Component} from '@angular/core';
+import {Event, Router, NavigationStart, NavigationEnd} from '@angular/router';
+import {NgxSpinnerService} from 'ngx-spinner';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -8,6 +9,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 })
 export class AppComponent {
   currentUrl: string;
+
   constructor(public _router: Router, private spinner: NgxSpinnerService) {
     this._router.events.subscribe((routerEvent: Event) => {
       if (routerEvent instanceof NavigationStart) {

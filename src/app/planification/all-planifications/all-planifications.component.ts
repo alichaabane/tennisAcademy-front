@@ -1,23 +1,23 @@
-import { DataSource, SelectionModel } from '@angular/cdk/collections';
-import { HttpClient } from '@angular/common/http';
-import { Planification } from './planification.model';
-import { Component, ElementRef, ViewChild } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { MatMenuTrigger } from '@angular/material/menu';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { MatSort } from '@angular/material/sort';
-import { BehaviorSubject, merge, fromEvent, map, Observable } from 'rxjs';
-import { PlanificationService } from './planification.service';
-import { FormDialogComponent } from './dialog/form-dialog/form-dialog.component';
-import { DeleteFormComponent } from './dialog/delete-form/delete-form.component';
+import {DataSource, SelectionModel} from '@angular/cdk/collections';
+import {HttpClient} from '@angular/common/http';
+import {Planification} from './planification.model';
+import {Component, ElementRef, ViewChild} from '@angular/core';
+import {MatDialog} from '@angular/material/dialog';
+import {MatMenuTrigger} from '@angular/material/menu';
+import {MatPaginator} from '@angular/material/paginator';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {MatSort} from '@angular/material/sort';
+import {BehaviorSubject, merge, fromEvent, map, Observable} from 'rxjs';
+import {PlanificationService} from './planification.service';
+import {FormDialogComponent} from './dialog/form-dialog/form-dialog.component';
+import {DeleteFormComponent} from './dialog/delete-form/delete-form.component';
 
 @Component({
   selector: 'app-all-planifications',
   templateUrl: './all-planifications.component.html',
   styleUrls: ['./all-planifications.component.sass']
 })
-export class AllPlanificationsComponent{
+export class AllPlanificationsComponent {
 
   displayedColumns = [
     'select',
@@ -32,22 +32,26 @@ export class AllPlanificationsComponent{
   selection = new SelectionModel<Planification>(true, []);
   id: number;
   planification: Planification | null;
+
   constructor(
     public httpClient: HttpClient,
     public dialog: MatDialog,
     public planificationService: PlanificationService,
     private snackBar: MatSnackBar
-  ) {}
-  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
-  @ViewChild(MatSort, { static: true }) sort: MatSort;
-  @ViewChild('filter', { static: true }) filter: ElementRef;
+  ) {
+  }
+
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
+  @ViewChild('filter', {static: true}) filter: ElementRef;
   @ViewChild(MatMenuTrigger)
   contextMenu: MatMenuTrigger;
-  contextMenuPosition = { x: '0px', y: '0px' };
+  contextMenuPosition = {x: '0px', y: '0px'};
 
   ngOnInit() {
     this.loadData();
   }
+
   refresh() {
     this.loadData();
   }
@@ -71,21 +75,20 @@ export class AllPlanificationsComponent{
         // After dialog is closed we're doing frontend updates
         // For add we're just pushing a new row inside DataService
         this.planificationService.addPlanification(result).subscribe(
-                    res=>{
-                      console.log(res);
-                      if(res){
-                        this.refresh();
-                        this.showNotification(
-                          'snackbar-success',
-                          'planification ajoutée avec succes...!!!',
-                          'bottom',
-                          'center'
-                        );
-                      }
-                    }
-                  );
-      }
-      else{
+          res => {
+            console.log(res);
+            if (res) {
+              this.refresh();
+              this.showNotification(
+                'snackbar-success',
+                'planification ajoutée avec succes...!!!',
+                'bottom',
+                'center'
+              );
+            }
+          }
+        );
+      } else {
         console.log("pas de action");
       }
       this.exampleDatabase.dataChange.value.unshift(
@@ -118,9 +121,9 @@ export class AllPlanificationsComponent{
 
         // Then you update that record using data from dialogData (values you enetered)
         this.planificationService.updatePlanification(result).subscribe(
-          res=> {
+          res => {
             console.log(res);
-            if (res){
+            if (res) {
               this.refresh();
               this.showNotification(
                 'black',
@@ -131,9 +134,9 @@ export class AllPlanificationsComponent{
             }
           }
         );
-          this.planificationService.getDialogData();
+        this.planificationService.getDialogData();
         // And lastly refresh table
-      }else {
+      } else {
         console.log("pas de mise à jour");
       }
     });
@@ -161,27 +164,27 @@ export class AllPlanificationsComponent{
         this.exampleDatabase.dataChange.value.splice(foundIndex, 1);
         this.planificationService.deletePlanification(row.idPlanification).subscribe(
           res => {
-              if (res) {
-                this.refresh();
-                this.showNotification(
-                  'snackbar-warning',
-                  'planification effacée avec succes...!!!',
-                  'bottom',
-                  'center'
-                );
-              } else {
-                this.showNotification(
-                  'snackbar-danger',
-                  'planification effacée avec succes...!!!',
-                  'bottom',
-                  'center'
-                );
-              }
+            if (res) {
+              this.refresh();
+              this.showNotification(
+                'snackbar-warning',
+                'planification effacée avec succes...!!!',
+                'bottom',
+                'center'
+              );
+            } else {
+              this.showNotification(
+                'snackbar-danger',
+                'planification effacée avec succes...!!!',
+                'bottom',
+                'center'
+              );
+            }
           },
           error => {
 
           }
-      );
+        );
       }
     });
   }
@@ -202,8 +205,8 @@ export class AllPlanificationsComponent{
     this.isAllSelected()
       ? this.selection.clear()
       : this.dataSource.renderedData.forEach((row) =>
-          this.selection.select(row)
-        );
+        this.selection.select(row)
+      );
   }
 
   removeSelectedRows() {
@@ -216,21 +219,22 @@ export class AllPlanificationsComponent{
       console.log(item);
       this.planificationService.deletePlanification(item.idPlanification).subscribe(
         res => {
-            if (res) {
+          if (res) {
 
-            } else {
-              this.showNotification(
-                'snackbar-danger',
-                'Planification :'+item.idPlanification+' non effacée...!!!',
-                'bottom',
-                'center'
-              );
-            }
+          } else {
+            this.showNotification(
+              'snackbar-danger',
+              'Planification :' + item.idPlanification + ' non effacée...!!!',
+              'bottom',
+              'center'
+            );
+          }
         },
         error => {
 
         }
-    );    this.exampleDatabase.dataChange.value.splice(index, 1);
+      );
+      this.exampleDatabase.dataChange.value.splice(index, 1);
       this.refreshTable();
       this.selection = new SelectionModel<Planification>(true, []);
     });
@@ -260,6 +264,7 @@ export class AllPlanificationsComponent{
         this.dataSource.filter = this.filter.nativeElement.value;
       });
   }
+
   showNotification(colorName, text, placementFrom, placementAlign) {
     this.snackBar.open(text, '', {
       duration: 2000,
@@ -268,26 +273,32 @@ export class AllPlanificationsComponent{
       panelClass: colorName,
     });
   }
+
   // context menu
   onContextMenu(event: MouseEvent, item: Planification) {
     event.preventDefault();
     this.contextMenuPosition.x = event.clientX + 'px';
     this.contextMenuPosition.y = event.clientY + 'px';
-    this.contextMenu.menuData = { item: item };
+    this.contextMenu.menuData = {item: item};
     this.contextMenu.menu.focusFirstItem('mouse');
     this.contextMenu.openMenu();
   }
-  }
-  export class ExampleDataSource extends DataSource<Planification> {
+}
+
+export class ExampleDataSource extends DataSource<Planification> {
   _filterChange = new BehaviorSubject('');
+
   get filter(): string {
     return this._filterChange.value;
   }
+
   set filter(filter: string) {
     this._filterChange.next(filter);
   }
+
   filteredData: Planification[] = [];
   renderedData: Planification[] = [];
+
   constructor(
     public _exampleDatabase: PlanificationService,
     public _paginator: MatPaginator,
@@ -297,6 +308,7 @@ export class AllPlanificationsComponent{
     // Reset to the first page when the user changes the filter.
     this._filterChange.subscribe(() => (this._paginator.pageIndex = 0));
   }
+
   /** Connect function called by the table to retrieve one stream containing the data to render. */
   connect(): Observable<Planification[]> {
     // Listen for any changes in the base data, sorting, filtering, or pagination
@@ -332,7 +344,10 @@ export class AllPlanificationsComponent{
       })
     );
   }
-  disconnect() {}
+
+  disconnect() {
+  }
+
   /** Returns a sorted copy of the database data. */
   sortData(data: Planification[]): Planification[] {
     if (!this._sort.active || this._sort.direction === '') {
@@ -359,4 +374,4 @@ export class AllPlanificationsComponent{
       );
     });
   }
-  }
+}

@@ -1,23 +1,23 @@
-import { DataSource, SelectionModel } from '@angular/cdk/collections';
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { CoursService } from './cours.service';
-import { Cours } from './cours.model';
-import { HttpClient } from '@angular/common/http';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
-import { MatMenuTrigger } from '@angular/material/menu';
-import { MatDialog } from '@angular/material/dialog';
-import { FormDialogComponent } from './dialogs/form-dialog/form-dialog.component';
-import { DeleteComponent } from './dialogs/delete/delete.component';
-import { BehaviorSubject, fromEvent,merge, map, Observable } from 'rxjs';
+import {DataSource, SelectionModel} from '@angular/cdk/collections';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {CoursService} from './cours.service';
+import {Cours} from './cours.model';
+import {HttpClient} from '@angular/common/http';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {MatPaginator} from '@angular/material/paginator';
+import {MatSort} from '@angular/material/sort';
+import {MatMenuTrigger} from '@angular/material/menu';
+import {MatDialog} from '@angular/material/dialog';
+import {FormDialogComponent} from './dialogs/form-dialog/form-dialog.component';
+import {DeleteComponent} from './dialogs/delete/delete.component';
+import {BehaviorSubject, fromEvent, merge, map, Observable} from 'rxjs';
 
 @Component({
   selector: 'app-all-cours',
   templateUrl: './all-cours.component.html',
   styleUrls: ['./all-cours.component.sass']
 })
-export class AllCoursComponent{
+export class AllCoursComponent {
   displayedColumns = [
     'select',
     'idCours',
@@ -32,22 +32,26 @@ export class AllCoursComponent{
   selection = new SelectionModel<Cours>(true, []);
   id: number;
   cours: Cours | null;
+
   constructor(
     public httpClient: HttpClient,
     public dialog: MatDialog,
     public coursService: CoursService,
     private snackBar: MatSnackBar
-  ) {}
-  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
-  @ViewChild(MatSort, { static: true }) sort: MatSort;
-  @ViewChild('filter', { static: true }) filter: ElementRef;
+  ) {
+  }
+
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
+  @ViewChild('filter', {static: true}) filter: ElementRef;
   @ViewChild(MatMenuTrigger)
   contextMenu: MatMenuTrigger;
-  contextMenuPosition = { x: '0px', y: '0px' };
+  contextMenuPosition = {x: '0px', y: '0px'};
 
   ngOnInit() {
     this.loadData();
   }
+
   refresh() {
     this.loadData();
   }
@@ -71,21 +75,20 @@ export class AllCoursComponent{
         // After dialog is closed we're doing frontend updates
         // For add we're just pushing a new row inside DataService
         this.coursService.addCours(result).subscribe(
-                    res=>{
-                      console.log(res);
-                      if(res){
-                        this.refresh();
-                        this.showNotification(
-                          'snackbar-success',
-                          'Cours ajouter avec succes...!!!',
-                          'bottom',
-                          'center'
-                        );
-                      }
-                    }
-                  );
-      }
-      else{
+          res => {
+            console.log(res);
+            if (res) {
+              this.refresh();
+              this.showNotification(
+                'snackbar-success',
+                'Cours ajouter avec succes...!!!',
+                'bottom',
+                'center'
+              );
+            }
+          }
+        );
+      } else {
         console.log("pas de action");
       }
       this.exampleDatabase.dataChange.value.unshift(
@@ -118,9 +121,9 @@ export class AllCoursComponent{
 
         // Then you update that record using data from dialogData (values you enetered)
         this.coursService.updateCours(result).subscribe(
-          res=>{
+          res => {
             console.log(res);
-            if(res){
+            if (res) {
               this.refresh();
               this.showNotification(
                 'black',
@@ -131,9 +134,9 @@ export class AllCoursComponent{
             }
           }
         );
-          this.coursService.getDialogData();
+        this.coursService.getDialogData();
         // And lastly refresh table
-      }else {
+      } else {
         console.log("pas de mise à jour");
       }
     });
@@ -161,27 +164,27 @@ export class AllCoursComponent{
         this.exampleDatabase.dataChange.value.splice(foundIndex, 1);
         this.coursService.deleteCours(row.idCours).subscribe(
           res => {
-              if (res) {
-                this.refresh();
-                this.showNotification(
-                  'snackbar-success',
-                  'Cours effacé avec succés...!!!',
-                  'bottom',
-                  'center'
-                );
-              } else {
-                this.showNotification(
-                  'snackbar-danger',
-                  'Cours effacé avec succés...!!!',
-                  'bottom',
-                  'center'
-                );
-              }
+            if (res) {
+              this.refresh();
+              this.showNotification(
+                'snackbar-success',
+                'Cours effacé avec succés...!!!',
+                'bottom',
+                'center'
+              );
+            } else {
+              this.showNotification(
+                'snackbar-danger',
+                'Cours effacé avec succés...!!!',
+                'bottom',
+                'center'
+              );
+            }
           },
           error => {
 
           }
-      );
+        );
       }
     });
   }
@@ -202,8 +205,8 @@ export class AllCoursComponent{
     this.isAllSelected()
       ? this.selection.clear()
       : this.dataSource.renderedData.forEach((row) =>
-          this.selection.select(row)
-        );
+        this.selection.select(row)
+      );
   }
 
   removeSelectedRows() {
@@ -216,21 +219,22 @@ export class AllCoursComponent{
       console.log(item);
       this.coursService.deleteCours(item.idCours).subscribe(
         res => {
-            if (res) {
+          if (res) {
 
-            } else {
-              this.showNotification(
-                'snackbar-danger',
-                'Cours :'+item.idCours+' non effacer...!!!',
-                'bottom',
-                'center'
-              );
-            }
+          } else {
+            this.showNotification(
+              'snackbar-danger',
+              'Cours :' + item.idCours + ' non effacer...!!!',
+              'bottom',
+              'center'
+            );
+          }
         },
         error => {
 
         }
-    );    this.exampleDatabase.dataChange.value.splice(index, 1);
+      );
+      this.exampleDatabase.dataChange.value.splice(index, 1);
       this.refreshTable();
       this.selection = new SelectionModel<Cours>(true, []);
     });
@@ -242,39 +246,39 @@ export class AllCoursComponent{
     );
   }
 
-    //  public async changeDispo(terrain){
-    //     if(terrain.enable==true)
-    //       terrain.enable=false;
-    //     else if(terrain.enable==false)
-    //       terrain.enable=true;
-    //       this.coursService.changeCoursDispoById(terrain.idTerrain,terrain.enable).subscribe(
-    //         res => {
-    //             if (res) {
+  //  public async changeDispo(terrain){
+  //     if(terrain.enable==true)
+  //       terrain.enable=false;
+  //     else if(terrain.enable==false)
+  //       terrain.enable=true;
+  //       this.coursService.changeCoursDispoById(terrain.idTerrain,terrain.enable).subscribe(
+  //         res => {
+  //             if (res) {
 
-    //                 // this.messageService.add({
-    //                 //     severity: 'SUCCESS',
-    //                 //     summary: 'Success',
-    //                 //     detail: 'Your Sponsor visibility status changed successfully.'
-    //                 // });
-    //             } else {
-    //                 // this.sponsors[index].enable = !this.sponsors[index].enable;
-    //                 // this.messageService.add({
-    //                 //     severity: 'FAILED',
-    //                 //     summary: 'Error',
-    //                 //     detail: 'Your Sponsor status cannot be changed, please try again'
-    //                 // });
-    //             }
-    //         },
-    //         error => {
-    //             // this.sponsors[index].enable = !this.sponsors[index].enable;
-    //             // this.messageService.add({
-    //             //     severity: 'FAILED',
-    //             //     summary: 'Error',
-    //             //     detail: error.error
-    //             // });
-    //         }
-    //     );
-    //   }
+  //                 // this.messageService.add({
+  //                 //     severity: 'SUCCESS',
+  //                 //     summary: 'Success',
+  //                 //     detail: 'Your Sponsor visibility status changed successfully.'
+  //                 // });
+  //             } else {
+  //                 // this.sponsors[index].enable = !this.sponsors[index].enable;
+  //                 // this.messageService.add({
+  //                 //     severity: 'FAILED',
+  //                 //     summary: 'Error',
+  //                 //     detail: 'Your Sponsor status cannot be changed, please try again'
+  //                 // });
+  //             }
+  //         },
+  //         error => {
+  //             // this.sponsors[index].enable = !this.sponsors[index].enable;
+  //             // this.messageService.add({
+  //             //     severity: 'FAILED',
+  //             //     summary: 'Error',
+  //             //     detail: error.error
+  //             // });
+  //         }
+  //     );
+  //   }
 
   public loadData() {
     this.exampleDatabase = new CoursService(this.httpClient);
@@ -293,6 +297,7 @@ export class AllCoursComponent{
         this.dataSource.filter = this.filter.nativeElement.value;
       });
   }
+
   showNotification(colorName, text, placementFrom, placementAlign) {
     this.snackBar.open(text, '', {
       duration: 2000,
@@ -301,26 +306,32 @@ export class AllCoursComponent{
       panelClass: colorName,
     });
   }
+
   // context menu
   onContextMenu(event: MouseEvent, item: Cours) {
     event.preventDefault();
     this.contextMenuPosition.x = event.clientX + 'px';
     this.contextMenuPosition.y = event.clientY + 'px';
-    this.contextMenu.menuData = { item: item };
+    this.contextMenu.menuData = {item: item};
     this.contextMenu.menu.focusFirstItem('mouse');
     this.contextMenu.openMenu();
   }
-  }
-  export class ExampleDataSource extends DataSource<Cours> {
+}
+
+export class ExampleDataSource extends DataSource<Cours> {
   _filterChange = new BehaviorSubject('');
+
   get filter(): string {
     return this._filterChange.value;
   }
+
   set filter(filter: string) {
     this._filterChange.next(filter);
   }
+
   filteredData: Cours[] = [];
   renderedData: Cours[] = [];
+
   constructor(
     public _exampleDatabase: CoursService,
     public _paginator: MatPaginator,
@@ -330,6 +341,7 @@ export class AllCoursComponent{
     // Reset to the first page when the user changes the filter.
     this._filterChange.subscribe(() => (this._paginator.pageIndex = 0));
   }
+
   /** Connect function called by the table to retrieve one stream containing the data to render. */
   connect(): Observable<Cours[]> {
     // Listen for any changes in the base data, sorting, filtering, or pagination
@@ -350,7 +362,7 @@ export class AllCoursComponent{
               cours.idCours +
               cours.label +
               cours.description +
-              cours.duree+
+              cours.duree +
               cours.nbrPlaces
             ).toLowerCase();
             return searchStr.indexOf(this.filter.toLowerCase()) !== -1;
@@ -367,7 +379,10 @@ export class AllCoursComponent{
       })
     );
   }
-  disconnect() {}
+
+  disconnect() {
+  }
+
   /** Returns a sorted copy of the database data. */
   sortData(data: Cours[]): Cours[] {
     if (!this._sort.active || this._sort.direction === '') {
@@ -391,7 +406,7 @@ export class AllCoursComponent{
           break;
         case 'nbrPlaces':
           [propertyA, propertyB] = [a.nbrPlaces, b.nbrPlaces];
-           break;
+          break;
       }
       const valueA = isNaN(+propertyA) ? propertyA : +propertyA;
       const valueB = isNaN(+propertyB) ? propertyB : +propertyB;
@@ -400,4 +415,4 @@ export class AllCoursComponent{
       );
     });
   }
-  }
+}

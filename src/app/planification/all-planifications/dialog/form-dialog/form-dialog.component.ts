@@ -1,18 +1,19 @@
-import { formatDate } from '@angular/common';
-import { HttpErrorResponse } from '@angular/common/http';
-import { Component, Inject } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { Cours } from 'src/app/cours/all-cours/cours.model';
-import { Planification } from '../../planification.model';
-import { PlanificationService } from '../../planification.service';
+import {formatDate} from '@angular/common';
+import {HttpErrorResponse} from '@angular/common/http';
+import {Component, Inject} from '@angular/core';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {Cours} from 'src/app/cours/all-cours/cours.model';
+import {Planification} from '../../planification.model';
+import {PlanificationService} from '../../planification.service';
+
 @Component({
   selector: 'app-form-dialog',
   templateUrl: './form-dialog.component.html',
   styleUrls: ['./form-dialog.component.sass']
 })
-export class FormDialogComponent{
+export class FormDialogComponent {
   public coursList: Cours[];
   minDate: Date;
   maxDate: Date;
@@ -20,11 +21,12 @@ export class FormDialogComponent{
   dialogTitle: string;
   seanceForm: FormGroup;
   planification: Planification;
-  constructor(  private snackBar: MatSnackBar,
-    public dialogRef: MatDialogRef<FormDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any,
-    public planificationService: PlanificationService,
-    private fb: FormBuilder
+
+  constructor(private snackBar: MatSnackBar,
+              public dialogRef: MatDialogRef<FormDialogComponent>,
+              @Inject(MAT_DIALOG_DATA) public data: any,
+              public planificationService: PlanificationService,
+              private fb: FormBuilder
   ) {
     // const currentYear = new Date().getFullYear();
     // this.minDate = new Date(currentYear - 20, 0, 1);
@@ -45,10 +47,10 @@ export class FormDialogComponent{
 
   }
 
-  getAllCours(){
+  getAllCours() {
     this.planificationService.getAllCours().subscribe(
       (data) => {
-        this.coursList=data;
+        this.coursList = data;
       },
       (error: HttpErrorResponse) => {
         console.log(error.name + ' ' + error.message);
@@ -66,19 +68,20 @@ export class FormDialogComponent{
     Validators.required,
     // Validators.email,
   ]);
+
   getErrorMessage() {
     return this.formControl.hasError('required')
       ? 'Required field'
       : this.formControl.hasError('email')
-      ? 'Not a valid email'
-      : '';
+        ? 'Not a valid email'
+        : '';
   }
 
   createContactForm(): FormGroup {
     return this.fb.group({
       dateDebut: [this.planification.dateDebut, [Validators.required]],
-      dateFin: [this.planification.dateFin,[Validators.required]],
-      cours: [this.planification.cours.idCours,[Validators.required]],
+      dateFin: [this.planification.dateFin, [Validators.required]],
+      cours: [this.planification.cours.idCours, [Validators.required]],
     });
   }
 
@@ -86,22 +89,24 @@ export class FormDialogComponent{
   submit() {
     // emppty stuff
   }
+
   onNoClick(): void {
     this.dialogRef.close();
-}
+  }
 
 
   public confirmAdd(): void {
     console.log(this.seanceForm.getRawValue());
-    if (this.seanceForm.valid){
-      this.planification.dateDebut=this.seanceForm.value.dateDebut;
-      this.planification.dateDebut=formatDate(this.planification.dateDebut,'yyyy-MM-dd',"en-US");
-      this.planification.dateFin=this.seanceForm.value.dateFin;
-      this.planification.dateFin=formatDate(this.planification.dateFin,'yyyy-MM-dd',"en-US");
-    this.planification.cours=this.seanceForm.value.cours;
+    if (this.seanceForm.valid) {
+      this.planification.dateDebut = this.seanceForm.value.dateDebut;
+      this.planification.dateDebut = formatDate(this.planification.dateDebut, 'yyyy-MM-dd', "en-US");
+      this.planification.dateFin = this.seanceForm.value.dateFin;
+      this.planification.dateFin = formatDate(this.planification.dateFin, 'yyyy-MM-dd', "en-US");
+      this.planification.cours = this.seanceForm.value.cours;
     }
 
   }
+
   openedChange(opened: boolean) {
     console.log(opened ? 'opened' : 'closed');
   }

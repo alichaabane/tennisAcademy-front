@@ -1,4 +1,5 @@
-import { RouteInfo } from './sidebar.metadata';
+import {RouteInfo} from './sidebar.metadata';
+
 export const ROUTES: RouteInfo[] = [
   {
     path: '',
@@ -24,7 +25,7 @@ export const ROUTES: RouteInfo[] = [
     badgeClass: '',
     submenu: [],
   },
-   {
+  {
     path: '',
     title: 'Utilisateurs',
     moduleName: 'utilisateurs',

@@ -99,6 +99,7 @@
           .menu-top {
             background-color: #f0f3fb;
           }
+
           > :first-child {
             span {
               font-weight: bold;
@@ -149,6 +150,7 @@
         .ml-menu {
           display: block;
         }
+
         .ml-sub-menu {
           display: block;
         }
@@ -178,8 +180,7 @@
 
       .material-icons-two-tone {
         vertical-align: middle;
-        filter: invert(43%) sepia(4%) saturate(19%) hue-rotate(342deg)
-          brightness(94%) contrast(88%);
+        filter: invert(43%) sepia(4%) saturate(19%) hue-rotate(342deg) brightness(94%) contrast(88%);
       }
 
       .active .menu-toggle {
@@ -313,6 +314,7 @@
                 top: calc(50% - 15px);
               }
             }
+
             .ml-menu-2 {
               display: block;
             }
@@ -613,8 +615,7 @@
     }
 
     .material-icons-two-tone {
-      filter: invert(99%) sepia(95%) saturate(4461%) hue-rotate(181deg)
-        brightness(134%) contrast(83%);
+      filter: invert(99%) sepia(95%) saturate(4461%) hue-rotate(181deg) brightness(134%) contrast(83%);
     }
 
     .ml-menu {
@@ -622,6 +623,7 @@
         color: #dadada;
       }
     }
+
     li {
       &.active {
         .menu-top {

@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import { Observable } from 'rxjs';
+import {Observable} from 'rxjs';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {HttpErrorResponse} from "@angular/common/http";
 import {PlanificationService} from "../../planification/all-planifications/planification.service";
@@ -60,12 +60,6 @@ export class AddSeanceComponent implements OnInit {
       },
       (error: HttpErrorResponse) => {
         console.log(error.name + ' ' + error.message);
-        // this.showNotification(
-        //   'snackbar-danger',
-        //   error.message,
-        //   'bottom',
-        //   'center'
-        // );
       }
     );
   }
@@ -78,18 +72,12 @@ export class AddSeanceComponent implements OnInit {
       },
       (error: HttpErrorResponse) => {
         console.log(error.name + ' ' + error.message);
-        // this.showNotification(
-        //   'snackbar-danger',
-        //   error.message,
-        //   'bottom',
-        //   'center'
-        // );
       }
     );
   }
 
-   getAllUsers() {
-     this.userService.getAllUtilisateurs().subscribe(
+  getAllUsers() {
+    this.userService.getAllUtilisateurs().subscribe(
       (data) => {
         this.utilisateurList = data;
         console.log('utilisateurList = ', this.utilisateurList);
@@ -122,18 +110,33 @@ export class AddSeanceComponent implements OnInit {
 // tslint:disable-next-line:align
   private addSeance() {
 
-    this.seanceService.addSeance(this.seance);
+    this.seanceService.addSeance(this.seance).subscribe(res => {
+      console.log('res = ', res);
+      if (res) {
+        this.showNotification(
+          'snackbar-info',
+          'Seance planifié avec succés',
+          'bottom',
+          'center'
+        );
+      }
+    }, error => {
+      this.showNotification(
+        'snackbar-danger',
+        'Erreur dans la création de séance !',
+        'bottom',
+        'center'
+      );
+    });
   }
 
-// showNotification(colorName, text, placementFrom, placementAlign);
-// {
-//   this.snackBar.open(text, '', {
-//     duration: 2000,
-//     verticalPosition: placementFrom,
-//     horizontalPosition: placementAlign,
-//     panelClass: colorName,
-//   });
-// }
-
+  showNotification(colorName, text, placementFrom, placementAlign) {
+    this.snackBar.open(text, '', {
+      duration: 2000,
+      verticalPosition: placementFrom,
+      horizontalPosition: placementAlign,
+      panelClass: colorName,
+    });
+  }
 
 }

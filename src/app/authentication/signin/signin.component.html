@@ -9,7 +9,7 @@
           <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
             <mat-form-field class="example-full-width" appearance="outline">
               <mat-label>Nom d'utilisateur</mat-label>
-              <input matInput formControlName="username" />
+              <input matInput formControlName="username"/>
               <mat-icon matSuffix>face</mat-icon>
             </mat-form-field>
           </div>
@@ -20,7 +20,7 @@
               <mat-label>Mot de passe</mat-label>
               <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
               <a class="show-pwd-icon" href="#" onClick="return false;" matSuffix (click)="hide = !hide"
-                [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                 [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
                 <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
               </a>
             </mat-form-field>
@@ -58,14 +58,14 @@
         <div class="text-center font-bold p-t-30 p-b-20">
           V.{{appVersion}}
         </div>
-<!--        <div class="login100-form-social flex-c-m">-->
-<!--          <a href="#" class="login100-form-social-item flex-c-m bg1 m-r-5">-->
-<!--            <i class="fab fa-facebook-f"></i>-->
-<!--          </a>-->
-<!--          <a href="#" class="login100-form-social-item flex-c-m bg2 m-r-5">-->
-<!--            <i class="fab fa-twitter"></i>-->
-<!--          </a>-->
-<!--        </div>-->
+        <!--        <div class="login100-form-social flex-c-m">-->
+        <!--          <a href="#" class="login100-form-social-item flex-c-m bg1 m-r-5">-->
+        <!--            <i class="fab fa-facebook-f"></i>-->
+        <!--          </a>-->
+        <!--          <a href="#" class="login100-form-social-item flex-c-m bg2 m-r-5">-->
+        <!--            <i class="fab fa-twitter"></i>-->
+        <!--          </a>-->
+        <!--        </div>-->
       </form>
 
       <div class="login100-more" style="background-image: url('assets/images/loginPhoto.jpg');">

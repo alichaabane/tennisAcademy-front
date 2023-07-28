@@ -8,6 +8,7 @@
   //padding: 100px 0 0;
   max-height: 100%;
   width: 100%;
+
   .modal-header {
     border: none;
     padding: 0px;
@@ -34,37 +35,45 @@
   .modal-footer {
     border: none;
     background-color: transparent;
+
     .btn {
       margin: 10px;
     }
   }
 }
+
 .editRowModal {
   .modal-header {
     padding: 5px;
     border-radius: 0 0.55rem 0 0;
+
     img {
       float: left;
       @include border-radius(50%);
       width: 45px;
     }
+
     .modal-about {
       float: left;
       padding-left: 10px;
     }
+
     .modal-with {
       font-weight: bold;
       font-size: 16px;
     }
+
     .modal-num-messages {
       color: 434651;
     }
   }
 }
+
 .addContainer {
   display: flex;
   flex-direction: column;
   overflow: hidden;
+
   .form {
     display: flex;
     padding-top: 6px;
@@ -73,10 +82,12 @@
   .mat-form-field {
     flex-grow: 1;
   }
+
   .modalHeader {
     img {
       border-radius: 50%;
     }
+
     .modal-about {
       margin: 0px 10px;
     }
@@ -89,6 +100,7 @@
   justify-content: space-between;
   padding: 0px 10px 0px 10px;
 }
+
 .modal-close-button {
   background-color: transparent !important;
   box-shadow: none !important;
@@ -119,9 +131,11 @@
     }
   }
 }
+
 .cdk-overlay-connected-position-bounding-box {
   z-index: 1052 !important;
 }
+
 .mat-dialog-content {
   margin: 0px !important;
   padding: 0px !important;

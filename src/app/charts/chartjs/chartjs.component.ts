@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 
 @Component({
   selector: 'app-chartjs',
@@ -6,7 +6,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./chartjs.component.scss'],
 })
 export class ChartjsComponent {
-  constructor() {}
+  constructor() {
+  }
 
   // Line chert start
   public lineChartOptions = {
@@ -228,8 +229,8 @@ export class ChartjsComponent {
   public barChartLegend = true;
 
   public barChartData: any[] = [
-    { data: [58, 60, 74, 78, 55, 64, 42], label: 'Series A' },
-    { data: [30, 45, 51, 22, 79, 35, 82], label: 'Series B' },
+    {data: [58, 60, 74, 78, 55, 64, 42], label: 'Series A'},
+    {data: [30, 45, 51, 22, 79, 35, 82], label: 'Series B'},
   ];
 
   public barChartColors: Array<any> = [
@@ -264,8 +265,8 @@ export class ChartjsComponent {
   ];
 
   public radarChartData: any = [
-    { data: [58, 60, 74, 78, 55, 64, 42], label: 'Series A' },
-    { data: [30, 45, 51, 22, 79, 35, 82], label: 'Series B' },
+    {data: [58, 60, 74, 78, 55, 64, 42], label: 'Series A'},
+    {data: [30, 45, 51, 22, 79, 35, 82], label: 'Series B'},
   ];
   public radarChartType = 'radar';
   public radarChartColors: any[] = [
@@ -361,13 +362,13 @@ export class ChartjsComponent {
   public bubbleChartData: Array<any> = [
     {
       data: [
-        { x: 45, y: 150000, r: 22.22 },
-        { x: 42, y: 110000, r: 33.0 },
-        { x: 60, y: 80637, r: 15.22 },
-        { x: 75, y: 195055, r: 21.5 },
-        { x: 30, y: 160446, r: 35.67 },
-        { x: 25, y: 80446, r: 25.67 },
-        { x: 10, y: 228446, r: 30.32 },
+        {x: 45, y: 150000, r: 22.22},
+        {x: 42, y: 110000, r: 33.0},
+        {x: 60, y: 80637, r: 15.22},
+        {x: 75, y: 195055, r: 21.5},
+        {x: 30, y: 160446, r: 35.67},
+        {x: 25, y: 80446, r: 25.67},
+        {x: 10, y: 228446, r: 30.32},
       ],
       label: 'Units sold, Sales and Profitability',
     },

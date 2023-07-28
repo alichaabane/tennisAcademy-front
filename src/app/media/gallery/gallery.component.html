@@ -27,13 +27,13 @@
             <div class="group-2">
               <div>
                 <img *ngFor="let img of imageObject; let i = index" [src]="img.thumbImage || img.posterImage"
-                  (click)="showLightbox(i)" />
+                     (click)="showLightbox(i)"/>
               </div>
             </div>
 
             <!-- ng-image-fullscreen-view  -->
             <ng-image-fullscreen-view [images]="imageObject" [imageIndex]="currentIndex" [show]="showFlag"
-              (close)="closeEventHandler()"></ng-image-fullscreen-view>
+                                      (close)="closeEventHandler()"></ng-image-fullscreen-view>
           </div>
         </div>
       </div>

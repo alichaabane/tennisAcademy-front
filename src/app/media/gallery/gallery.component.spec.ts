@@ -1,5 +1,6 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { GalleryComponent } from './gallery.component';
+import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
+import {GalleryComponent} from './gallery.component';
+
 describe('GalleryComponent', () => {
   let component: GalleryComponent;
   let fixture: ComponentFixture<GalleryComponent>;

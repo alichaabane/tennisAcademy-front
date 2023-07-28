@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { AddTerrainComponent } from './add-terrain.component';
+import {AddTerrainComponent} from './add-terrain.component';
 
 describe('AddTerrainComponent', () => {
   let component: AddTerrainComponent;
@@ -8,9 +8,9 @@ describe('AddTerrainComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AddTerrainComponent ]
+      declarations: [AddTerrainComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

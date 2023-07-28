@@ -1,5 +1,6 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { EchartComponent } from './echart.component';
+import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
+import {EchartComponent} from './echart.component';
+
 describe('EchartComponent', () => {
   let component: EchartComponent;
   let fixture: ComponentFixture<EchartComponent>;

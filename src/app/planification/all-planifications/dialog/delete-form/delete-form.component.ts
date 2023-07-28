@@ -1,6 +1,6 @@
-import { Component, Inject, OnInit } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { PlanificationService } from '../../planification.service';
+import {Component, Inject, OnInit} from '@angular/core';
+import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import {PlanificationService} from '../../planification.service';
 
 @Component({
   selector: 'app-delete-form',
@@ -12,7 +12,9 @@ export class DeleteFormComponent {
     public dialogRef: MatDialogRef<DeleteFormComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     public planificationService: PlanificationService
-  ) { }
+  ) {
+  }
+
   onNoClick(): void {
     this.dialogRef.close();
   }

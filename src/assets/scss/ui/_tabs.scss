@@ -22,15 +22,18 @@
   .mat-tab-header {
     border-bottom: none;
   }
+
   .mat-tab-label-content {
     display: block !important;
   }
+
   .mat-tab-list {
     .mat-tab-label {
       border-bottom: 1px solid rgba(0, 0, 0, 0.12);
       height: 75px;
       min-width: 50%;
     }
+
     .mat-ink-bar {
       content: '';
       position: absolute;
@@ -44,8 +47,10 @@
       margin: 0 20%;
     }
   }
+
   .mat-tab-label-active {
     opacity: 1 !important;
+
     .tab-icon {
       color: #ff6c04;
     }

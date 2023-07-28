@@ -44,36 +44,37 @@
     </div>
 
 
-
-
-      <div class="row clearfix">
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-          <div class="card" style="width:60%;margin-left: 20%;background-color: beige;">
-            <div class="header">
-              <div style="flex: 0 0 auto;width: 100%;">
-                <ul>
-                  <li style="float: left;margin-right: 120px;
+    <div class="row clearfix">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="card" style="width:60%;margin-left: 20%;background-color: beige;">
+          <div class="header">
+            <div style="flex: 0 0 auto;width: 100%;">
+              <ul>
+                <li style="float: left;margin-right: 120px;
                   margin-left: 16%;">
-                    <button mat-icon-button>
-                      <mat-icon>calendar_today</mat-icon>Mes Reservations
-                    </button>
-                  </li>
-                  <li style="float: left;margin-right: 120px;">
-                      <button mat-icon-button>
-                        <mat-icon>assignment_ind</mat-icon>Mes statistiques
-                      </button>
-                    </li>
-                    <li style="float: left;margin-right: 120px;">
-                      <button mat-icon-button>
-                        <mat-icon>calendar_view_day</mat-icon>Mes publications
-                      </button>
-                    </li>
-                </ul>
-              </div>
+                  <button mat-icon-button>
+                    <mat-icon>calendar_today</mat-icon>
+                    Mes Reservations
+                  </button>
+                </li>
+                <li style="float: left;margin-right: 120px;">
+                  <button mat-icon-button>
+                    <mat-icon>assignment_ind</mat-icon>
+                    Mes statistiques
+                  </button>
+                </li>
+                <li style="float: left;margin-right: 120px;">
+                  <button mat-icon-button>
+                    <mat-icon>calendar_view_day</mat-icon>
+                    Mes publications
+                  </button>
+                </li>
+              </ul>
             </div>
           </div>
         </div>
       </div>
+    </div>
     <!-- Widgets -->
     <div *ngIf="admin">
       <div class="row">
@@ -251,170 +252,170 @@
       </div>
     </div>
 
-      <!--start page acceuil-->
-      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-        <div class="card">
-          <div class="header">
-            <h2>Publication</h2>
-            <button
-              mat-button
-              [matMenuTriggerFor]="menu"
-              class="header-dropdown"
-            >
-              <mat-icon>more_vert</mat-icon>
-            </button>
-            <mat-menu #menu="matMenu">
-              <button mat-menu-item>Action</button>
-              <button mat-menu-item>Another action</button>
-              <button mat-menu-item>Something else here</button>
-            </mat-menu>
-          </div>
-          <div class="body">
-            <app-publication></app-publication>
-            <!-- <div class="review-block">
-              <div class="row">
-                <div class="review-img">
-                  <img src="assets/images/user/user1.jpg" alt="" />
-                </div>
-                <div class="col">
-                  <h6 class="m-b-5">
-                    Alis Smith
-                    <span class="float-end m-r-10 text-muted">
-                      a week ago
-                    </span>
-                  </h6>
-                  <i class="material-icons">star</i>
-                  <i class="material-icons">star</i>
-                  <i class="material-icons">star</i>
-                  <i class="material-icons">star_half</i>
-                  <i class="material-icons">star_border</i>
-                  <p class="m-t-15 m-b-15 text-muted">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Etiam vel rutrum ex, at ornare mi. In quis scelerisque
-                    dui, eget rhoncus orci. Fusce et sodales ipsum. Nam id
-                    nunc euismod, aliquet arcu quis, mattis nisi.
-                  </p>
-                  <button mat-icon-button class="m-r-10 col-blue">
-                    <mat-icon>thumb_up</mat-icon>
-                  </button>
-                  <button mat-icon-button class="m-r-10 col-red">
-                    <mat-icon>thumb_down</mat-icon>
-                  </button>
-                </div>
+    <!--start page acceuil-->
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+      <div class="card">
+        <div class="header">
+          <h2>Publication</h2>
+          <button
+            mat-button
+            [matMenuTriggerFor]="menu"
+            class="header-dropdown"
+          >
+            <mat-icon>more_vert</mat-icon>
+          </button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item>Action</button>
+            <button mat-menu-item>Another action</button>
+            <button mat-menu-item>Something else here</button>
+          </mat-menu>
+        </div>
+        <div class="body">
+          <app-publication></app-publication>
+          <!-- <div class="review-block">
+            <div class="row">
+              <div class="review-img">
+                <img src="assets/images/user/user1.jpg" alt="" />
               </div>
-              <div class="row mt-3">
-                <div class="review-img">
-                  <img src="assets/images/user/user2.jpg" alt="" />
-                </div>
-                <div class="col">
-                  <h6 class="m-b-5">
-                    John Dio
-                    <span class="float-end m-r-10 text-muted">
-                      a week ago
-                    </span>
-                  </h6>
-                  <i class="material-icons">star</i>
-                  <i class="material-icons">star_half</i>
-                  <i class="material-icons">star_border</i>
-                  <i class="material-icons">star_border</i>
-                  <i class="material-icons">star_border</i>
-                  <p class="m-t-15 m-b-15 text-muted">
-                    Nam quis ligula est. Nunc sed risus non turpis tristique
-                    tempor. Ut sollicitudin faucibus magna nec gravida.
-                    Suspendisse ullamcorper justo vel porta imperdiet. Nunc
-                    nec ipsum vel augue placerat faucibus.
-                  </p>
-                  <button mat-icon-button class="m-r-10 col-blue">
-                    <mat-icon>thumb_up</mat-icon>
-                  </button>
-                  <button mat-icon-button class="m-r-10 col-red">
-                    <mat-icon>thumb_down</mat-icon>
-                  </button>
-                </div>
+              <div class="col">
+                <h6 class="m-b-5">
+                  Alis Smith
+                  <span class="float-end m-r-10 text-muted">
+                    a week ago
+                  </span>
+                </h6>
+                <i class="material-icons">star</i>
+                <i class="material-icons">star</i>
+                <i class="material-icons">star</i>
+                <i class="material-icons">star_half</i>
+                <i class="material-icons">star_border</i>
+                <p class="m-t-15 m-b-15 text-muted">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  Etiam vel rutrum ex, at ornare mi. In quis scelerisque
+                  dui, eget rhoncus orci. Fusce et sodales ipsum. Nam id
+                  nunc euismod, aliquet arcu quis, mattis nisi.
+                </p>
+                <button mat-icon-button class="m-r-10 col-blue">
+                  <mat-icon>thumb_up</mat-icon>
+                </button>
+                <button mat-icon-button class="m-r-10 col-red">
+                  <mat-icon>thumb_down</mat-icon>
+                </button>
               </div>
-              <div class="text-center m-b-5">
-                <a href="javascript:void(0)" class="b-b-primary text-primary">
-                  View all Customer Reviews
-                </a>
+            </div>
+            <div class="row mt-3">
+              <div class="review-img">
+                <img src="assets/images/user/user2.jpg" alt="" />
               </div>
-            </div> -->
-          </div>
+              <div class="col">
+                <h6 class="m-b-5">
+                  John Dio
+                  <span class="float-end m-r-10 text-muted">
+                    a week ago
+                  </span>
+                </h6>
+                <i class="material-icons">star</i>
+                <i class="material-icons">star_half</i>
+                <i class="material-icons">star_border</i>
+                <i class="material-icons">star_border</i>
+                <i class="material-icons">star_border</i>
+                <p class="m-t-15 m-b-15 text-muted">
+                  Nam quis ligula est. Nunc sed risus non turpis tristique
+                  tempor. Ut sollicitudin faucibus magna nec gravida.
+                  Suspendisse ullamcorper justo vel porta imperdiet. Nunc
+                  nec ipsum vel augue placerat faucibus.
+                </p>
+                <button mat-icon-button class="m-r-10 col-blue">
+                  <mat-icon>thumb_up</mat-icon>
+                </button>
+                <button mat-icon-button class="m-r-10 col-red">
+                  <mat-icon>thumb_down</mat-icon>
+                </button>
+              </div>
+            </div>
+            <div class="text-center m-b-5">
+              <a href="javascript:void(0)" class="b-b-primary text-primary">
+                View all Customer Reviews
+              </a>
+            </div>
+          </div> -->
         </div>
       </div>
+    </div>
 
-      <div>
-        <div class="row clearfix" *ngIf="activeTerrains">
-          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-            <div class="card">
-              <div class="header">
-                <div class="col-xs-12 col-sm-6">
-                  <h2>Nos Meilleurs Terrains</h2>
-                </div>
+    <div>
+      <div class="row clearfix" *ngIf="activeTerrains">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <div class="card">
+            <div class="header">
+              <div class="col-xs-12 col-sm-6">
+                <h2>Nos Meilleurs Terrains</h2>
               </div>
-              <div class="body">
-                <div class="row">
-                  <ng-template
-                    ngFor
-                    let-terrain
-                    [ngForOf]="activeTerrains"
-                    let-i="index"
-                    [ngForTrackBy]="trackByFn"
-                  >
-                    <div class="col-md-4">
-                      <div class="card border-apply">
-                        <div class="m-b-20">
-                          <div class="contact-grid">
-                            <div class="terrain-header"></div>
-                            <img
-                              [src]="
+            </div>
+            <div class="body">
+              <div class="row">
+                <ng-template
+                  ngFor
+                  let-terrain
+                  [ngForOf]="activeTerrains"
+                  let-i="index"
+                  [ngForTrackBy]="trackByFn"
+                >
+                  <div class="col-md-4">
+                    <div class="card border-apply">
+                      <div class="m-b-20">
+                        <div class="contact-grid">
+                          <div class="terrain-header"></div>
+                          <img
+                            [src]="
                                 terrain.photo
                                   ? IMG_BASE_URL + terrain.photo.mediaURL
                                   : 'assets/images/noPhoto.jpeg'
                               "
-                              class="terrain-img"
-                              alt=""
-                            />
-                            <div class="user-name">{{ terrain.label }}</div>
-                            <div class="name-center">{{ terrain.type }}</div>
+                            class="terrain-img"
+                            alt=""
+                          />
+                          <div class="user-name">{{ terrain.label }}</div>
+                          <div class="name-center">{{ terrain.type }}</div>
 
-                            <div class="profile-userbuttons">
-                              <button
-                                mat-flat-button
-                                color="primary"
-                                (click)="reservez()"
-                              >
-                                Reservez
-                              </button>
-                            </div>
+                          <div class="profile-userbuttons">
+                            <button
+                              mat-flat-button
+                              color="primary"
+                              (click)="reservez()"
+                            >
+                              Reservez
+                            </button>
                           </div>
                         </div>
                       </div>
                     </div>
-                  </ng-template>
-                </div>
+                  </div>
+                </ng-template>
               </div>
             </div>
           </div>
         </div>
+      </div>
 
-        <div class="row clearfix" *ngIf="activeEntraineurs">
-          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-            <div class="card">
-              <div class="header">
-                <div class="col-xs-12 col-sm-6">
-                  <h2>Nos Meilleurs Entraineurs</h2>
-                </div>
+      <div class="row clearfix" *ngIf="activeEntraineurs">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <div class="card">
+            <div class="header">
+              <div class="col-xs-12 col-sm-6">
+                <h2>Nos Meilleurs Entraineurs</h2>
               </div>
-              <div class="body">
-                <div class="row">
-                  <ng-template
-                    ngFor
-                    let-entraineur
-                    [ngForOf]="activeEntraineurs"
-                    let-i="index"
-                    [ngForTrackBy]="trackByFn"
-                  >
-                  <div class="col-md-4" >
+            </div>
+            <div class="body">
+              <div class="row">
+                <ng-template
+                  ngFor
+                  let-entraineur
+                  [ngForOf]="activeEntraineurs"
+                  let-i="index"
+                  [ngForTrackBy]="trackByFn"
+                >
+                  <div class="col-md-4">
                     <div class="card border-apply">
                       <div class="m-b-20">
                         <div class="contact-grid">
@@ -423,7 +424,7 @@
                             <div class="name-center">{{entraineur.roles[0].name}}</div>
                           </div>
                           <img
-                          [src]="
+                            [src]="
                           entraineur.photo
                             ? IMG_BASE_URL + entraineur.photo.mediaURL
                             : 'assets/images/noPhoto.jpeg'"
@@ -432,7 +433,7 @@
                           />
                           <p>
                             {{entraineur.addresse}}
-                            <br />
+                            <br/>
                             {{entraineur.email}}
                           </p>
                           <div>
@@ -450,14 +451,14 @@
                       </div>
                     </div>
                   </div>
-                  </ng-template>
-                </div>
+                </ng-template>
               </div>
             </div>
           </div>
         </div>
       </div>
+    </div>
 
-      <!--end page acceuil-->
+    <!--end page acceuil-->
   </div>
 </section>

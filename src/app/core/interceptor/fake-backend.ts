@@ -1,4 +1,4 @@
-﻿import { Injectable } from '@angular/core';
+﻿import {Injectable} from '@angular/core';
 import {
   HttpRequest,
   HttpResponse,
@@ -7,9 +7,9 @@ import {
   HttpInterceptor,
   HTTP_INTERCEPTORS
 } from '@angular/common/http';
-import { Observable, of, throwError } from 'rxjs';
-import { delay, mergeMap, materialize, dematerialize } from 'rxjs/operators';
-import { User } from '../models/user';
+import {Observable, of, throwError} from 'rxjs';
+import {delay, mergeMap, materialize, dematerialize} from 'rxjs/operators';
+import {User} from '../models/user';
 
 const users: User[] = [
   {
@@ -18,7 +18,7 @@ const users: User[] = [
     password: 'admin',
     firstName: 'Sarah',
     lastName: 'Smith',
-    roles:['ROLE_ADMIN','ROLE_JOUEUR'],
+    roles: ['ROLE_ADMIN', 'ROLE_JOUEUR'],
     accessToken: 'admin-token'
   }
 ];
@@ -29,7 +29,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
     request: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    const { url, method, headers, body } = request;
+    const {url, method, headers, body} = request;
     // wrap in delayed observable to simulate server api call
     return of(null).pipe(mergeMap(handleRoute));
 
@@ -46,7 +46,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
     // route functions
 
     function authenticate() {
-      const { username, password } = body;
+      const {username, password} = body;
       const user = users.find(
         (x) => x.username === username && x.password === password
       );
@@ -65,15 +65,15 @@ export class FakeBackendInterceptor implements HttpInterceptor {
     // helper functions
 
     function ok(body?) {
-      return of(new HttpResponse({ status: 200, body }));
+      return of(new HttpResponse({status: 200, body}));
     }
 
     function error(message) {
-      return throwError({ error: { message } });
+      return throwError({error: {message}});
     }
 
     function unauthorized() {
-      return throwError({ status: 401, error: { message: 'Unauthorised' } });
+      return throwError({status: 401, error: {message: 'Unauthorised'}});
     }
 
     function isLoggedIn() {

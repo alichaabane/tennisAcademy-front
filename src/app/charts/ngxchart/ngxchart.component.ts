@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import * as shape from 'd3-shape';
+
 @Component({
   selector: 'app-ngxchart',
   templateUrl: './ngxchart.component.html',
@@ -126,5 +127,7 @@ export class NgxchartComponent {
   areaxAxisLabel = 'Year';
   areayAxisLabel = 'Sales';
   shapeChartCurve = shape.curveBasis;
-  constructor() {}
+
+  constructor() {
+  }
 }

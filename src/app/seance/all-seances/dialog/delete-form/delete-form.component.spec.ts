@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { DeleteFormComponent } from './delete-form.component';
+import {DeleteFormComponent} from './delete-form.component';
 
 describe('DeleteFormComponent', () => {
   let component: DeleteFormComponent;
@@ -8,9 +8,9 @@ describe('DeleteFormComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ DeleteFormComponent ]
+      declarations: [DeleteFormComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

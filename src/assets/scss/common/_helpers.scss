@@ -37,6 +37,7 @@
     padding-bottom: #{$i * 5}px;
   }
 }
+
 @for $i from 0 through 25 {
   .margin-#{$i * 5} {
     margin: #{$i * 5}px;
@@ -153,6 +154,7 @@
     color: $val !important;
   }
 }
+
 @for $i from 0 through 100 {
   .width-per-#{$i} {
     width: round(percentage($i/100));

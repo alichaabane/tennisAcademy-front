@@ -1,4 +1,4 @@
-import { DOCUMENT } from '@angular/common';
+import {DOCUMENT} from '@angular/common';
 import {
   Component,
   Inject,
@@ -7,12 +7,13 @@ import {
   Renderer2,
   AfterViewInit,
 } from '@angular/core';
-import { ConfigService } from 'src/app/config/config.service';
-import { AuthService } from 'src/app/core/service/auth.service';
-import { RightSidebarService } from 'src/app/core/service/rightsidebar.service';
-import { environment } from 'src/environments/environment';
+import {ConfigService} from 'src/app/config/config.service';
+import {AuthService} from 'src/app/core/service/auth.service';
+import {RightSidebarService} from 'src/app/core/service/rightsidebar.service';
+import {environment} from 'src/environments/environment';
 import {Router} from "@angular/router";
 import {NgxSpinnerService} from "ngx-spinner";
+
 const document: any = window.document;
 
 @Component({
@@ -37,7 +38,9 @@ export class HeaderComponent implements OnInit, AfterViewInit {
     private authService: AuthService,
     private router: Router,
     private spinner: NgxSpinnerService
-  ) {}
+  ) {
+  }
+
   // notifications: any[] = [
   //   {
   //     userImg: 'assets/images/user/user1.jpg',
@@ -89,7 +92,7 @@ export class HeaderComponent implements OnInit, AfterViewInit {
       this.isNavbarCollapsed = true;
       this.authService.getUtilisateur(this.authService.currentUserValue.id).subscribe(
         data => {
-          if (data){
+          if (data) {
             this.photoProfile = data.mediaURL;
           }
         }
@@ -98,7 +101,7 @@ export class HeaderComponent implements OnInit, AfterViewInit {
     this.config = this.configService.configData;
   }
 
-  logout(){
+  logout() {
     // this.authService.logout();
     // this.router.navigateByUrl('/dashboard/main')
     //   .then(() => {
@@ -162,6 +165,7 @@ export class HeaderComponent implements OnInit, AfterViewInit {
       }
     }
   }
+
   callFullscreen() {
     if (
       !document.fullscreenElement &&
@@ -190,6 +194,7 @@ export class HeaderComponent implements OnInit, AfterViewInit {
       }
     }
   }
+
   mobileMenuSidebarOpen(event: any, className: string) {
     const hasClass = event.target.classList.contains(className);
     if (hasClass) {
@@ -198,6 +203,7 @@ export class HeaderComponent implements OnInit, AfterViewInit {
       this.renderer.addClass(this.document.body, className);
     }
   }
+
   callSidemenuCollapse() {
     const hasClass = this.document.body.classList.contains('side-closed');
     if (hasClass) {
@@ -208,6 +214,7 @@ export class HeaderComponent implements OnInit, AfterViewInit {
       this.renderer.addClass(this.document.body, 'submenu-closed');
     }
   }
+
   public toggleRightSidebar(): void {
     this.rightSidebarService.sidebarState.subscribe((isRunning) => {
       this.isOpenSidebar = isRunning;

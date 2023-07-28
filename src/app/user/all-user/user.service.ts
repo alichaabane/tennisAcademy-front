@@ -1,9 +1,9 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { Role } from 'src/app/role/role.model';
-import { environment } from 'src/environments/environment';
-import { User } from './user.model';
+import {HttpClient, HttpErrorResponse} from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {BehaviorSubject, Observable} from 'rxjs';
+import {Role} from 'src/app/role/role.model';
+import {environment} from 'src/environments/environment';
+import {User} from './user.model';
 import {Cours} from "../../cours/all-cours/cours.model";
 
 @Injectable({
@@ -16,10 +16,14 @@ export class UserService {
   dataChange: BehaviorSubject<User[]> = new BehaviorSubject<User[]>([]);
   // Temporarily stores data from dialogs
   dialogData: any;
-  constructor(private httpClient: HttpClient) {}
+
+  constructor(private httpClient: HttpClient) {
+  }
+
   get data(): User[] {
     return this.dataChange.value;
   }
+
   getDialogData() {
     return this.dialogData;
   }
@@ -42,7 +46,7 @@ export class UserService {
     return this.httpClient.get<User[]>(this.Url + '/adherent');
   }
 
-  getAllRoles(): Observable<Role[]>{
+  getAllRoles(): Observable<Role[]> {
     return this.httpClient.get<Role[]>(environment.apiUrl + "role");
   }
 
@@ -52,11 +56,13 @@ export class UserService {
     console.log(utilisateur);
     return this.httpClient.post<User>(this.Url + "/signup", utilisateur);
   }
+
   updateUtilisateur(utilisateur: User): Observable<User> {
     this.dialogData = utilisateur;
     // console.log(utilisateur);
     return this.httpClient.put<User>(this.Url + '/edit', utilisateur);
   }
+
   deleteUtilisateur(id: number): Observable<boolean> {
     return this.httpClient.delete<boolean>(this.Url + '/' + id);
   }
@@ -66,8 +72,8 @@ export class UserService {
   }
 
 
-    public changeUtilisateurDispoById(utilisateurId: number, status: boolean): Observable<boolean> {
-        return this.httpClient.put<boolean>(this.Url + '/changeDispo/' + utilisateurId, status);
-    }
-
+  public changeUtilisateurDispoById(utilisateurId: number, status: boolean): Observable<boolean> {
+    return this.httpClient.put<boolean>(this.Url + '/changeDispo/' + utilisateurId, status);
   }
+
+}

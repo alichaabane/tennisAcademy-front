@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { AddSeanceComponent } from './add-seance.component';
+import {AddSeanceComponent} from './add-seance.component';
 
 describe('AddSeanceComponent', () => {
   let component: AddSeanceComponent;
@@ -8,9 +8,9 @@ describe('AddSeanceComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AddSeanceComponent ]
+      declarations: [AddSeanceComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

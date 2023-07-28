@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {
   ChartComponent,
   ApexAxisChartSeries,
@@ -35,7 +35,7 @@ declare const ApexCharts: any;
   styleUrls: ['./apexchart.component.sass'],
 })
 export class ApexchartComponent implements OnInit {
-  @ViewChild('chart', { static: true }) chart: ChartComponent;
+  @ViewChild('chart', {static: true}) chart: ChartComponent;
   // public barChartOptions: any;
   public barChartOptions: Partial<ChartOptions>;
   public barChart2Options: any;
@@ -46,7 +46,8 @@ export class ApexchartComponent implements OnInit {
   public pieChartOptions: any;
   public radarChartOptions: any;
 
-  constructor() {}
+  constructor() {
+  }
 
   ngOnInit() {
     this.chart1();
@@ -155,7 +156,7 @@ export class ApexchartComponent implements OnInit {
       },
       dataLabels: {
         enabled: true,
-        formatter: function (val) {
+        formatter: function(val) {
           return val + '%';
         },
         offsetY: -20,
@@ -232,7 +233,7 @@ export class ApexchartComponent implements OnInit {
         },
         labels: {
           show: false,
-          formatter: function (val) {
+          formatter: function(val) {
             return val + '%';
           },
         },
@@ -257,6 +258,7 @@ export class ApexchartComponent implements OnInit {
       },
     };
   }
+
   private chart3() {
     this.lineChartOptions = {
       chart: {
@@ -347,6 +349,7 @@ export class ApexchartComponent implements OnInit {
       },
     };
   }
+
   private chart4() {
     this.lineChart2Options = {
       chart: {
@@ -445,6 +448,7 @@ export class ApexchartComponent implements OnInit {
       },
     };
   }
+
   private chart5() {
     this.lineColumnChartOptions = {
       chart: {
@@ -570,7 +574,7 @@ export class ApexchartComponent implements OnInit {
       xaxis: {
         tickAmount: 10,
         labels: {
-          formatter: function (val) {
+          formatter: function(val) {
             return parseFloat(val).toFixed(1);
           },
           style: {
@@ -588,6 +592,7 @@ export class ApexchartComponent implements OnInit {
       },
     };
   }
+
   private chart6() {
     this.areaChartOptions = {
       chart: {
@@ -643,6 +648,7 @@ export class ApexchartComponent implements OnInit {
       },
     };
   }
+
   private chart7() {
     this.pieChartOptions = {
       chart: {
@@ -667,6 +673,7 @@ export class ApexchartComponent implements OnInit {
       ],
     };
   }
+
   private chart8() {
     this.radarChartOptions = {
       chart: {

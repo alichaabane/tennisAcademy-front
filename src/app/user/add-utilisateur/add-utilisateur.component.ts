@@ -1,11 +1,11 @@
-import { X } from '@angular/cdk/keycodes';
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { Media } from 'src/app/media/media.model';
-import { Role } from 'src/app/role/role.model';
-import { User } from '../all-user/user.model';
-import { UserService } from '../all-user/user.service';
+import {X} from '@angular/cdk/keycodes';
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {Router} from '@angular/router';
+import {Media} from 'src/app/media/media.model';
+import {Role} from 'src/app/role/role.model';
+import {User} from '../all-user/user.model';
+import {UserService} from '../all-user/user.service';
 
 @Component({
   selector: 'app-add-utilisateur',
@@ -41,13 +41,13 @@ export class AddUtilisateurComponent {
     JSON.parse(localStorage.getItem('currentUser') || '{}');
     const currentRoles = JSON.parse(localStorage.getItem('currentUser') || '{}').roles;
     this.connectedUserRole = currentRoles.includes('ROLE_ADMIN');
-    if (!this.connectedUserRole){
+    if (!this.connectedUserRole) {
       this.router.navigate(['/page403']);
     }
     this.getAllroles();
   }
 
-  getAllroles(){
+  getAllroles() {
     this.utilisateurService.getAllRoles().subscribe(
       (data) => {
         this.roles = data;
@@ -75,9 +75,9 @@ export class AddUtilisateurComponent {
   }
 
   onSubmit() {
-    if (this.utilisateurForm.invalid ) {
+    if (this.utilisateurForm.invalid) {
       return;
-  }
+    }
 
     this.utilisateur.prenom = this.utilisateurForm.value.prenom;
     this.utilisateur.nom = this.utilisateurForm.value.nom;
@@ -90,64 +90,64 @@ export class AddUtilisateurComponent {
     this.utilisateur.telephone = this.utilisateurForm.value.telephone;
 
     this.addUtilisateur();
-}
+  }
 
-private addUtilisateur() {
+  private addUtilisateur() {
 
-  this.utilisateurService.addUtilisateur(this.utilisateur).subscribe(
+    this.utilisateurService.addUtilisateur(this.utilisateur).subscribe(
       data => {
-          if (data) {
-            this.router.navigate(['/utilisateurs/all-utilisateurs']);
+        if (data) {
+          this.router.navigate(['/utilisateurs/all-utilisateurs']);
 
-          } else {
-              // this.messageService.add({
-              //     severity: 'FAILED',
-              //     summary: 'Error',
-              //     detail: 'Desolé impossible d'ajouter le terrain',
-              //     life: 3000
-              // });
-          }
-      }, error => {
+        } else {
           // this.messageService.add({
           //     severity: 'FAILED',
           //     summary: 'Error',
-          //     detail: error.error,
+          //     detail: 'Desolé impossible d'ajouter le terrain',
           //     life: 3000
           // });
+        }
+      }, error => {
+        // this.messageService.add({
+        //     severity: 'FAILED',
+        //     summary: 'Error',
+        //     detail: error.error,
+        //     life: 3000
+        // });
       }
-  );
+    );
 
 
-}
+  }
 
 
-onSelect(event) {
-  this.img = event.addedFiles[0];
-  this.covertImgToByte();
-}
+  onSelect(event) {
+    this.img = event.addedFiles[0];
+    this.covertImgToByte();
+  }
 
-onRemove(event) {
-  this.img = null;
-}
+  onRemove(event) {
+    this.img = null;
+  }
 
 
-covertImgToByte(): void {
-  const reader = new FileReader();
-  reader.onload = this.handleFile.bind(this);
+  covertImgToByte(): void {
+    const reader = new FileReader();
+    reader.onload = this.handleFile.bind(this);
 
-  reader.readAsBinaryString(this.img);
-}
+    reader.readAsBinaryString(this.img);
+  }
 
-handleFile(event) {
-  const binaryString = event.target.result;
-  const base64textString = btoa(binaryString);
-  const media: Media = new Media();
+  handleFile(event) {
+    const binaryString = event.target.result;
+    const base64textString = btoa(binaryString);
+    const media: Media = new Media();
 
-  media.file = base64textString;
-  media.fileName = this.img.name;
+    media.file = base64textString;
+    media.fileName = this.img.name;
 
-  this.utilisateur.photo = media;
-}
+    this.utilisateur.photo = media;
+  }
 
 // getSponsorById(dsponsorId): void {
 //   this.sponsorsService.getSponsorById(dsponsorId).subscribe((data) => {
@@ -158,14 +158,14 @@ handleFile(event) {
 //   });
 // }
 
-async getImageByUrl(url): Promise<void> {
-  // const data = await this.terrainService.getImageByUrl(url).toPromise();
-  // const file = new File([data], "image", {
-  //   type: "image/png",
-  //   lastModified: new Date().getTime(),
-  // });
-  // console.log(file);
-  // this.img = file;
-  // this.covertImgToByte();
-}
+  async getImageByUrl(url): Promise<void> {
+    // const data = await this.terrainService.getImageByUrl(url).toPromise();
+    // const file = new File([data], "image", {
+    //   type: "image/png",
+    //   lastModified: new Date().getTime(),
+    // });
+    // console.log(file);
+    // this.img = file;
+    // this.covertImgToByte();
+  }
 }

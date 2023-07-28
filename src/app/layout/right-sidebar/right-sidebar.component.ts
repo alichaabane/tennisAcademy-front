@@ -1,5 +1,5 @@
-import { ConfigService } from './../../config/config.service';
-import { DOCUMENT } from '@angular/common';
+import {ConfigService} from './../../config/config.service';
+import {DOCUMENT} from '@angular/common';
 import {
   Component,
   Inject,
@@ -9,8 +9,8 @@ import {
   Renderer2,
   ChangeDetectionStrategy,
 } from '@angular/core';
-import { RightSidebarService } from 'src/app/core/service/rightsidebar.service';
-import { MatSlideToggleChange } from '@angular/material/slide-toggle';
+import {RightSidebarService} from 'src/app/core/service/rightsidebar.service';
+import {MatSlideToggleChange} from '@angular/material/slide-toggle';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -35,7 +35,9 @@ export class RightSidebarComponent implements OnInit, AfterViewInit {
     public elementRef: ElementRef,
     private rightSidebarService: RightSidebarService,
     private configService: ConfigService
-  ) {}
+  ) {
+  }
+
   ngOnInit() {
     this.config = this.configService.configData;
     this.rightSidebarService.sidebarState.subscribe((isRunning) => {
@@ -111,6 +113,7 @@ export class RightSidebarComponent implements OnInit, AfterViewInit {
     localStorage.setItem('choose_skin', 'theme-' + this.selectedBgColor);
     localStorage.setItem('choose_skin_active', this.selectedBgColor);
   }
+
   lightSidebarBtnClick() {
     this.renderer.removeClass(this.document.body, 'menu_dark');
     this.renderer.removeClass(this.document.body, 'logo-black');
@@ -120,6 +123,7 @@ export class RightSidebarComponent implements OnInit, AfterViewInit {
     localStorage.setItem('choose_logoheader', 'logo-white');
     localStorage.setItem('menuOption', menuOption);
   }
+
   darkSidebarBtnClick() {
     this.renderer.removeClass(this.document.body, 'menu_light');
     this.renderer.removeClass(this.document.body, 'logo-white');
@@ -129,6 +133,7 @@ export class RightSidebarComponent implements OnInit, AfterViewInit {
     localStorage.setItem('choose_logoheader', 'logo-black');
     localStorage.setItem('menuOption', menuOption);
   }
+
   lightThemeBtnClick() {
     this.renderer.removeClass(this.document.body, 'dark');
     this.renderer.removeClass(this.document.body, 'submenu-closed');
@@ -155,6 +160,7 @@ export class RightSidebarComponent implements OnInit, AfterViewInit {
     localStorage.setItem('theme', theme);
     localStorage.setItem('menuOption', menuOption);
   }
+
   darkThemeBtnClick() {
     this.renderer.removeClass(this.document.body, 'light');
     this.renderer.removeClass(this.document.body, 'submenu-closed');
@@ -180,11 +186,13 @@ export class RightSidebarComponent implements OnInit, AfterViewInit {
     localStorage.setItem('theme', theme);
     localStorage.setItem('menuOption', menuOption);
   }
+
   setRightSidebarWindowHeight() {
     const height = window.innerHeight - 137;
     this.maxHeight = height + '';
     this.maxWidth = '500px';
   }
+
   onClickedOutside(event: Event) {
     const button = event.target as HTMLButtonElement;
     if (button.id !== 'settingBtn') {
@@ -193,6 +201,7 @@ export class RightSidebarComponent implements OnInit, AfterViewInit {
       }
     }
   }
+
   toggleRightSidebar(): void {
     this.rightSidebarService.setRightSidebar(
       (this.isOpenSidebar = !this.isOpenSidebar)
@@ -217,12 +226,14 @@ export class RightSidebarComponent implements OnInit, AfterViewInit {
     localStorage.setItem('isRtl', isrtl);
     this.isRtl = event.checked;
   }
+
   setRTLSettings() {
     document.getElementsByTagName('html')[0].setAttribute('dir', 'rtl');
     this.renderer.addClass(this.document.body, 'rtl');
     this.isRtl = true;
     localStorage.setItem('isRtl', 'true');
   }
+
   setLTRSettings() {
     document.getElementsByTagName('html')[0].removeAttribute('dir');
     this.renderer.removeClass(this.document.body, 'rtl');

@@ -1,20 +1,18 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
-import { DashboardRoutingModule } from './dashboard-routing.module';
-import { MainComponent } from './main/main.component';
-import { NgxEchartsModule } from 'ngx-echarts';
-import { NgApexchartsModule } from 'ng-apexcharts';
-import { MatIconModule } from '@angular/material/icon';
-import { MatButtonModule } from '@angular/material/button';
-import { MatMenuModule } from '@angular/material/menu';
-import { PublicationComponent } from '../publication/publication/publication.component';
-
-
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {PerfectScrollbarModule} from 'ngx-perfect-scrollbar';
+import {DashboardRoutingModule} from './dashboard-routing.module';
+import {MainComponent} from './main/main.component';
+import {NgxEchartsModule} from 'ngx-echarts';
+import {NgApexchartsModule} from 'ng-apexcharts';
+import {MatIconModule} from '@angular/material/icon';
+import {MatButtonModule} from '@angular/material/button';
+import {MatMenuModule} from '@angular/material/menu';
+import {PublicationComponent} from '../publication/publication/publication.component';
 
 
 @NgModule({
-  declarations: [MainComponent,PublicationComponent],
+  declarations: [MainComponent, PublicationComponent],
   imports: [
     CommonModule,
     DashboardRoutingModule,
@@ -28,4 +26,5 @@ import { PublicationComponent } from '../publication/publication/publication.com
     MatMenuModule,
   ],
 })
-export class DashboardModule {}
+export class DashboardModule {
+}

@@ -1,5 +1,6 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { SidebarComponent } from './sidebar.component';
+import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
+import {SidebarComponent} from './sidebar.component';
+
 describe('SidebarComponent', () => {
   let component: SidebarComponent;
   let fixture: ComponentFixture<SidebarComponent>;

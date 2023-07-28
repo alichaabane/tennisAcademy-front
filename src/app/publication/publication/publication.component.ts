@@ -1,8 +1,7 @@
-import { Component, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
-import { Observable } from 'rxjs';
-import { Publication } from '../publication.model';
-import { PublicationService } from '../publication.service';
-
+import {Component, OnInit, ViewChild, ViewContainerRef} from '@angular/core';
+import {Observable} from 'rxjs';
+import {Publication} from '../publication.model';
+import {PublicationService} from '../publication.service';
 
 
 @Component({
@@ -11,7 +10,7 @@ import { PublicationService } from '../publication.service';
   styleUrls: ['./publication.component.sass']
 })
 export class PublicationComponent implements OnInit {
-  @ViewChild('dynamic', { read: ViewContainerRef }) viewContainerRef: ViewContainerRef;
+  @ViewChild('dynamic', {read: ViewContainerRef}) viewContainerRef: ViewContainerRef;
 
   public publication: Publication;
   publications$: Observable<Publication[]>;

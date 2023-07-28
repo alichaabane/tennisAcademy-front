@@ -1,5 +1,6 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { Page500Component } from './page500.component';
+import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
+import {Page500Component} from './page500.component';
+
 describe('Page500Component', () => {
   let component: Page500Component;
   let fixture: ComponentFixture<Page500Component>;

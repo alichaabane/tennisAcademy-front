@@ -1,5 +1,6 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { PageLoaderComponent } from './page-loader.component';
+import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
+import {PageLoaderComponent} from './page-loader.component';
+
 describe('PageLoaderComponent', () => {
   let component: PageLoaderComponent;
   let fixture: ComponentFixture<PageLoaderComponent>;

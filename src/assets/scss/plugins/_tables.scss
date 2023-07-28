@@ -167,6 +167,7 @@
     background-color: #ff9600;
   }
 }
+
 .btn-tbl-confirm {
   background-color: #3fa3f3;
   height: 30px !important;
@@ -189,6 +190,7 @@
     background-color: #62b5f8;
   }
 }
+
 .btn-tbl-reject {
   background-color: #f96333;
   height: 30px !important;
@@ -271,7 +273,7 @@
 .buttons-copy {
   background-color: #666 !important;
   box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.2),
-    0 13px 24px -11px rgba(233, 30, 99, 0.6);
+  0 13px 24px -11px rgba(233, 30, 99, 0.6);
   color: #fff !important;
   border-radius: 30px !important;
   border: 0px !important;
@@ -283,7 +285,7 @@
 .buttons-excel {
   background-color: #59bf70 !important;
   box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.2),
-    0 13px 24px -11px rgba(233, 30, 99, 0.6);
+  0 13px 24px -11px rgba(233, 30, 99, 0.6);
   color: #fff !important;
   border-radius: 30px !important;
   border: 0px !important;
@@ -295,7 +297,7 @@
 .buttons-csv {
   background-color: #2ab9d0 !important;
   box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.2),
-    0 13px 24px -11px rgba(233, 30, 99, 0.6);
+  0 13px 24px -11px rgba(233, 30, 99, 0.6);
   color: #fff !important;
   border-radius: 30px !important;
   border: 0px !important;
@@ -307,7 +309,7 @@
 .buttons-pdf {
   background-color: #e91e63 !important;
   box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.2),
-    0 13px 24px -11px rgba(233, 30, 99, 0.6);
+  0 13px 24px -11px rgba(233, 30, 99, 0.6);
   color: #fff !important;
   border-radius: 30px !important;
   border: 0px !important;
@@ -620,15 +622,18 @@ tr.group:hover {
 .tbl-checkbox label {
   margin-bottom: 0px;
 }
+
 .column-nowrap {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
 .table-tab a {
   background-color: #e2e2e2 !important;
   color: #868788 !important;
   border-radius: 30px;
+
   &.active {
     background-color: #7274e2 !important;
     box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.2), 0 4px 13px -11px #7197b5;
@@ -636,6 +641,7 @@ tr.group:hover {
     border-radius: 30px;
   }
 }
+
 .app-list {
   display: flex;
   flex-direction: row;
@@ -645,13 +651,16 @@ tr.group:hover {
   padding: 10px;
   margin-bottom: 10px;
   background: #f9f9f9;
+
   img {
     margin: 0px 10px;
   }
+
   .set-flex {
     flex: 1;
   }
 }
+
 .lecture-list {
   display: flex;
   flex-direction: row;
@@ -662,6 +671,7 @@ tr.group:hover {
   margin-bottom: 10px;
   background: #f6f4ff;
 }
+
 .report-list {
   display: flex;
   align-items: center;
@@ -669,23 +679,28 @@ tr.group:hover {
   padding: 12px 12px;
   border: 1px dashed #bfc9d4;
   border-radius: 6px;
+
   .file-style {
     font-size: 20px;
     margin: 0px 10px;
   }
+
   .ms-auto {
     margin-right: 10px;
     cursor: pointer;
+
     i {
       padding-right: 10px;
     }
   }
 }
+
 .sales-group-list {
   display: flex;
   align-items: center;
   margin: 20px 0px;
   border-radius: 6px;
+
   .lbl-bedge {
     padding: 10px;
     margin: 0px 5px;
@@ -697,6 +712,7 @@ tr.group:hover {
     font-size: 14px;
     font-weight: 600;
     letter-spacing: 1px;
+
     .lbl-bedge-title {
       color: #ffffff;
       display: flex;
@@ -712,22 +728,26 @@ tr.group:hover {
     padding-left: 10px;
     font-weight: 500;
   }
+
   .set-flex {
     flex: 1;
   }
 }
+
 .tbl-spinner {
   display: flex;
   justify-content: center;
   align-items: center;
   margin-top: 20px;
 }
+
 .doc-file-type {
   .d-flex {
     margin-bottom: 15px;
     padding-bottom: 15px;
     border-bottom: 1px solid #d5dadb;
   }
+
   .img-icon {
     width: 46px;
     height: 46px;
@@ -737,39 +757,47 @@ tr.group:hover {
     text-align: center;
     margin: 0px 15px;
   }
+
   .set-flex {
     display: block;
     color: #000;
     height: 30px;
   }
+
   .ms-auto {
     margin-right: 10px;
     cursor: pointer;
   }
 }
+
 .primary-rgba {
   background-color: rgba(110, 129, 220, 0.1);
 }
+
 .success-rgba {
   background-color: rgba(95, 194, 126, 0.1);
 }
+
 .danger-rgba {
   background-color: rgba(244, 68, 85, 0.1);
 }
+
 .info-rgba {
   background-color: rgba(114, 208, 251, 0.1);
 }
+
 .timetable-block {
   border-radius: 4px;
   border: 1px solid #f4f4f4;
   padding: 10px;
   margin-bottom: 20px;
   box-shadow: 0 0.46875rem 2.1875rem rgba(90, 97, 105, 0.1),
-    0 0.9375rem 1.40625rem rgba(90, 97, 105, 0.1),
-    0 0.25rem 0.53125rem rgba(90, 97, 105, 0.12),
-    0 0.125rem 0.1875rem rgba(90, 97, 105, 0.1);
+  0 0.9375rem 1.40625rem rgba(90, 97, 105, 0.1),
+  0 0.25rem 0.53125rem rgba(90, 97, 105, 0.12),
+  0 0.125rem 0.1875rem rgba(90, 97, 105, 0.1);
   background: #ffffff;
 }
+
 .medicine-list td {
   padding: 0.4rem;
 }
