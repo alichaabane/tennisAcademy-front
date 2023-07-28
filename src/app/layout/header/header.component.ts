@@ -109,7 +109,7 @@ export class HeaderComponent implements OnInit, AfterViewInit {
     //   });
     this.spinner.show();
     this.authService.logout();
-    this.router.navigate(['/dashboard/main']).then();
+    this.router.navigate(['/authentication/signin']).then();
     setTimeout(() => {
       this.spinner.hide();
       window.location.reload();

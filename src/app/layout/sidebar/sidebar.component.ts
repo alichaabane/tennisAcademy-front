@@ -40,7 +40,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
   public photoProfile: any;
   public addressProfile: string;
   public authentifiee = false;
-
+  public isRoleAdmin: boolean = false;
   constructor(
     @Inject(DOCUMENT) private document: Document,
     private renderer: Renderer2,
@@ -119,6 +119,9 @@ export class SidebarComponent implements OnInit, OnDestroy {
             this.photoProfile = data.mediaURL;
             this.addressProfile = data.addresse;
             console.log(this.roleProfile);
+            JSON.parse(localStorage.getItem('currentUser') || '{}');
+            const currentRoles = JSON.parse(localStorage.getItem('currentUser') || '{}').roles;
+            this.isRoleAdmin = currentRoles.includes('ROLE_ADMIN');
             //  this.roleProfile = data.roles;
 
           }
