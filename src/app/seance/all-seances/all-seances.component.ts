@@ -88,10 +88,13 @@ export class AllSeancesComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result) => {
       console.log(result);
       if (result) {
-        console.log(result);
+        console.log('after close modal ' , result);
         // When using an edit things are little different, firstly we find record inside DataService by id
 
         // Then you update that record using data from dialogData (values you enetered)
+        this.seanceService.getDialogData();
+        setTimeout( () => {
+
         this.seanceService.updateSeance(result).subscribe(
           res => {
             console.log(res);
@@ -106,7 +109,7 @@ export class AllSeancesComponent implements OnInit {
             }
           }
         );
-        this.seanceService.getDialogData();
+        }, 2000);
         // And lastly refresh table
       } else {
         console.log("pas de mise à jour");
@@ -116,49 +119,25 @@ export class AllSeancesComponent implements OnInit {
 
 
   deleteItem(row) {
-    this.id = row.id;
-    let tempDirection;
-    if (localStorage.getItem('isRtl') === 'true') {
-      tempDirection = 'rtl';
-    } else {
-      tempDirection = 'ltr';
-    }
-    const dialogRef = this.dialog.open(DeleteFormComponent, {
-      data: row,
-      direction: tempDirection,
-    });
-    dialogRef.afterClosed().subscribe((result) => {
-      if (result === 1) {
-        const foundIndex = this.exampleDatabase.dataChange.value.findIndex(
-          (x) => x.idSeance === this.id
-        );
-        // for delete we use splice in order to remove single object from DataService
-        this.exampleDatabase.dataChange.value.splice(foundIndex, 1);
-        this.seanceService.deleteSeance(row.idSeance).subscribe(
-          res => {
-            if (res) {
-              this.refresh();
-              this.showNotification(
-                'snackbar-warning',
-                'seance effacée avec succes...!!!',
-                'bottom',
-                'center'
-              );
-            } else {
-              this.showNotification(
-                'snackbar-danger',
-                'seance effacée avec succes...!!!',
-                'bottom',
-                'center'
-              );
-            }
-          },
-          error => {
-
-          }
+    this.seanceService.deleteSeance(row?.idSeance).subscribe(res => {
+      console.log('res = ', res);
+      if (res) {
+        this.showNotification(
+          'snackbar-info',
+          'Seance supprimé avec succés',
+          'bottom',
+          'center'
         );
       }
+    }, error => {
+      this.showNotification(
+        'snackbar-danger',
+        'Erreur dans la suppression de séance !',
+        'bottom',
+        'center'
+      );
     });
+    this.refresh();
   }
 
   private refreshTable() {
@@ -189,23 +168,24 @@ export class AllSeancesComponent implements OnInit {
       );
       // console.log(this.dataSource.renderedData.findIndex((d) => d === item));
       console.log(item);
-      this.seanceService.deleteSeance(item.idSeance).subscribe(
-        res => {
-          if (res) {
-
-          } else {
-            this.showNotification(
-              'snackbar-danger',
-              'Seance :' + item.idSeance + ' non effacé..!!!',
-              'bottom',
-              'center'
-            );
-          }
-        },
-        error => {
-
+      this.seanceService.deleteSeance(item?.idSeance).subscribe(res => {
+        console.log('res = ', res);
+        if (res) {
+          this.showNotification(
+            'snackbar-info',
+            'Seance supprimé avec succés',
+            'bottom',
+            'center'
+          );
         }
-      );
+      }, error => {
+        this.showNotification(
+          'snackbar-danger',
+          'Erreur dans la suppression de séance !',
+          'bottom',
+          'center'
+        );
+      });
       this.exampleDatabase.dataChange.value.splice(index, 1);
       this.refreshTable();
       this.selection = new SelectionModel<Seance>(true, []);
@@ -299,10 +279,11 @@ export class ExampleDataSource extends DataSource<Seance> {
         this.filteredData = this._exampleDatabase.data
           .slice()
           .filter((seance: Seance) => {
+            console.log('seance = ', seance)
             const searchStr = (
               seance.idSeance +
-              seance.planification.cours.label
-            ).toLowerCase();
+              seance.planification?.cours.label
+            ).toString().toLowerCase();
             return searchStr.indexOf(this.filter.toLowerCase()) !== -1;
           });
         // Sort filtered data

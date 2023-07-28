@@ -9,6 +9,7 @@ import {Terrain} from 'src/app/terrain/all-terrain/terrain.model';
 import {Seance} from '../../Seance.model';
 import {SeanceService} from '../../seance.service';
 import {User} from "../../../../user/all-user/user.model";
+import {UserService} from "../../../../user/all-user/user.service";
 
 @Component({
   selector: 'app-form-dialog',
@@ -21,6 +22,7 @@ export class FormDialogComponent {
               public dialogRef: MatDialogRef<FormDialogComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any,
               public seanceService: SeanceService,
+              public userService: UserService,
               private fb: FormBuilder
   ) {
     // Set the defaults
@@ -38,6 +40,7 @@ export class FormDialogComponent {
     }
     this.getAllPlanification();
     this.getAllTerrains();
+    this.getAllUsers();
     this.seanceForm = this.createContactForm();
 
   }
@@ -56,6 +59,19 @@ export class FormDialogComponent {
     Validators.required,
     // Validators.email,
   ]);
+
+  getAllUsers() {
+    this.userService.getUsers().subscribe(
+      (data) => {
+        this.utilisateurList = data;
+        console.log('utilisateurList = ', this.utilisateurList);
+      },
+      (error: HttpErrorResponse) => {
+        console.log(error.name + ' ' + error.message);
+      }
+    );
+  }
+
 
   getAllPlanification() {
     this.seanceService.getAllPlanification().subscribe(
@@ -106,12 +122,12 @@ export class FormDialogComponent {
       dateHeureFin: [this.seance.dateHeureFin, [Validators.required]],
       terrain: [this.seance.terrain?.idTerrain, [Validators.required]],
       planification: [this.seance.planification?.idPlanification, [Validators.required]],
+      user: [this.seance.user?.idUser, [Validators.required]],
     });
   }
 
 
   submit() {
-    // emppty stuff
   }
 
   onNoClick(): void {
@@ -120,27 +136,25 @@ export class FormDialogComponent {
 
 
   public confirmAdd(): void {
-    console.log(this.seanceForm.getRawValue());
     if (this.seanceForm.valid) {
       this.seance.dateHeureDebut = this.seanceForm.value.dateHeureDebut;
       this.seance.dateHeureDebut = this.datePipe.transform(this.seance.dateHeureDebut, 'yyyy-MM-ddTHH:mm:ss');
 
       this.seance.dateHeureFin = this.seanceForm.value.dateHeureFin;
       this.seance.dateHeureFin = this.datePipe.transform(this.seance.dateHeureFin, 'yyyy-MM-ddTHH:mm:ss');
+
       this.seance.planification = this.seanceForm.value.planification;
       this.seance.terrain = this.seanceForm.value.terrain;
+      this.seance.user = this.seanceForm.value.user;
+      console.log(this.seance);
 
-      //   this.seanceForm.value.jourSemaine.forEach(element => {
-      //     this.planification.jourSemaine=this.planification.jourSemaine+element
-      // });
-      // this.planification.cours=this.seanceForm.value.cours;
     }
-
   }
 
   openedChange(opened: boolean) {
     console.log(opened ? 'opened' : 'closed');
   }
+
 
 
   showNotification(colorName, text, placementFrom, placementAlign) {
