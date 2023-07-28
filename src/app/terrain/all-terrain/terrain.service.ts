@@ -27,7 +27,7 @@ export class TerrainService {
   }
 
   /** CRUD METHODS */
-  getAllTerrains(): void {
+  getAllTerrains(): any {
     this.httpClient.get<Terrain[]>(this.Url).subscribe(
       (data) => {
         this.isTblLoading = false;
@@ -38,6 +38,10 @@ export class TerrainService {
         console.log(error.name + ' ' + error.message);
       }
     );
+  }
+
+  getAllStadiums(): any {
+    return this.httpClient.get<Terrain[]>(this.Url);
   }
 
   getAllActiveTerrains(): Observable<Terrain[]> {

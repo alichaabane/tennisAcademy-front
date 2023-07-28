@@ -77,7 +77,7 @@ export class AddSeanceComponent implements OnInit {
   }
 
   getAllUsers() {
-    this.userService.getUsers().subscribe(
+    this.userService.getAllAdherent().subscribe(
       (data) => {
         this.utilisateurList = data;
         console.log('utilisateurList = ', this.utilisateurList);

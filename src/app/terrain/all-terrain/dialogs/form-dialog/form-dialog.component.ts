@@ -62,6 +62,7 @@ export class FormDialogComponent {
       label: [this.terrain.label, [Validators.required]],
       type: [this.terrain.type, [Validators.required]],
       enable: [this.terrain.enable],
+      photo: [this.terrain.photo]
     });
   }
 

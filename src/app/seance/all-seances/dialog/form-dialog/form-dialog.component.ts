@@ -61,7 +61,7 @@ export class FormDialogComponent {
   ]);
 
   getAllUsers() {
-    this.userService.getUsers().subscribe(
+    this.userService.getAllAdherent().subscribe(
       (data) => {
         this.utilisateurList = data;
         console.log('utilisateurList = ', this.utilisateurList);
@@ -94,6 +94,7 @@ export class FormDialogComponent {
   getAllTerrains() {
     this.seanceService.getAllTerrain().subscribe(
       (data) => {
+        console.log('terrain mibon  = ', data);
         this.terrainsList = data;
       },
       (error: HttpErrorResponse) => {

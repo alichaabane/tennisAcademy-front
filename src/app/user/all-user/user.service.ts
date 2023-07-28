@@ -90,4 +90,12 @@ export class UserService {
     return this.httpClient.put<boolean>(this.Url + '/changeDispo/' + utilisateurId, status);
   }
 
+
+  public getAllAdherent(): Observable<User[]> {
+    return this.httpClient.get<User[]>(this.Url + "/adherent");
+  }
+  public getAllUsers(): Observable<User[]> {
+    return this.httpClient.get<User[]>(this.Url );
+  }
+
 }

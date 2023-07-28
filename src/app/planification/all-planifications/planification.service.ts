@@ -42,6 +42,7 @@ export class PlanificationService {
     );
   }
 
+
   // DEMO ONLY, you can find working methods below
   addPlanification(planification: Planification): Observable<Planification> {
     this.dialogData = planification;
@@ -64,7 +65,7 @@ export class PlanificationService {
   }
 
   getAllPlans(): Observable<any> {
-    return this.httpClient.get<Cours[]>(this.Url);
+    return this.httpClient.get<Planification[]>(this.Url);
   }
 
 }

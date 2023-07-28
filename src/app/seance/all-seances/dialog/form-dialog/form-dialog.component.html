@@ -21,7 +21,7 @@
             <mat-label>Planification</mat-label>
             <mat-select formControlName="planification" required>
               <mat-option *ngFor="let planification of planificationsList" [value]="planification?.idPlanification">
-                {{planification.cours?.label}}
+                Planification N° {{planification?.idPlanification}}
               </mat-option>
             </mat-select>
             <mat-error *ngIf="seanceForm.get('planification').hasError('required')">

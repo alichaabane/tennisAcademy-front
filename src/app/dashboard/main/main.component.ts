@@ -23,6 +23,8 @@ import {HttpErrorResponse} from '@angular/common/http';
 import {Router} from '@angular/router';
 import {User} from 'src/app/user/all-user/user.model';
 import {UserService} from 'src/app/user/all-user/user.service';
+import {SeanceService} from "../../seance/all-seances/seance.service";
+import {PlanificationService} from "../../planification/all-planifications/planification.service";
 
 export type SparklineChartOptions = {
   series: ApexAxisChartSeries;
@@ -176,7 +178,7 @@ export class MainComponent implements OnInit {
       },
       {
         name: 'Seance Planifiee',
-        data: [11, 32, 45, 32, 34, 52, 41, 40, 28, 51, 42, 85],
+        data: [11, 32, 45, 32, 34, 52, 41, 40, 28, 51],
       },
     ],
     chart: {
@@ -239,11 +241,16 @@ export class MainComponent implements OnInit {
   terrain$: Observable<Terrain[]>;
   activeTerrains: Terrain[];
   activeEntraineurs: User[];
-
+  usersNumber: number = 0;
+  terrainsNumber: number = 0;
+  seancesNumber: number = 0;
+  planificationsNumber: number = 0;
 
   // area chart end
   // tslint:disable-next-line:max-line-length
-  constructor(private authService: AuthService, private router: Router, private terrainService: TerrainService, private utilisateurService: UserService) {
+  constructor(private authService: AuthService, private router: Router,
+              private seanceService: SeanceService, private terrainService: TerrainService, private utilisateurService: UserService,
+              private planificationService: PlanificationService) {
 
   }
 
@@ -262,23 +269,27 @@ export class MainComponent implements OnInit {
         }
       });
     }
-    this.getActiveTerrains();
+    setTimeout( () => {
+    this.getAllTerrains();
+    this.getAllUsers();
     this.getActiveEntraineurs();
-    this.getInfos();
+    this.getAllSeances();
+    this.getAllPlanifications();
+    }, 2000 );
     // tslint:disable-next-line:no-unused-expression
     this.areaChartOptions.series[0].data;
   }
 
-  getInfos() {
-    // this.authService.getAdminInfo().subscribe(
-    //   data => {
-    //     if (data){
-    //       this.AdminInfo = data;
-    //
-    //     }
-    //   }
-    // );
-  }
+  // getInfos() {
+  //   // this.authService.getAdminInfo().subscribe(
+  //   //   data => {
+  //   //     if (data){
+  //   //       this.AdminInfo = data;
+  //   //
+  //   //     }
+  //   //   }
+  //   // );
+  // }
 
   public getActiveEntraineurs(): void {
     this.utilisateurService.getAllActiveEntraineurs().subscribe(
@@ -291,16 +302,53 @@ export class MainComponent implements OnInit {
     );
   }
 
-  public getActiveTerrains(): void {
-    this.terrainService.getAllActiveTerrains().subscribe(
+  public getAllPlanifications(): void {
+    this.planificationService.getAllPlans().subscribe(
       (data) => {
-        this.activeTerrains = data;
+        this.planificationsNumber = data.length ? data.length : 0;
       },
       (error: HttpErrorResponse) => {
         console.log(error.name + ' ' + error.message);
       }
     );
   }
+
+  public getAllUsers(): void {
+    this.utilisateurService.getUsers().subscribe(
+      (data) => {
+        console.log(data);
+        this.usersNumber = data.length ? data.length : 0;
+      },
+      (error: HttpErrorResponse) => {
+        console.log(error.name + ' ' + error.message);
+      }
+    );
+  }
+
+  public getAllTerrains(): void {
+    this.terrainService.getAllStadiums().subscribe(
+      (data) => {
+        console.log(data);
+        this.terrainsNumber = data.length ? data.length : 0;
+      },
+      (error: HttpErrorResponse) => {
+        console.log(error.name + ' ' + error.message);
+      }
+    );
+  }
+
+  public getAllSeances(): void {
+    this.seanceService.getAllSessions().subscribe(
+      (data) => {
+        console.log(data);
+        this.seancesNumber = data.length ? data.length : 0;
+      },
+      (error: HttpErrorResponse) => {
+        console.log(error.name + ' ' + error.message);
+      }
+    );
+  }
+
 
   reservez() {
     if (!this.authentifiee) {

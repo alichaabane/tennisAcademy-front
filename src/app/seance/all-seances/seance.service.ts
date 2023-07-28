@@ -5,6 +5,7 @@ import {Planification} from 'src/app/planification/all-planifications/planificat
 import {Terrain} from 'src/app/terrain/all-terrain/terrain.model';
 import {environment} from 'src/environments/environment';
 import {Seance} from './/Seance.model';
+import {User} from "../../user/all-user/user.model";
 
 @Injectable({
   providedIn: 'root'
@@ -40,6 +41,10 @@ export class SeanceService {
         console.log(error.name + ' ' + error.message);
       }
     );
+  }
+
+  getAllSessions(): Observable<Seance[]> {
+    return this.httpClient.get<Seance[]>(this.Url);
   }
 
   addSeance(seance: Seance): Observable<Seance> {
