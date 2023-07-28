@@ -26,6 +26,7 @@ import { SeanceService } from './all-seances/seance.service';
 import { SeanceRoutingModule } from 'src/app/seance/seance-routing.module';
 import { AddSeanceComponent } from './add-seance/add-seance.component';
 import { MatNativeDateModule } from '@angular/material/core';
+import {SharedModule} from "../shared/shared.module";
 
 
 
@@ -62,6 +63,7 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatProgressSpinnerModule,
     SeanceRoutingModule,
     MatNativeDateModule,
+    SharedModule
   ],
   providers: [SeanceService, DatePipe]
 })

@@ -39,7 +39,7 @@ export class AddSeanceComponent implements OnInit {
       dateHeureFin: ["", [Validators.required]],
       terrain: [null, [Validators.required]],
       planification: [null, [Validators.required]],
-      utilisateur: [null, [Validators.required]],
+      user: [null, [Validators.required]],
     });
 
   }
@@ -112,7 +112,7 @@ export class AddSeanceComponent implements OnInit {
     this.seance.dateHeureFin = this.datePipe.transform(this.seance.dateHeureFin, 'yyyy-MM-ddTHH:mm:ss');
     this.seance.terrain = this.seanceForm.value.terrain;
     this.seance.planification = this.seanceForm.value.planification;
-    this.seance.utilisateur = this.seanceForm.value.utilisateur;
+    this.seance.user = this.seanceForm.value.user;
     console.log('seance = ', this.seance.terrain);
     this.addSeance();
   }
@@ -122,28 +122,7 @@ export class AddSeanceComponent implements OnInit {
 // tslint:disable-next-line:align
   private addSeance() {
 
-    this.seanceService.addSeance(this.seance).subscribe(
-      data => {
-        if (data) {
-          this.router.navigate(['/seance/all-seances']);
-
-        } else {
-          // this.messageService.add({
-          //     severity: 'FAILED',
-          //     summary: 'Error',
-          //     detail: 'Désole impossible d ajouter une séance',
-          //     life: 3000
-          // });
-        }
-      }, error => {
-        // this.messageService.add({
-        //     severity: 'FAILED',
-        //     summary: 'Désole impossible d ajouter une séance',
-        //     detail: error.error,
-        //     life: 3000
-        // });
-      }
-    );
+    this.seanceService.addSeance(this.seance);
   }
 
 // showNotification(colorName, text, placementFrom, placementAlign);

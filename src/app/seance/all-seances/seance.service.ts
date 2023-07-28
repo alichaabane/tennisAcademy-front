@@ -17,6 +17,7 @@ export class SeanceService {
   dialogData: any;
 
   constructor(private httpClient: HttpClient) {
+
   }
 
   get data(): Seance[] {

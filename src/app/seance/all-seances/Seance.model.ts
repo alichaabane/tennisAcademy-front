@@ -9,7 +9,7 @@ export class Seance {
   dateHeureFin: string;
   terrain: Terrain;
   planification: Planification;
-  utilisateur: User;
+  user: User;
 
   constructor() {
     {
@@ -18,7 +18,7 @@ export class Seance {
       this.dateHeureFin = '';
       this.terrain = new Terrain();
       this.planification = new Planification();
-      this.utilisateur = new User();
+      this.user = new User();
     }
   }
 }
