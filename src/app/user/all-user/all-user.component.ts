@@ -92,7 +92,7 @@ export class AllUserComponent {
 
 
   addNew() {
-    this.router.navigate(['/user/add-user']);
+    this.router.navigate(['/utilisateurs/add-user']);
   }
 
   editCall(row) {
